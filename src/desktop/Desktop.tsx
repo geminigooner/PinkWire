@@ -8,6 +8,7 @@ import { StickersRenderer } from './StickersRenderer';
 import { StickersDrawer } from './StickersDrawer';
 import { AudioService } from '../services/AudioService';
 import { MiniPlayer } from '../applications/spun/components/MiniPlayer';
+import { SearchProviders } from '../services/search/SearchProviders';
 
 export function Desktop() {
 
@@ -52,6 +53,7 @@ export function Desktop() {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
+      <SearchProviders />
       <AudioService />
       <MiniPlayer />
       <Wallpaper />

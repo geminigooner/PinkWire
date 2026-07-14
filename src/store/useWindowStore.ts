@@ -42,6 +42,11 @@ export const useWindowStore = create<WindowStore>()(
         const appMeta = AppMetadataRegistry[appId];
         if (!appMeta) return;
 
+        // Try importing useRecentStore inside function to avoid circular dependency if any
+        import('./useRecentStore').then(({ useRecentStore }) => {
+          useRecentStore.getState().addRecentApp(appId, appMeta.name);
+        }).catch(e => console.error(e));
+
         const policy = appMeta.instancePolicy || 'multiple';
         const instanceKey = options.instanceKey;
 

@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { AppRegistry } from '../applications/registry';
-import { useWindowStore } from '../store/useWindowStore';
-import { useDesktopStore } from '../store/useDesktopStore';
-import { Power, User } from 'lucide-react';
-import { motion } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { StartMenuProfile } from './StartMenuProfile';
+import { StartMenuSearch } from './StartMenuSearch';
+import { StartMenuPinned } from './StartMenuPinned';
+import { StartMenuRecent } from './StartMenuRecent';
+import { StartMenuQuickActions } from './StartMenuQuickActions';
+import { useSearchStore } from '../store/useSearchStore';
 
 export function StartMenu({ onClose }: { onClose: () => void }) {
-  const openWindow = useWindowStore(state => state.openWindow);
-  const setHasBooted = useDesktopStore(state => state.setHasBooted);
   const menuRef = useRef<HTMLDivElement>(null);
+  const isSearching = useSearchStore(state => state.isSearching);
+  const query = useSearchStore(state => state.query);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -19,56 +21,55 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
         }
       }
     };
+    
+    // Desktop: click outside
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    
+    // Keyboard shortcuts
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [onClose]);
 
-  const handleShutdown = () => {
-    // Reset boot state to show boot sequence again on next reload
-    setHasBooted(false);
-    window.location.reload();
-  };
+  // Mobile layout uses full height almost, sliding up.
+  // Desktop layout is bottom-anchored, floating panel.
 
   return (
-    <div className="absolute bottom-14 left-2 z-50 pointer-events-auto" ref={menuRef}>
+    <div className="fixed inset-0 sm:absolute sm:inset-auto sm:bottom-14 sm:left-2 z-50 pointer-events-auto flex items-end sm:items-start justify-center sm:justify-start" ref={menuRef}>
       <motion.div 
-        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-        transition={{ duration: 0.15 }}
-        className="w-[calc(100vw-16px)] sm:w-80 h-[22rem] bg-os-taskbar-bg backdrop-blur-xl border border-os-window-border rounded-xl shadow-2xl flex flex-col overflow-hidden max-w-sm"
+        initial={{ y: '100%', opacity: 0.8 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: '100%', opacity: 0.8 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+        className="w-full sm:w-[28rem] h-[90dvh] sm:h-[40rem] max-h-screen bg-os-taskbar-bg/95 backdrop-blur-2xl sm:border border-os-window-border sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden rounded-t-3xl sm:rounded-t-2xl"
       >
-        <div className="p-4 flex-1 overflow-y-auto scrollbar-hide">
-          <div className="text-xs font-semibold text-os-text-muted mb-3 px-2">PINNED APPS</div>
-          <div className="grid grid-cols-4 gap-2">
-            {Object.values(AppRegistry).map((app) => (
-              <button
-                key={app.id}
-                onClick={() => {
-                  openWindow(app.id);
-                  onClose();
-                }}
-                className="flex flex-col items-center gap-2 p-2 sm:p-3 hover:bg-white/10 rounded-xl transition-colors group"
-              >
-                <div className="w-10 h-10 bg-os-titlebar-bg rounded-lg flex items-center justify-center shadow border border-os-window-border group-hover:border-os-accent/50 transition-colors">
-                  <app.icon size={20} className="text-os-accent" />
-                </div>
-                <span className="text-[10px] text-os-text-muted group-hover:text-os-text transition-colors truncate w-full text-center">{app.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+        <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mt-3 mb-1 sm:hidden shrink-0" />
         
-        <div className="h-14 bg-black/20 border-t border-os-window-border flex items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-os-accent flex items-center justify-center shadow-[0_0_10px_rgba(236,72,153,0.5)]">
-              <User size={16} className="text-white" />
-            </div>
-            <span className="text-sm font-medium text-os-text">Pookie</span>
-          </div>
-          <button onClick={handleShutdown} title="Shut down" className="p-2 hover:bg-white/10 rounded-lg transition-colors text-os-text-muted hover:text-red-400">
-            <Power size={18} />
-          </button>
+        <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col p-4 sm:p-6 gap-6 relative">
+          <StartMenuProfile />
+          <StartMenuSearch onClose={onClose} />
+          
+          {query.trim().length > 0 ? (
+             <div className="flex-1 flex flex-col min-h-0">
+               {/* Search results handled inside StartMenuSearch or a separate wrapper. But let's render them here or inside StartMenuSearch. */}
+             </div>
+          ) : (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col gap-6"
+            >
+              <StartMenuPinned onClose={onClose} />
+              <StartMenuQuickActions onClose={onClose} />
+              <StartMenuRecent onClose={onClose} />
+            </motion.div>
+          )}
         </div>
       </motion.div>
     </div>
