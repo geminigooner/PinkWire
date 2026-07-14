@@ -1,4 +1,4 @@
-import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc } from 'lucide-react';
+import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart } from 'lucide-react';
 import { AppDefinition } from '../types/os';
 
 // Exclude component from AppDefinition for metadata
@@ -85,6 +85,18 @@ export const AppMetadataRegistry: Record<string, AppMetadata> = {
     defaultHeight: 600,
     minWidth: 600,
     minHeight: 400,
+    resizable: true,
+    draggable: true,
+    instancePolicy: 'single'
+  },
+  guestbook: {
+    id: 'guestbook',
+    name: 'Guestbook',
+    icon: BookHeart,
+    defaultWidth: 1000,
+    defaultHeight: 700,
+    minWidth: 600,
+    minHeight: 500,
     resizable: true,
     draggable: true,
     instancePolicy: 'single'

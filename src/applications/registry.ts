@@ -8,6 +8,7 @@ import { ExplorerApp } from './explorer/ExplorerApp';
 import { BrowserApp } from './browser/BrowserApp';
 import { SettingsApp } from './settings/SettingsApp';
 import { SpunApp } from './spun/SpunApp';
+import { GuestbookApp } from './guestbook/GuestbookApp';
 
 export const AppRegistry: Record<string, AppDefinition> = {
   settings: {
@@ -37,5 +38,9 @@ export const AppRegistry: Record<string, AppDefinition> = {
   spun: {
     ...AppMetadataRegistry.spun,
     component: SpunApp
+  },
+  guestbook: {
+    ...AppMetadataRegistry.guestbook,
+    component: GuestbookApp
   }
 };

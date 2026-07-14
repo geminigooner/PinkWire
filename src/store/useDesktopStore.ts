@@ -47,6 +47,7 @@ const DEFAULT_ICONS = [
   { id: 'journal-icon', appId: 'journal', x: 20, y: 220 },
   { id: 'disposable-icon', appId: 'disposable', x: 20, y: 320 },
   { id: 'browser-icon', appId: 'browser', x: 20, y: 420 },
+  { id: 'guestbook-icon', appId: 'guestbook', x: 20, y: 520 },
   { id: 'settings-icon', appId: 'settings', x: 120, y: 20 },
 ];
 
