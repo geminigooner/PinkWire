@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { DesktopIconState } from '../types/os';
+import { osEvents } from '../services/notifications/EventBus';
 
 export interface StickerState {
   id: string;
@@ -66,7 +67,10 @@ export const useDesktopStore = create<DesktopStore>()(
       showLabels: true,
       
       setHasBooted: (hasBooted) => set({ hasBooted }),
-      setWallpaper: (wallpaper) => set({ wallpaper }),
+      setWallpaper: (wallpaper) => {
+        set({ wallpaper });
+        osEvents.publish({ type: 'WallpaperChanged', payload: { name: 'New wallpaper' } });
+      },
       setWallpaperFit: (wallpaperFit) => set({ wallpaperFit }),
       setWallpaperBlur: (wallpaperBlur) => set({ wallpaperBlur }),
       updateIconPosition: (id, x, y) => set((state) => ({

@@ -9,9 +9,10 @@ import { StickersDrawer } from './StickersDrawer';
 import { AudioService } from '../services/AudioService';
 import { MiniPlayer } from '../applications/spun/components/MiniPlayer';
 import { SearchProviders } from '../services/search/SearchProviders';
+import { NotificationService } from '../services/notifications/NotificationService';
+import { NotificationToasts } from '../components/notifications/NotificationToasts';
 
 export function Desktop() {
-
   const { desktopIcons, selectIcon, addSticker, autoArrangeIcons, updateIconPosition } = useDesktopStore();
 
   useEffect(() => {
@@ -53,6 +54,8 @@ export function Desktop() {
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
+      <NotificationService />
+      <NotificationToasts />
       <SearchProviders />
       <AudioService />
       <MiniPlayer />

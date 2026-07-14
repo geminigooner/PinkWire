@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useAudioStore } from '../store/useAudioStore';
+import { osEvents } from './notifications/EventBus';
 
 export function AudioService() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -39,6 +40,21 @@ export function AudioService() {
       audioRef.current.muted = isMuted;
     }
   }, [volume, isMuted]);
+  
+  // Publish event when track changes
+  useEffect(() => {
+    if (currentTrack) {
+      osEvents.publish({ 
+        type: 'MusicStarted', 
+        payload: { 
+          trackId: currentTrack.id, 
+          title: currentTrack.title, 
+          artist: currentTrack.artist, 
+          coverUrl: currentTrack.coverArt 
+        } 
+      });
+    }
+  }, [currentTrack]);
   
   useEffect(() => {
     if ('mediaSession' in navigator && currentTrack) {

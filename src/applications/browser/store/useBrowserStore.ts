@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Tab, Bookmark } from '../types';
 import { INITIAL_BOOKMARKS, HOMEPAGE_URL } from '../data/mockData';
+import { osEvents } from '../../../services/notifications/EventBus';
 
 interface BrowserStore {
   tabs: Tab[];
@@ -138,9 +139,15 @@ export const useBrowserStore = create<BrowserStore>((set, get) => ({
   },
   
   setLoading: (tabId, isLoading) => {
-    set((state) => ({
-      tabs: state.tabs.map(tab => tab.id === tabId ? { ...tab, isLoading } : tab)
-    }));
+    set((state) => {
+      const tab = state.tabs.find(t => t.id === tabId);
+      if (tab && tab.isLoading && !isLoading) {
+        osEvents.publish({ type: 'BrowserFinishedLoading', payload: { url: tab.url } });
+      }
+      return {
+        tabs: state.tabs.map(t => t.id === tabId ? { ...t, isLoading } : t)
+      };
+    });
   },
   
   setTitle: (tabId, title) => {

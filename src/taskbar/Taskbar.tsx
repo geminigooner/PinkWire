@@ -4,10 +4,11 @@ import { StartMenu } from './StartMenu';
 import { useWindowStore } from '../store/useWindowStore';
 import { AppRegistry } from '../applications/registry';
 import { cn } from '../utils/cn';
-import { Command, Wifi, Volume2, BatteryMedium } from 'lucide-react';
+import { Command } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { NowPlayingWidget } from './NowPlayingWidget';
 import { NotificationCenter } from './NotificationCenter';
+import { SystemTray } from './SystemTray';
 
 export function Taskbar() {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -62,12 +63,8 @@ export function Taskbar() {
         </div>
         <div className="flex items-center gap-1 h-full px-2">
           <NowPlayingWidget />
-          {/* System Tray Placeholder */}
-          <div className="hidden sm:flex items-center gap-2 px-3 h-9 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
-            <Wifi size={16} />
-            <Volume2 size={16} />
-            <BatteryMedium size={16} />
-          </div>
+          
+          <SystemTray />
           
           <NotificationCenter />
           

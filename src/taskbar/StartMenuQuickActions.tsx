@@ -3,6 +3,7 @@ import { useSettingsStore } from '../store/useSettingsStore';
 import { useWindowStore } from '../store/useWindowStore';
 import { Moon, Sun, Power, LogOut, Settings, Camera } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { osEvents } from '../services/notifications/EventBus';
 
 export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
   const atmosphere = useSettingsStore(state => state.atmosphere);
@@ -41,8 +42,11 @@ export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
       </button>
 
       <button 
-        onClick={() => {}}
-        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text opacity-50 cursor-not-allowed"
+        onClick={() => {
+          osEvents.publish({ type: 'PhotoDownloaded', payload: { filename: 'Screenshot-2026.png' } });
+          onClose();
+        }}
+        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
       >
         <div className="p-2 bg-black/30 rounded-full shadow-inner border border-white/5">
           <Camera size={18} />

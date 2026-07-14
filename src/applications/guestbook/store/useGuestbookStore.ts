@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
-import { useNotificationStore } from '../../../store/useNotificationStore';
+import { osEvents } from '../../../services/notifications/EventBus';
 
 export interface Visitor {
   id: string;
@@ -120,13 +120,13 @@ export const useGuestbookStore = create<GuestbookStore>()(
             moderationReason: reason
           };
 
-          // Trigger notification
           if (status === 'Publish') {
-            useNotificationStore.getState().addNotification({
-              title: visitor.visitCount > 1 ? '👋 Returning Visitor' : '💌 New Guestbook Entry',
-              message: `${visitor.displayName} just signed your guestbook!`,
-              icon: 'BookHeart',
-              onClickApp: 'guestbook'
+            osEvents.publish({
+              type: 'GuestbookEntry',
+              payload: {
+                visitorName: visitor.displayName,
+                returning: visitor.visitCount > 1
+              }
             });
           }
 
@@ -140,13 +140,8 @@ export const useGuestbookStore = create<GuestbookStore>()(
       
       toggleFavorite: (id) => set((state) => {
         const entry = state.entries.find(e => e.id === id);
-        if (entry && !entry.favorite) {
-           useNotificationStore.getState().addNotification({
-              title: '⭐ Entry Favorited',
-              message: `You favorited an entry.`,
-              icon: 'Star',
-              onClickApp: 'guestbook'
-            });
+        if (entry && !entry.favorite) { 
+           osEvents.publish({ type: 'GuestbookFavorited', payload: {} });
         }
         return {
           entries: state.entries.map(e => e.id === id ? { ...e, favorite: !e.favorite } : e)
@@ -175,26 +170,6 @@ export const useGuestbookStore = create<GuestbookStore>()(
             joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
             visitCount: 1,
             lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
-          },
-          {
-            id: v2Id,
-            displayName: 'NeonDreamer',
-            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
-            website: 'https://neondreams.example.com',
-            favoriteColor: '#8b5cf6',
-            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 15).toISOString(),
-            visitCount: 3,
-            lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 15).toISOString(),
-          },
-          {
-            id: v3Id,
-            displayName: 'RetroBytes',
-            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-            location: 'Tokyo, Japan',
-            favoriteColor: '#3b82f6',
-            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 45).toISOString(),
-            visitCount: 1,
-            lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 45).toISOString(),
           }
         ];
 
@@ -203,24 +178,8 @@ export const useGuestbookStore = create<GuestbookStore>()(
             id: uuidv4(),
             visitorId: v1Id,
             timestamp: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
-            message: 'Love the new site layout! Very cozy vibes here. Will definitely stop by again.',
+            message: 'Love the new site layout!',
             favorite: true,
-            moderationStatus: 'Publish'
-          },
-          {
-            id: uuidv4(),
-            visitorId: v2Id,
-            timestamp: new Date(now - 1000 * 60 * 60 * 24 * 15).toISOString(),
-            message: 'Just dropping a quick hello! Your journal entries have been so inspiring lately.',
-            favorite: false,
-            moderationStatus: 'Publish'
-          },
-          {
-            id: uuidv4(),
-            visitorId: v3Id,
-            timestamp: new Date(now - 1000 * 60 * 60 * 24 * 45).toISOString(),
-            message: 'Stumbled upon this place by accident and what a happy accident it was. Keep up the great work!',
-            favorite: false,
             moderationStatus: 'Publish'
           }
         ];
