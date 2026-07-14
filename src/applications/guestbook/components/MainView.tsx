@@ -5,10 +5,10 @@ import { Composer } from './Composer';
 import { format, parseISO } from 'date-fns';
 
 export function MainView() {
-  const { entries, filter, sortOrder, searchQuery, archiveMonthYear } = useGuestbookStore();
+  const { entries, visitors, filter, sortOrder, searchQuery, archiveMonthYear } = useGuestbookStore();
 
   const filteredEntries = useMemo(() => {
-    let result = entries.filter(e => e.status === 'Publish');
+    let result = entries.filter(e => e.moderationStatus === 'Publish');
     
     // Apply filters
     if (filter === 'favorites') {
@@ -23,12 +23,15 @@ export function MainView() {
     // Apply search
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      result = result.filter(e => 
-        e.displayName.toLowerCase().includes(q) || 
-        e.message.toLowerCase().includes(q) ||
-        (e.location && e.location.toLowerCase().includes(q)) ||
-        (e.website && e.website.toLowerCase().includes(q))
-      );
+      result = result.filter(e => {
+        const visitor = visitors.find(v => v.id === e.visitorId);
+        return visitor && (
+          visitor.displayName.toLowerCase().includes(q) || 
+          e.message.toLowerCase().includes(q) ||
+          (visitor.location && visitor.location.toLowerCase().includes(q)) ||
+          (visitor.website && visitor.website.toLowerCase().includes(q))
+        );
+      });
     }
     
     // Apply sort
@@ -38,13 +41,15 @@ export function MainView() {
       } else if (sortOrder === 'oldest') {
         return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
       } else if (sortOrder === 'alphabetical') {
-        return a.displayName.localeCompare(b.displayName);
+        const visitorA = visitors.find(v => v.id === a.visitorId);
+        const visitorB = visitors.find(v => v.id === b.visitorId);
+        return (visitorA?.displayName || '').localeCompare(visitorB?.displayName || '');
       }
       return 0;
     });
     
     return result;
-  }, [entries, filter, sortOrder, searchQuery, archiveMonthYear]);
+  }, [entries, visitors, filter, sortOrder, searchQuery, archiveMonthYear]);
 
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-[#fdfbf7] relative">

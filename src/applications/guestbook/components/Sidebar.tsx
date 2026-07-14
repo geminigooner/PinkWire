@@ -7,7 +7,7 @@ import { format, parseISO } from 'date-fns';
 export function Sidebar() {
   const { filter, setFilter, entries, archiveMonthYear, setArchiveMonthYear, isSidebarOpen, toggleSidebar } = useGuestbookStore();
 
-  const publishedEntries = entries.filter(e => e.status === 'Publish');
+  const publishedEntries = entries.filter(e => e.moderationStatus === 'Publish');
 
   const archives = useMemo(() => {
     const map = new Map<string, number>();

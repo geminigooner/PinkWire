@@ -3,6 +3,7 @@ import { Sidebar } from './components/Sidebar';
 import { MainView } from './components/MainView';
 import { Toolbar } from './components/Toolbar';
 import { StatusBar } from './components/StatusBar';
+import { VisitorProfile } from './components/VisitorProfile';
 import { useGuestbookStore } from './store/useGuestbookStore';
 
 export function GuestbookApp() {
@@ -20,6 +21,7 @@ export function GuestbookApp() {
         <MainView />
       </div>
       <StatusBar />
+      <VisitorProfile />
     </div>
   );
 }

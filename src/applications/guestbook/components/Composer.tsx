@@ -73,12 +73,11 @@ export function Composer() {
         // Publish or Review
         addEntry({
           displayName: displayName.trim(),
-          message: message.trim(),
           location: location.trim(),
           website: website.trim(),
           avatar,
-          themeColor
-        }, result.decision, result.reason);
+          favoriteColor: themeColor
+        }, message.trim(), result.decision, result.reason);
         
         // Reset form
         setMessage('');

@@ -7,6 +7,7 @@ import { cn } from '../utils/cn';
 import { Command, Wifi, Volume2, BatteryMedium } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { NowPlayingWidget } from './NowPlayingWidget';
+import { NotificationCenter } from './NotificationCenter';
 
 export function Taskbar() {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -67,6 +68,8 @@ export function Taskbar() {
             <Volume2 size={16} />
             <BatteryMedium size={16} />
           </div>
+          
+          <NotificationCenter />
           
           <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default">
             <Clock />

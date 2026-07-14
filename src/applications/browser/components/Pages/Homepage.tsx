@@ -1,12 +1,15 @@
 import React from 'react';
 import { useBrowserStore } from '../../store/useBrowserStore';
-import { Globe, Terminal, FileText, FolderGit2, BookOpen, Music } from 'lucide-react';
+import { Globe, Terminal, FileText, FolderGit2, BookOpen, Music, Users, PenTool, BookHeart } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 import { NowPlayingHomepageWidget } from './NowPlayingHomepageWidget';
+import { useGuestbookStore } from '../../../guestbook/store/useGuestbookStore';
 
 export function Homepage({ tabId }: { tabId: string }) {
   const { navigate, bookmarks } = useBrowserStore();
-
+  const { entries, visitors } = useGuestbookStore();
+  const publishedEntriesCount = entries.filter(e => e.moderationStatus === 'Publish').length;
+  
   const handleLink = (url: string) => {
     navigate(tabId, url);
   };
@@ -22,9 +25,10 @@ export function Homepage({ tabId }: { tabId: string }) {
       { label: 'The Ledger', url: 'pinkwire://ledger', icon: FileText, color: 'text-amber-400' },
       { label: 'Echo Observatory', url: 'pinkwire://echo', icon: Globe, color: 'text-blue-400' },
     ]},
-    { title: 'Recent Downloads', items: [
-      { label: 'resume_FINAL.pdf', url: 'pinkwire://downloads', icon: FileText, color: 'text-red-400' },
-      { label: 'Untitled.png', url: 'pinkwire://downloads', icon: FileText, color: 'text-purple-400' },
+    { title: 'Guestbook', items: [
+      { label: 'Sign Guestbook', url: 'pinkwire://guestbook', icon: PenTool, color: 'text-[#cf8c8c]' },
+      { label: `Recent Visitors (${visitors.length})`, url: 'pinkwire://guestbook', icon: Users, color: 'text-[#cf8c8c]' },
+      { label: `Latest Entries (${publishedEntriesCount})`, url: 'pinkwire://guestbook', icon: BookHeart, color: 'text-[#cf8c8c]' },
     ]}
   ];
 
