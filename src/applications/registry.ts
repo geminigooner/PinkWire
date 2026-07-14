@@ -1,14 +1,27 @@
-import { Zap, Book, Image as ImageIcon, Globe, Music, Download, Flame } from 'lucide-react';
+import { Zap, Book, Image as ImageIcon, Globe, Music, Download, Flame, Folder } from 'lucide-react';
 import { AppDefinition } from '../types/os';
 import { PlaceholderApp } from './PlaceholderApp';
 import { PinkWireApp } from './pinkwire/PinkWireApp';
 import { DisposableApp } from './disposable/DisposableApp';
 import { JournalApp } from './journal/JournalApp';
+import { ExplorerApp } from './explorer/ExplorerApp';
 import React from 'react';
 
 const createPlaceholder = (name: string) => () => React.createElement(PlaceholderApp, { name });
 
 export const AppRegistry: Record<string, AppDefinition> = {
+  explorer: {
+    id: 'explorer',
+    name: 'File Explorer',
+    icon: Folder,
+    defaultWidth: 900,
+    defaultHeight: 600,
+    minWidth: 600,
+    minHeight: 400,
+    resizable: true,
+    draggable: true,
+    component: ExplorerApp
+  },
   pinkwire: {
     id: 'pinkwire',
     name: 'PinkWire',

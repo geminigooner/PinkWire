@@ -6,4 +6,5 @@ export const APP_METADATA: Record<string, { name: string, defaultWidth: number, 
   music: { name: 'Music', defaultWidth: 400, defaultHeight: 600 },
   downloads: { name: 'Downloads', defaultWidth: 600, defaultHeight: 400 },
   bad_takes: { name: 'Bad Takes', defaultWidth: 500, defaultHeight: 500 },
+  explorer: { name: 'File Explorer', defaultWidth: 900, defaultHeight: 600 },
 };

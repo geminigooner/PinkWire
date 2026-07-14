@@ -20,13 +20,14 @@ export const useDesktopStore = create<DesktopStore>()(
       hasBooted: false,
       wallpaper: 'bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900',
       desktopIcons: [
-         { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 20 },
-         { id: 'journal-icon', appId: 'journal', x: 20, y: 120 },
-         { id: 'disposable-icon', appId: 'disposable', x: 20, y: 220 },
-         { id: 'browser-icon', appId: 'browser', x: 20, y: 320 },
-         { id: 'music-icon', appId: 'music', x: 20, y: 420 },
-         { id: 'downloads-icon', appId: 'downloads', x: 120, y: 20 },
-         { id: 'bad-takes-icon', appId: 'bad_takes', x: 120, y: 120 }
+         { id: 'explorer-icon', appId: 'explorer', x: 20, y: 20 },
+         { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 120 },
+         { id: 'journal-icon', appId: 'journal', x: 20, y: 220 },
+         { id: 'disposable-icon', appId: 'disposable', x: 20, y: 320 },
+         { id: 'browser-icon', appId: 'browser', x: 20, y: 420 },
+         { id: 'music-icon', appId: 'music', x: 120, y: 20 },
+         { id: 'downloads-icon', appId: 'downloads', x: 120, y: 120 },
+         { id: 'bad-takes-icon', appId: 'bad_takes', x: 120, y: 220 }
       ],
       selectedIconId: null,
       
