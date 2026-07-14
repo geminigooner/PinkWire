@@ -2,40 +2,25 @@ import React, { useEffect } from 'react';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { MainPanel } from './components/MainPanel/MainPanel';
 import { useJournalStore } from './store/useJournalStore';
-import { cn } from '../../utils/cn';
 
-export function JournalApp({ appData }: { appData?: any }) {
-  const { setActiveArticle, isSidebarOpen, setSidebarOpen, activeArticleId } = useJournalStore();
+interface JournalAppData {
+  articleId?: string;
+}
+
+export function JournalApp({ appData }: { appData?: unknown }) {
+  const setActiveArticle = useJournalStore(state => state.setActiveArticle);
+  const data = appData as JournalAppData | undefined;
 
   useEffect(() => {
-    if (appData?.articleId) {
-      setActiveArticle(appData.articleId);
+    if (data?.articleId) {
+      setActiveArticle(data.articleId);
     }
-  }, [appData?.articleId, setActiveArticle]);
+  }, [data?.articleId, setActiveArticle]);
 
   return (
-    <div className="flex w-full h-full bg-os-window-bg text-os-text overflow-hidden font-sans relative">
-      <div className={cn(
-        "absolute inset-y-0 left-0 z-20 md:relative md:flex h-full w-64 transform transition-transform duration-300 ease-in-out",
-        isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-      )}>
-        <Sidebar />
-      </div>
-      
-      {/* Mobile overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="absolute inset-0 bg-black/50 z-10 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div className={cn(
-        "flex-1 min-w-0 flex h-full transition-all duration-300",
-        activeArticleId ? "flex" : (isSidebarOpen ? "hidden md:flex" : "flex")
-      )}>
-        <MainPanel />
-      </div>
+    <div className="flex w-full h-full bg-os-window-bg overflow-hidden text-os-text font-sans">
+      <Sidebar />
+      <MainPanel />
     </div>
   );
 }

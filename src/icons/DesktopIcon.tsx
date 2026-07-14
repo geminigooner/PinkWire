@@ -18,7 +18,7 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
   const Icon = app.icon;
   const isSelected = selectedIconId === id;
 
-  const handleDragEnd = (e: any, info: any) => {
+  const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, info: any) => {
     setIsDragging(false);
     let newX = x + info.offset.x;
     let newY = y + info.offset.y;

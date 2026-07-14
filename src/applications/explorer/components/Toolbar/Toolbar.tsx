@@ -24,7 +24,7 @@ export function Toolbar() {
   const currentFolderId = currentPath[currentPath.length - 1];
   const currentFolder = files.find(f => f.id === currentFolderId);
 
-  const viewModes: { id: ViewMode; icon: any; label: string }[] = [
+  const viewModes: { id: ViewMode; icon: React.ElementType; label: string }[] = [
     { id: 'large', icon: Grid, label: 'Large Icons' },
     { id: 'medium', icon: LayoutGrid, label: 'Medium Icons' },
     { id: 'list', icon: List, label: 'List' },

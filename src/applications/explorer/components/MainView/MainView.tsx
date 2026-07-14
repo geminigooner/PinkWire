@@ -44,12 +44,12 @@ export function MainView() {
   const handleDoubleClick = (file: FileItem) => {
     if (file.type === 'folder') {
       navigateToFolder(file.id);
-    } else if (file.type === 'markdown' && file.content?.articleId) {
-      openWindow('journal', { articleId: file.content.articleId });
-    } else if (file.type === 'image' && file.content?.imageUrl) {
-      openWindow('disposable', { imageUrl: file.content.imageUrl });
-    } else if (file.type === 'shortcut' && file.content?.appId) {
-      openWindow(file.content.appId);
+    } else if (file.type === 'markdown' && (file.content as any)?.articleId) {
+      openWindow('journal', { articleId: (file.content as any).articleId });
+    } else if (file.type === 'image' && (file.content as any)?.imageUrl) {
+      openWindow('disposable', { imageUrl: (file.content as any).imageUrl });
+    } else if (file.type === 'shortcut' && (file.content as any)?.appId) {
+      openWindow((file.content as any).appId);
     }
   };
 

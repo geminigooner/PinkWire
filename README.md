@@ -1,20 +1,35 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# PinkWire OS
 
-# Run and deploy your AI Studio app
+PinkWire OS is a creative, client-side personal website styled as a desktop operating system. It features a window manager, customized applications, persistent state, and high visual polish.
 
-This contains everything you need to run your app locally.
+## Applications
 
-View your app in AI Studio: https://ai.studio/apps/9f725dde-72a6-443f-979f-a16dc755dbb1
+- **PinkWire**: The conversational core.
+- **Journal**: Personal blog entries.
+- **Disposable**: Photo viewer.
+- **File Explorer**: A simulated file system.
+- **Internet ExplAmanda**: An embedded web browser.
+- **Control Panel**: Personalization and settings.
 
-## Run Locally
+## Architecture
 
-**Prerequisites:**  Node.js
+PinkWire OS is fully client-side and relies heavily on Zustand stores for persistent state management.
+It utilizes Tailwind CSS for styling and Framer Motion for smooth, interruptible animations.
+Wallpapers uploaded by the user are stored via IndexedDB to prevent `localStorage` limits.
 
+## Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Storage Management
+
+To fully reset the operating system without clearing other site data, use the "Reset Desktop Layout" feature in Control Panel, or click "Restart Application" if a global error occurs. PinkWire OS carefully prefixes its storage keys (`pinkwire-`) to be good citizens of `localStorage`.

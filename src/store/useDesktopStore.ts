@@ -41,6 +41,15 @@ interface DesktopStore {
   resetDesktop: () => void;
 }
 
+const DEFAULT_ICONS = [
+  { id: 'explorer-icon', appId: 'explorer', x: 20, y: 20 },
+  { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 120 },
+  { id: 'journal-icon', appId: 'journal', x: 20, y: 220 },
+  { id: 'disposable-icon', appId: 'disposable', x: 20, y: 320 },
+  { id: 'browser-icon', appId: 'browser', x: 20, y: 420 },
+  { id: 'settings-icon', appId: 'settings', x: 120, y: 20 },
+];
+
 export const useDesktopStore = create<DesktopStore>()(
   persist(
     (set) => ({
@@ -48,16 +57,7 @@ export const useDesktopStore = create<DesktopStore>()(
       wallpaper: 'bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900',
       wallpaperFit: 'cover',
       wallpaperBlur: false,
-      desktopIcons: [
-         { id: 'explorer-icon', appId: 'explorer', x: 20, y: 20 },
-         { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 120 },
-         { id: 'journal-icon', appId: 'journal', x: 20, y: 220 },
-         { id: 'disposable-icon', appId: 'disposable', x: 20, y: 320 },
-         { id: 'browser-icon', appId: 'browser', x: 20, y: 420 },
-         { id: 'settings-icon', appId: 'settings', x: 120, y: 20 },
-         { id: 'music-icon', appId: 'music', x: 120, y: 120 },
-         { id: 'downloads-icon', appId: 'downloads', x: 120, y: 220 },
-      ],
+      desktopIcons: [...DEFAULT_ICONS],
       selectedIconId: null,
       stickers: [],
       autoArrangeIcons: false,
@@ -76,7 +76,7 @@ export const useDesktopStore = create<DesktopStore>()(
       selectIcon: (id) => set({ selectedIconId: id }),
       
       addSticker: (sticker) => set((state) => ({
-        stickers: [...state.stickers, { ...sticker, id: Math.random().toString(36).substring(2, 9) }]
+        stickers: [...state.stickers, { ...sticker, id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 9) }]
       })),
       updateStickerPosition: (id, x, y) => set((state) => ({
         stickers: state.stickers.map(s => s.id === id ? { ...s, x, y } : s)
@@ -92,19 +92,24 @@ export const useDesktopStore = create<DesktopStore>()(
       setSnapToGrid: (snapToGrid) => set({ snapToGrid }),
       setShowLabels: (showLabels) => set({ showLabels }),
       resetDesktop: () => set({
-        desktopIcons: [
-           { id: 'explorer-icon', appId: 'explorer', x: 20, y: 20 },
-           { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 120 },
-           { id: 'journal-icon', appId: 'journal', x: 20, y: 220 },
-           { id: 'disposable-icon', appId: 'disposable', x: 20, y: 320 },
-           { id: 'browser-icon', appId: 'browser', x: 20, y: 420 },
-           { id: 'settings-icon', appId: 'settings', x: 120, y: 20 },
-           { id: 'music-icon', appId: 'music', x: 120, y: 120 },
-           { id: 'downloads-icon', appId: 'downloads', x: 120, y: 220 },
-        ],
+        desktopIcons: [...DEFAULT_ICONS],
         stickers: []
       }),
     }),
-    { name: 'pinkwire-desktop-store' }
+    { 
+      name: 'pinkwire-desktop-store',
+      version: 1,
+      partialize: (state) => ({
+        hasBooted: state.hasBooted,
+        wallpaper: state.wallpaper,
+        wallpaperFit: state.wallpaperFit,
+        wallpaperBlur: state.wallpaperBlur,
+        desktopIcons: state.desktopIcons,
+        stickers: state.stickers,
+        autoArrangeIcons: state.autoArrangeIcons,
+        snapToGrid: state.snapToGrid,
+        showLabels: state.showLabels,
+      }),
+    }
   )
 );

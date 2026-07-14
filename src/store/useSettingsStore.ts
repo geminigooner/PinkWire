@@ -82,6 +82,9 @@ export const useSettingsStore = create<SettingsStore>()(
       setAnimationSpeed: (animationSpeed) => set({ animationSpeed }),
       setClockFormat: (clockFormat) => set({ clockFormat }),
     }),
-    { name: 'pinkwire-settings-store' }
+    { 
+      name: 'pinkwire-settings-store',
+      version: 1,
+    }
   )
 );

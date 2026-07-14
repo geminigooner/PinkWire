@@ -12,7 +12,7 @@ export function StickersDrawer() {
   const addSticker = useDesktopStore(state => state.addSticker);
 
   const handleDragStart = (e: React.DragEvent, sticker: string) => {
-    e.dataTransfer.setData('text/plain', sticker);
+    e.dataTransfer.setData('application/x-pinkwire-sticker', sticker);
   };
 
   const handleAddClick = (sticker: string) => {

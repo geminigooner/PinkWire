@@ -1,14 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { WindowState } from '../types/os';
-import { APP_METADATA } from './appMetadata';
+import { AppMetadataRegistry } from '../applications/metadata';
+
+interface OpenWindowOptions {
+  instanceKey?: string;
+  focusExisting?: boolean;
+}
 
 interface WindowStore {
   windows: WindowState[];
   focusedWindowId: string | null;
   highestZIndex: number;
   
-  openWindow: (appId: string, appData?: any) => void;
+  openWindow: (appId: string, appData?: unknown, options?: OpenWindowOptions) => void;
   closeWindow: (id: string) => void;
   minimizeWindow: (id: string) => void;
   restoreWindow: (id: string) => void;
@@ -18,6 +23,13 @@ interface WindowStore {
   updateWindowSize: (id: string, width: number, height: number) => void;
 }
 
+const focusNextWindow = (windows: WindowState[], currentFocusedId: string | null): string | null => {
+  const visibleWindows = windows.filter(w => !w.isMinimized && w.id !== currentFocusedId);
+  if (visibleWindows.length === 0) return null;
+  const next = visibleWindows.reduce((prev, current) => (prev.zIndex > current.zIndex) ? prev : current);
+  return next.id;
+};
+
 export const useWindowStore = create<WindowStore>()(
   persist(
     (set, get) => ({
@@ -25,36 +37,49 @@ export const useWindowStore = create<WindowStore>()(
       focusedWindowId: null,
       highestZIndex: 10,
 
-      openWindow: (appId, appData) => {
+      openWindow: (appId, appData, options = { focusExisting: true }) => {
         const { windows, highestZIndex } = get();
-        const appMeta = APP_METADATA[appId];
+        const appMeta = AppMetadataRegistry[appId];
         if (!appMeta) return;
 
-        const existing = windows.find(w => w.appId === appId);
-        if (existing) {
+        const policy = appMeta.instancePolicy || 'multiple';
+        const instanceKey = options.instanceKey;
+
+        let existing: WindowState | undefined;
+        if (policy === 'single') {
+          existing = windows.find(w => w.appId === appId);
+        } else if (policy === 'keyed' && instanceKey !== undefined) {
+          existing = windows.find(w => w.appId === appId && w.instanceKey === instanceKey);
+        }
+
+        if (existing && options.focusExisting) {
           get().restoreWindow(existing.id);
           get().focusWindow(existing.id);
-          set(state => ({
-            windows: state.windows.map(w => 
-              w.id === existing.id ? { ...w, appData } : w
-            )
-          }));
+          
+          if (appData !== undefined) {
+            set(state => ({
+              windows: state.windows.map(w => 
+                w.id === existing!.id ? { ...w, appData } : w
+              )
+            }));
+          }
           return;
         }
 
         const newZ = highestZIndex + 1;
         const newWindow: WindowState = {
-          id: `${appId}-${Date.now()}`,
+          id: `${appId}-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
           appId,
           title: appMeta.name,
-          x: 50 + windows.length * 30,
-          y: 50 + windows.length * 30,
+          x: Math.max(0, 50 + (windows.length % 10) * 30),
+          y: Math.max(0, 50 + (windows.length % 10) * 30),
           width: appMeta.defaultWidth || 600,
           height: appMeta.defaultHeight || 400,
           zIndex: newZ,
           isMinimized: false,
           isMaximized: false,
           appData,
+          instanceKey
         };
 
         set({
@@ -64,15 +89,23 @@ export const useWindowStore = create<WindowStore>()(
         });
       },
 
-      closeWindow: (id) => set((state) => ({
-        windows: state.windows.filter((w) => w.id !== id),
-        focusedWindowId: state.focusedWindowId === id ? null : state.focusedWindowId
-      })),
+      closeWindow: (id) => set((state) => {
+        const newWindows = state.windows.filter((w) => w.id !== id);
+        const nextFocused = state.focusedWindowId === id ? focusNextWindow(newWindows, id) : state.focusedWindowId;
+        return {
+          windows: newWindows,
+          focusedWindowId: nextFocused
+        };
+      }),
 
-      minimizeWindow: (id) => set((state) => ({
-        windows: state.windows.map(w => w.id === id ? { ...w, isMinimized: true } : w),
-        focusedWindowId: state.focusedWindowId === id ? null : state.focusedWindowId
-      })),
+      minimizeWindow: (id) => set((state) => {
+        const newWindows = state.windows.map(w => w.id === id ? { ...w, isMinimized: true } : w);
+        const nextFocused = state.focusedWindowId === id ? focusNextWindow(newWindows, id) : state.focusedWindowId;
+        return {
+          windows: newWindows,
+          focusedWindowId: nextFocused
+        };
+      }),
 
       restoreWindow: (id) => set((state) => ({
         windows: state.windows.map(w => w.id === id ? { ...w, isMinimized: false } : w)
@@ -103,6 +136,7 @@ export const useWindowStore = create<WindowStore>()(
     }),
     {
       name: 'pinkwire-window-store',
+      version: 1,
     }
   )
 );

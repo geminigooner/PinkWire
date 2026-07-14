@@ -1,14 +1,19 @@
+import React from 'react';
+
+export type WindowInstancePolicy = 'single' | 'multiple' | 'keyed';
+
 export interface AppDefinition {
   id: string;
   name: string;
-  icon: any; // Lucide icon component
+  icon: React.ElementType; // Lucide icon component
   defaultWidth?: number;
   defaultHeight?: number;
   minWidth?: number;
   minHeight?: number;
   resizable?: boolean;
   draggable?: boolean;
-  component: React.FC<any>;
+  instancePolicy?: WindowInstancePolicy;
+  component: React.FC<{ appData?: unknown; windowId: string }>;
 }
 
 export interface WindowState {
@@ -22,7 +27,8 @@ export interface WindowState {
   zIndex: number;
   isMinimized: boolean;
   isMaximized: boolean;
-  appData?: any;
+  appData?: unknown;
+  instanceKey?: string;
 }
 
 export interface DesktopIconState {

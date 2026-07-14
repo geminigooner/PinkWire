@@ -9,14 +9,14 @@ export interface FileItem {
   createdAt: string;
   modifiedAt: string;
   isFavorite?: boolean;
-  content?: any;
+  content?: unknown;
   tags?: string[];
   icon?: string;
   properties?: {
     created?: string;
     modifiedCount?: number;
     previousNames?: string[];
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 

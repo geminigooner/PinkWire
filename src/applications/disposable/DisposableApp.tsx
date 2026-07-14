@@ -1,44 +1,31 @@
 import React, { useEffect } from 'react';
-import { Sidebar } from './components/Sidebar/Sidebar';
 import { Toolbar } from './components/Toolbar/Toolbar';
 import { MainView } from './components/MainView/MainView';
 import { StatusBar } from './components/StatusBar/StatusBar';
-import { Viewer } from './components/Viewer/Viewer';
 import { useDisposableStore } from './store/useDisposableStore';
-import { cn } from '../../utils/cn';
+import { Viewer } from './components/Viewer/Viewer';
 
-export function DisposableApp({ appData }: { appData?: any }) {
-  const { openViewer, isSidebarOpen, setSidebarOpen } = useDisposableStore();
+interface DisposableAppData {
+  imageUrl?: string;
+}
 
-  // Handle external images sent via appData
+export function DisposableApp({ appData }: { appData?: unknown }) {
+  const openViewer = useDisposableStore(state => state.openViewer);
+  const data = appData as DisposableAppData | undefined;
+
   useEffect(() => {
-    if (appData?.imageUrl) {
-      openViewer(appData.imageUrl);
+    if (data?.imageUrl) {
+      openViewer(data.imageUrl);
     }
-  }, [appData?.imageUrl, openViewer]);
+  }, [data?.imageUrl, openViewer]);
 
   return (
-    <div className="flex w-full h-full bg-os-window-bg text-os-text overflow-hidden font-sans relative">
-      <div className={cn(
-        "absolute inset-y-0 left-0 z-20 md:relative md:flex h-full w-56 transform transition-transform duration-300 ease-in-out",
-        isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-      )}>
-        <Sidebar />
-      </div>
-
-      {/* Mobile overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="absolute inset-0 bg-black/50 z-10 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div className="flex-1 flex flex-col min-w-0 relative">
-        <Toolbar />
+    <div className="flex flex-col w-full h-full bg-[#fcfcfc] overflow-hidden text-os-text font-sans">
+      <Toolbar />
+      <div className="flex flex-1 overflow-hidden relative">
         <MainView />
-        <StatusBar />
       </div>
+      <StatusBar />
       <Viewer />
     </div>
   );

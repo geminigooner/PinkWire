@@ -5,20 +5,25 @@ import { Content } from './components/Content/Content';
 import { StatusBar } from './components/StatusBar/StatusBar';
 import { useBrowserStore } from './store/useBrowserStore';
 
-export function BrowserApp({ appData }: { appData?: any }) {
+interface BrowserAppData {
+  url?: string;
+}
+
+export function BrowserApp({ appData }: { appData?: unknown }) {
   const { tabs, createTab, navigate, activeTabId } = useBrowserStore();
+  const data = appData as BrowserAppData | undefined;
 
   useEffect(() => {
     if (tabs.length === 0) {
-      createTab(appData?.url);
-    } else if (appData?.url) {
+      createTab(data?.url);
+    } else if (data?.url) {
       if (activeTabId) {
-        navigate(activeTabId, appData.url);
+        navigate(activeTabId, data.url);
       } else {
-        createTab(appData.url);
+        createTab(data.url);
       }
     }
-  }, [appData?.url]); // eslint-disable-line
+  }, [data?.url]); // eslint-disable-line
 
   return (
     <div className="flex flex-col w-full h-full bg-os-window-bg overflow-hidden font-sans">

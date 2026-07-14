@@ -7,7 +7,7 @@ import { cn } from '../../../../utils/cn';
 export function Toolbar() {
   const { searchQuery, setSearchQuery, viewMode, setViewMode, toggleSlideshow, slideshowActive, isSidebarOpen, setSidebarOpen } = useDisposableStore();
 
-  const viewModes: { id: ViewMode; icon: any; label: string }[] = [
+  const viewModes: { id: ViewMode; icon: React.ElementType; label: string }[] = [
     { id: 'small', icon: Grid, label: 'Small' },
     { id: 'medium', icon: LayoutGrid, label: 'Medium' },
     { id: 'large', icon: Square, label: 'Large' },

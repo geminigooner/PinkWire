@@ -6,16 +6,15 @@ import { Homepage } from '../Pages/Homepage';
 import { AboutSystem } from '../Pages/AboutSystem';
 import { AboutHistory } from '../Pages/AboutHistory';
 import { AboutCredits } from '../Pages/AboutCredits';
+import { ExternalIframe } from './ExternalIframe';
 
 export function Content() {
   const { tabs, activeTabId, setLoading, setTitle } = useBrowserStore();
   const activeTab = tabs.find(t => t.id === activeTabId);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const openWindow = useWindowStore(state => state.openWindow);
 
   useEffect(() => {
     if (!activeTab) return;
-
     if (activeTab.url.startsWith('about:') || activeTab.url.startsWith('pinkwire://')) {
       setLoading(activeTab.id, false);
       let newTitle = activeTab.title;
@@ -57,15 +56,13 @@ export function Content() {
   }, [activeTab?.url, activeTab?.id, setLoading, setTitle, openWindow]);
 
   const handleIframeLoad = () => {
-    if (activeTab && iframeRef.current) {
+    if (activeTab) {
       setLoading(activeTab.id, false);
       try {
-        const title = iframeRef.current.contentDocument?.title;
-        if (title) setTitle(activeTab.id, title);
-      } catch (e) {
-        // Cross-origin
         const domain = new URL(activeTab.url).hostname;
         setTitle(activeTab.id, domain);
+      } catch (e) {
+        setTitle(activeTab.id, 'External Site');
       }
     }
   };
@@ -91,13 +88,9 @@ export function Content() {
 
     // External website
     return (
-      <iframe
-        ref={iframeRef}
-        src={activeTab.url}
-        className="w-full h-full border-none bg-white"
-        onLoad={handleIframeLoad}
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-        title="Browser Content"
+      <ExternalIframe 
+        url={activeTab.url} 
+        onLoad={handleIframeLoad} 
       />
     );
   };

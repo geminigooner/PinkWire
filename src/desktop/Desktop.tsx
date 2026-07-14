@@ -25,7 +25,7 @@ export function Desktop() {
   }, [autoArrangeIcons, desktopIcons.length, updateIconPosition]);
 
   const handleDrop = (e: React.DragEvent) => {
-    const stickerData = e.dataTransfer.getData('text/plain');
+    const stickerData = e.dataTransfer.getData('application/x-pinkwire-sticker');
     if (stickerData) {
       addSticker({
         type: stickerData,

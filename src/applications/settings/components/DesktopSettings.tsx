@@ -3,6 +3,7 @@ import { useDesktopStore } from '../../../store/useDesktopStore';
 import { WALLPAPERS } from '../data/wallpapers';
 import { Upload, Star, LayoutGrid, Monitor, ToggleLeft, ToggleRight, Trash2 } from 'lucide-react';
 import { cn } from '../../../utils/cn';
+import { handleWallpaperUpload } from '../../../store/wallpaperManager';
 
 export function DesktopSettings() {
   const { 
@@ -13,16 +14,15 @@ export function DesktopSettings() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target?.result) {
-          setWallpaper(e.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+      try {
+        const id = await handleWallpaperUpload(file);
+        setWallpaper(id);
+      } catch (err: any) {
+        alert(err.message || 'Failed to upload wallpaper.');
+      }
     }
   };
 

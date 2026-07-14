@@ -5,6 +5,7 @@ import { AppRegistry } from '../applications/registry';
 import { Minus, Square, X } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 
 export function WindowNode({ id }: { id: string }) {
   const windowState = useWindowStore(state => state.windows.find(w => w.id === id));
@@ -23,12 +24,30 @@ export function WindowNode({ id }: { id: string }) {
   const isFocused = focusedWindowId === id;
   const { zIndex, x, y, width, height } = windowState;
   const isMaximized = windowState.isMaximized || isMobile;
+
   const AppComponent = appDef.component;
   
   if (windowState.isMinimized) return null;
 
   const isResizable = appDef.resizable !== false && !isMobile;
   const isDraggable = appDef.draggable !== false && !isMobile;
+
+  // Add a bound check when drag ends
+  const handleDragEnd = () => {
+    if (windowRef.current && !isMobile) {
+       const rect = windowRef.current.getBoundingClientRect();
+       
+       let newX = rect.left;
+       let newY = rect.top;
+       
+       // Keep window titlebar somewhat visible (prevent losing it off screen)
+       if (newY < 0) newY = 0;
+       if (newX > window.innerWidth - 40) newX = window.innerWidth - 40;
+       if (newX < -rect.width + 40) newX = -rect.width + 40;
+       
+       updateWindowPosition(id, newX, newY);
+    }
+  };
 
   return (
     <motion.div
@@ -38,17 +57,12 @@ export function WindowNode({ id }: { id: string }) {
       dragControls={dragControls}
       dragListener={false}
       dragMomentum={false}
-      onDragEnd={(e, info) => {
-        if (windowRef.current && !isMobile) {
-           const rect = windowRef.current.getBoundingClientRect();
-           updateWindowPosition(id, rect.left, rect.top);
-        }
-      }}
+      onDragEnd={handleDragEnd}
       initial={false}
       animate={
         isMaximized 
-          ? { x: 0, y: 0, width: '100vw', height: 'calc(100vh - 48px)' } 
-          : { x, y, width, height }
+          ? { x: 0, y: 0, width: '100vw', height: '100dvh', paddingBottom: '48px' } 
+          : { x, y, width, height, paddingBottom: 0 }
       }
       transition={isResizing ? { duration: 0 } : { duration: 0.2, type: 'spring', bounce: 0 }}
       onPointerDown={() => focusWindow(id)}
@@ -61,7 +75,7 @@ export function WindowNode({ id }: { id: string }) {
     >
       {/* Title Bar */}
       <div 
-        className="flex items-center justify-between h-10 px-3 select-none bg-os-titlebar-bg border-b border-os-window-border"
+        className="flex items-center justify-between h-10 px-3 select-none bg-os-titlebar-bg border-b border-os-window-border shrink-0"
         onPointerDown={(e) => {
           focusWindow(id);
           if (isDraggable) {
@@ -78,15 +92,15 @@ export function WindowNode({ id }: { id: string }) {
            <span className="text-sm font-medium text-os-text">{windowState.title}</span>
         </div>
         <div className="flex items-center gap-2">
-          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => minimizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors">
+          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => minimizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors" aria-label="Minimize">
             <Minus size={14} />
           </button>
           {isResizable && (
-            <button onPointerDown={(e) => e.stopPropagation()} onClick={() => toggleMaximizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors">
+            <button onPointerDown={(e) => e.stopPropagation()} onClick={() => toggleMaximizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors" aria-label="Maximize">
               <Square size={12} />
             </button>
           )}
-          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => closeWindow(id)} className="p-1.5 text-os-text-muted hover:text-white hover:bg-red-500 rounded-md transition-colors">
+          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => closeWindow(id)} className="p-1.5 text-os-text-muted hover:text-white hover:bg-red-500 rounded-md transition-colors" aria-label="Close">
             <X size={14} />
           </button>
         </div>
@@ -94,7 +108,9 @@ export function WindowNode({ id }: { id: string }) {
       
       {/* Content */}
       <div className="flex-1 overflow-hidden relative">
-        <AppComponent appData={windowState.appData} windowId={id} />
+        <ErrorBoundary>
+          <AppComponent appData={windowState.appData} windowId={id} />
+        </ErrorBoundary>
       </div>
 
       {/* Resize Handle */}
