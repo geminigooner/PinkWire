@@ -22,7 +22,7 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
   }, [onComplete, setHasBooted]);
 
   return (
-    <div className="fixed inset-0 bg-black text-green-500 font-mono text-sm p-8 z-[100] flex flex-col">
+    <div className="fixed top-0 left-0 w-full h-[100dvh] bg-black text-green-500 font-mono text-sm p-8 z-[100] flex flex-col">
       <AnimatePresence>
         {stage >= 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

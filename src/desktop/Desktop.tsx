@@ -6,8 +6,11 @@ import { Taskbar } from '../taskbar/Taskbar';
 import { useDesktopStore } from '../store/useDesktopStore';
 import { StickersRenderer } from './StickersRenderer';
 import { StickersDrawer } from './StickersDrawer';
+import { AudioService } from '../services/AudioService';
+import { MiniPlayer } from '../applications/spun/components/MiniPlayer';
 
 export function Desktop() {
+
   const { desktopIcons, selectIcon, addSticker, autoArrangeIcons, updateIconPosition } = useDesktopStore();
 
   useEffect(() => {
@@ -43,12 +46,14 @@ export function Desktop() {
 
   return (
     <div 
-      className="fixed inset-0 overflow-hidden text-os-text select-none bg-os-bg font-sans"
+      className="fixed top-0 left-0 w-full h-[100dvh] overflow-hidden text-os-text select-none bg-os-bg font-sans"
       onPointerDown={() => selectIcon(null)}
       onContextMenu={(e) => e.preventDefault()}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
+      <AudioService />
+      <MiniPlayer />
       <Wallpaper />
       
       <StickersRenderer />

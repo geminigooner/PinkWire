@@ -24,17 +24,14 @@ export const MOCK_ARTICLES: Article[] = [
     readingTime: 4,
     favorite: true,
     status: 'published',
-    content: `
-# Designing PinkWire OS
-
+    references: [{ type: 'track', id: 't2', name: 'Neon Nights by Synthwave Society' }],
+    content: `# Designing PinkWire OS
 When I started building PinkWire, I didn't want to just make another website. I wanted it to feel like a place.
-
 A real operating system environment. 
 
 > "It should feel like finding someone's abandoned desktop from an alternate timeline."
 
 ## The Aesthetic
-
 We chose a glossy, premium UI style, moving away from flat design and embracing:
 * Soft gradients
 * Distinct shadows
@@ -42,7 +39,6 @@ We chose a glossy, premium UI style, moving away from flat design and embracing:
 * High-contrast borders
 
 Here is some of the code for the windows:
-
 \`\`\`tsx
 <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl">
   {children}
@@ -50,7 +46,6 @@ Here is some of the code for the windows:
 \`\`\`
 
 ## What's Next?
-
 We still need to build the Journal, the Browser, and refine the filesystem. But the foundation is solid.
     `
   },
@@ -65,15 +60,11 @@ We still need to build the Journal, the Browser, and refine the filesystem. But 
     readingTime: 7,
     favorite: false,
     status: 'published',
-    content: `
-# Notes on Interpretability
-
-Understanding how a neural network arrives at its outputs remains one of the most fascinating challenges in modern computing. 
-
-If we treat a model purely as a black box, we limit our ability to align it, debug it, and trust it.
+    references: [{ type: 'track', id: 't4', name: 'Midnight Coding by Coffee & Code' }],
+    content: `# Notes on Interpretability
+Understanding how a neural network arrives at its outputs remains one of the most fascinating challenges in modern computing. If we treat a model purely as a black box, we limit our ability to align it, debug it, and trust it.
 
 ## Feature Excision
-
 Recently, I've been experimenting with identifying and isolating specific concepts within the latent space.
 
 1.  **Identify:** Locate the activation vectors correlated with a specific concept.
@@ -83,7 +74,6 @@ Recently, I've been experimenting with identifying and isolating specific concep
 So far, the results are promising but extremely noisy. The concepts are heavily entangled. 
 
 ![Thought Vectors](https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80)
-
 *Visualizing the latent space projections.*
     `
   }

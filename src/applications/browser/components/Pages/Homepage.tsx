@@ -2,6 +2,7 @@ import React from 'react';
 import { useBrowserStore } from '../../store/useBrowserStore';
 import { Globe, Terminal, FileText, FolderGit2, BookOpen, Music } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
+import { NowPlayingHomepageWidget } from './NowPlayingHomepageWidget';
 
 export function Homepage({ tabId }: { tabId: string }) {
   const { navigate, bookmarks } = useBrowserStore();
@@ -29,9 +30,12 @@ export function Homepage({ tabId }: { tabId: string }) {
 
   return (
     <div className="min-h-full p-8 md:p-12 text-os-text font-sans flex flex-col max-w-5xl mx-auto bg-black/20">
-      <div className="mb-12 text-center md:text-left">
-        <h1 className="text-4xl font-light mb-2 tracking-tight">Internet <span className="font-semibold text-os-accent">ExplAmanda</span></h1>
-        <p className="text-os-text-muted">Welcome back. The grid is active.</p>
+      <div className="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-start md:justify-between">
+        <div>
+          <h1 className="text-4xl font-light mb-2 tracking-tight">Internet <span className="font-semibold text-os-accent">ExplAmanda</span></h1>
+          <p className="text-os-text-muted">Welcome back. The grid is active.</p>
+        </div>
+        <NowPlayingHomepageWidget />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

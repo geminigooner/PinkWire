@@ -61,7 +61,7 @@ export function WindowNode({ id }: { id: string }) {
       initial={false}
       animate={
         isMaximized 
-          ? { x: 0, y: 0, width: '100vw', height: '100dvh', paddingBottom: '48px' } 
+          ? { x: 0, y: 0, width: '100%', height: '100%', paddingBottom: 0 } 
           : { x, y, width, height, paddingBottom: 0 }
       }
       transition={isResizing ? { duration: 0 } : { duration: 0.2, type: 'spring', bounce: 0 }}

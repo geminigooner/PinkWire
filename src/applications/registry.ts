@@ -1,11 +1,13 @@
 import { AppDefinition } from '../types/os';
 import { AppMetadataRegistry } from './metadata';
+
 import { PinkWireApp } from './pinkwire/PinkWireApp';
 import { DisposableApp } from './disposable/DisposableApp';
 import { JournalApp } from './journal/JournalApp';
 import { ExplorerApp } from './explorer/ExplorerApp';
 import { BrowserApp } from './browser/BrowserApp';
 import { SettingsApp } from './settings/SettingsApp';
+import { SpunApp } from './spun/SpunApp';
 
 export const AppRegistry: Record<string, AppDefinition> = {
   settings: {
@@ -31,5 +33,9 @@ export const AppRegistry: Record<string, AppDefinition> = {
   browser: {
     ...AppMetadataRegistry.browser,
     component: BrowserApp
+  },
+  spun: {
+    ...AppMetadataRegistry.spun,
+    component: SpunApp
   }
 };

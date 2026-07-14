@@ -4,12 +4,16 @@ import ReactMarkdown from 'react-markdown';
 import { format } from 'date-fns';
 import { cn } from '../../../../utils/cn';
 import { useWindowStore } from '../../../../store/useWindowStore';
+import { useAudioStore } from '../../../../store/useAudioStore';
+import { Music2, Play } from 'lucide-react';
 
 export function Reader() {
   const { articles, activeArticleId, textSize, readingMode } = useJournalStore();
   const openWindow = useWindowStore(state => state.openWindow);
-
+  const { tracks, playTrack } = useAudioStore();
+  
   const article = articles.find(a => a.id === activeArticleId);
+
   if (!article) return null;
 
   const sizeClasses = {
@@ -18,12 +22,22 @@ export function Reader() {
     large: 'prose-lg',
   };
 
+  const handlePlayReference = (type: string, id: string) => {
+    openWindow('spun');
+    if (type === 'track') {
+      const track = tracks.find(t => t.id === id);
+      if (track) {
+        playTrack(track, tracks);
+      }
+    }
+  };
+
   return (
     <div className={cn(
       "flex-1 overflow-y-auto custom-scrollbar transition-colors duration-500",
       readingMode ? "bg-[#FAF9F6] text-gray-900" : "bg-black/20 text-os-text"
     )}>
-      <div className="max-w-3xl mx-auto px-8 py-16">
+      <div className="max-w-3xl mx-auto px-4 md:px-8 py-8 md:py-16">
         <header className="mb-12 text-center">
           <div className={cn(
             "flex items-center justify-center gap-3 mb-6 text-sm font-medium tracking-wider uppercase",
@@ -35,12 +49,14 @@ export function Reader() {
             <span>•</span>
             <span className={readingMode ? "text-rose-600" : "text-os-accent"}>{article.category}</span>
           </div>
+
           <h1 className={cn(
             "text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight",
             readingMode ? "text-gray-900" : "text-os-text text-shadow-sm"
           )}>
             {article.title}
           </h1>
+
           {article.tags.length > 0 && (
             <div className="flex justify-center flex-wrap gap-2">
               {article.tags.map(tag => (
@@ -58,6 +74,38 @@ export function Reader() {
         {article.coverImage && (
           <div className="mb-12 rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10">
             <img src={article.coverImage} alt="Cover" className="w-full h-auto object-cover" />
+          </div>
+        )}
+        
+        {article.references && article.references.length > 0 && (
+          <div className={cn(
+            "mb-10 p-4 rounded-xl border flex flex-col gap-3 max-w-2xl mx-auto",
+            readingMode ? "bg-gray-100 border-gray-200" : "bg-black/20 border-os-window-border"
+          )}>
+            <div className={cn("text-xs font-semibold uppercase tracking-wider", readingMode ? "text-gray-500" : "text-os-text-muted")}>
+              Attached Media
+            </div>
+            <div className="flex flex-col gap-2">
+              {article.references.map(ref => (
+                <button
+                  key={`${ref.type}-${ref.id}`}
+                  onClick={() => handlePlayReference(ref.type, ref.id)}
+                  className={cn(
+                    "flex items-center gap-3 p-3 rounded-lg transition-colors text-left group",
+                    readingMode ? "bg-white border border-gray-200 hover:bg-gray-50" : "bg-black/40 border border-os-window-border hover:bg-white/5"
+                  )}
+                >
+                  <div className={cn("p-2 rounded-md shadow-sm", readingMode ? "bg-rose-100 text-rose-600" : "bg-os-accent/20 text-os-accent")}>
+                    {ref.type === 'track' && <Music2 size={16} />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className={cn("text-sm font-medium truncate", readingMode ? "text-gray-900 group-hover:text-rose-600" : "text-os-text group-hover:text-os-accent")}>{ref.name}</p>
+                    <p className={cn("text-xs truncate", readingMode ? "text-gray-500" : "text-os-text-muted")}>Play {ref.type} in Spun.exe</p>
+                  </div>
+                  <Play size={16} className={readingMode ? "text-gray-400 group-hover:text-rose-600" : "text-os-text-muted group-hover:text-os-accent"} />
+                </button>
+              ))}
+            </div>
           </div>
         )}
 

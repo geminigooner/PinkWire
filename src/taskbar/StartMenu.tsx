@@ -36,7 +36,7 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.95 }}
         transition={{ duration: 0.15 }}
-        className="w-80 h-96 bg-os-taskbar-bg backdrop-blur-xl border border-os-window-border rounded-xl shadow-2xl flex flex-col overflow-hidden"
+        className="w-[calc(100vw-16px)] sm:w-80 h-[22rem] bg-os-taskbar-bg backdrop-blur-xl border border-os-window-border rounded-xl shadow-2xl flex flex-col overflow-hidden max-w-sm"
       >
         <div className="p-4 flex-1 overflow-y-auto scrollbar-hide">
           <div className="text-xs font-semibold text-os-text-muted mb-3 px-2">PINNED APPS</div>
@@ -48,7 +48,7 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
                   openWindow(app.id);
                   onClose();
                 }}
-                className="flex flex-col items-center gap-2 p-3 hover:bg-white/10 rounded-xl transition-colors group"
+                className="flex flex-col items-center gap-2 p-2 sm:p-3 hover:bg-white/10 rounded-xl transition-colors group"
               >
                 <div className="w-10 h-10 bg-os-titlebar-bg rounded-lg flex items-center justify-center shadow border border-os-window-border group-hover:border-os-accent/50 transition-colors">
                   <app.icon size={20} className="text-os-accent" />

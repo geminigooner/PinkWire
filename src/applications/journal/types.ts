@@ -12,6 +12,7 @@ export interface Article {
   favorite: boolean;
   content: string; // Markdown string
   status: 'published' | 'draft' | 'archived';
+  references?: { type: 'track' | 'album' | 'playlist'; id: string; name: string }[];
 }
 
 export interface Category {

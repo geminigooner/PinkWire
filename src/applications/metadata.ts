@@ -1,4 +1,4 @@
-import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings } from 'lucide-react';
+import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc } from 'lucide-react';
 import { AppDefinition } from '../types/os';
 
 // Exclude component from AppDefinition for metadata
@@ -72,6 +72,18 @@ export const AppMetadataRegistry: Record<string, AppMetadata> = {
     defaultWidth: 1000,
     defaultHeight: 700,
     minWidth: 400,
+    minHeight: 400,
+    resizable: true,
+    draggable: true,
+    instancePolicy: 'single'
+  },
+  spun: {
+    id: 'spun',
+    name: 'Spun.exe',
+    icon: Disc,
+    defaultWidth: 900,
+    defaultHeight: 600,
+    minWidth: 600,
     minHeight: 400,
     resizable: true,
     draggable: true,

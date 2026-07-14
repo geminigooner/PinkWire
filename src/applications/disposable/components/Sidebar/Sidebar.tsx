@@ -16,7 +16,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className="w-full shrink-0 border-r border-os-window-border bg-os-window-bg/80 flex flex-col h-full">
+    <div className="w-56 md:w-64 hidden sm:flex shrink-0 border-r border-os-window-border bg-os-window-bg/80 flex flex-col h-full">
       <div className="p-4 border-b border-os-window-border bg-os-titlebar-bg/50">
         <h2 className="font-semibold text-os-text text-sm">Library</h2>
       </div>

@@ -6,6 +6,7 @@ import { AppRegistry } from '../applications/registry';
 import { cn } from '../utils/cn';
 import { Command, Wifi, Volume2, BatteryMedium } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
+import { NowPlayingWidget } from './NowPlayingWidget';
 
 export function Taskbar() {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
@@ -23,9 +24,7 @@ export function Taskbar() {
         >
           <Command size={20} />
         </button>
-
         <div className="w-px h-6 bg-os-window-border mx-2" />
-
         <div className="flex-1 flex items-center gap-1 overflow-x-auto px-2 scrollbar-hide">
           {windows.map(w => {
             const app = AppRegistry[w.appId];
@@ -60,8 +59,8 @@ export function Taskbar() {
             )
           })}
         </div>
-
         <div className="flex items-center gap-1 h-full px-2">
+          <NowPlayingWidget />
           {/* System Tray Placeholder */}
           <div className="hidden sm:flex items-center gap-2 px-3 h-9 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
             <Wifi size={16} />
