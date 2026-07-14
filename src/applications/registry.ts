@@ -5,6 +5,7 @@ import { PinkWireApp } from './pinkwire/PinkWireApp';
 import { DisposableApp } from './disposable/DisposableApp';
 import { JournalApp } from './journal/JournalApp';
 import { ExplorerApp } from './explorer/ExplorerApp';
+import { BrowserApp } from './browser/BrowserApp';
 import React from 'react';
 
 const createPlaceholder = (name: string) => () => React.createElement(PlaceholderApp, { name });
@@ -68,7 +69,7 @@ export const AppRegistry: Record<string, AppDefinition> = {
     minHeight: 400,
     resizable: true,
     draggable: true,
-    component: createPlaceholder('Browser')
+    component: BrowserApp
   },
   music: {
     id: 'music',
