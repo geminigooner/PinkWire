@@ -1,7 +1,10 @@
 import React from 'react';
 import { Message } from '../../../types';
+import { useWindowStore } from '../../../../../store/useWindowStore';
 
 export function ImageMessage({ message }: { message: Message }) {
+  const openWindow = useWindowStore(state => state.openWindow);
+
   if (!message.attachments || message.attachments.length === 0) return null;
   
   return (
@@ -10,7 +13,11 @@ export function ImageMessage({ message }: { message: Message }) {
         <span className="text-[13px] text-os-text mb-1">{message.content}</span>
       )}
       {message.attachments.map(att => (
-        <div key={att.id} className="relative group cursor-pointer overflow-hidden rounded-lg border border-os-window-border max-w-md">
+        <div 
+          key={att.id} 
+          onDoubleClick={() => openWindow('disposable', { imageUrl: att.url })}
+          className="relative group cursor-pointer overflow-hidden rounded-lg border border-os-window-border max-w-md"
+        >
           <img 
             src={att.url} 
             alt={att.name} 

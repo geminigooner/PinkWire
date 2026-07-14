@@ -2,6 +2,7 @@ import { Zap, Book, Image as ImageIcon, Globe, Music, Download, Flame } from 'lu
 import { AppDefinition } from '../types/os';
 import { PlaceholderApp } from './PlaceholderApp';
 import { PinkWireApp } from './pinkwire/PinkWireApp';
+import { DisposableApp } from './disposable/DisposableApp';
 import React from 'react';
 
 const createPlaceholder = (name: string) => () => React.createElement(PlaceholderApp, { name });
@@ -31,17 +32,17 @@ export const AppRegistry: Record<string, AppDefinition> = {
     draggable: true,
     component: createPlaceholder('Journal')
   },
-  camera_roll: {
-    id: 'camera_roll',
-    name: 'Camera Roll',
+  disposable: {
+    id: 'disposable',
+    name: 'Disposable',
     icon: ImageIcon,
-    defaultWidth: 800,
-    defaultHeight: 600,
-    minWidth: 500,
+    defaultWidth: 900,
+    defaultHeight: 650,
+    minWidth: 600,
     minHeight: 400,
     resizable: true,
     draggable: true,
-    component: createPlaceholder('Camera Roll')
+    component: DisposableApp
   },
   browser: {
     id: 'browser',

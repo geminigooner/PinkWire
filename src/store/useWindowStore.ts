@@ -34,7 +34,11 @@ export const useWindowStore = create<WindowStore>()(
         if (existing) {
           get().restoreWindow(existing.id);
           get().focusWindow(existing.id);
-          // If we wanted to update appData on an existing window, we could do it here
+          set(state => ({
+            windows: state.windows.map(w => 
+              w.id === existing.id ? { ...w, appData } : w
+            )
+          }));
           return;
         }
 

@@ -22,7 +22,7 @@ export const useDesktopStore = create<DesktopStore>()(
       desktopIcons: [
          { id: 'pinkwire-icon', appId: 'pinkwire', x: 20, y: 20 },
          { id: 'journal-icon', appId: 'journal', x: 20, y: 120 },
-         { id: 'camera-roll-icon', appId: 'camera_roll', x: 20, y: 220 },
+         { id: 'disposable-icon', appId: 'disposable', x: 20, y: 220 },
          { id: 'browser-icon', appId: 'browser', x: 20, y: 320 },
          { id: 'music-icon', appId: 'music', x: 20, y: 420 },
          { id: 'downloads-icon', appId: 'downloads', x: 120, y: 20 },
