@@ -1,16 +1,26 @@
 import React from 'react';
 import { useDesktopStore } from '../store/useDesktopStore';
+import { cn } from '../utils/cn';
 
 export function Wallpaper() {
-  const wallpaper = useDesktopStore(state => state.wallpaper);
+  const { wallpaper, wallpaperFit, wallpaperBlur } = useDesktopStore();
   
-  // If it starts with bg-, it's a tailwind class, otherwise it's a URL
-  const isUrl = wallpaper.startsWith('http') || wallpaper.startsWith('url');
+  // If it starts with bg- or url, or data:
+  const isUrl = wallpaper.startsWith('http') || wallpaper.startsWith('url') || wallpaper.startsWith('data:');
 
   return (
     <div 
-      className={`absolute inset-0 -z-10 ${!isUrl ? wallpaper : ''}`}
-      style={isUrl ? { backgroundImage: `url(${wallpaper})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
+      className={cn(
+        "absolute inset-0 -z-10 transition-all duration-1000",
+        !isUrl ? wallpaper : '',
+        wallpaperBlur ? 'blur-md scale-105' : ''
+      )}
+      style={isUrl ? { 
+        backgroundImage: `url(${wallpaper})`, 
+        backgroundSize: wallpaperFit === 'fill' ? '100% 100%' : wallpaperFit, 
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      } : {}}
     />
   );
 }

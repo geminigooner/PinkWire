@@ -8,25 +8,35 @@ import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x: number, y: number }) {
   const openWindow = useWindowStore(state => state.openWindow);
-  const { updateIconPosition, selectedIconId, selectIcon } = useDesktopStore();
+  const { updateIconPosition, selectedIconId, selectIcon, snapToGrid, autoArrangeIcons, showLabels } = useDesktopStore();
   const [isDragging, setIsDragging] = useState(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
   
   const app = AppRegistry[appId];
-
   if (!app) return null;
+
   const Icon = app.icon;
   const isSelected = selectedIconId === id;
 
+  const handleDragEnd = (e: any, info: any) => {
+    setIsDragging(false);
+    let newX = x + info.offset.x;
+    let newY = y + info.offset.y;
+    
+    if (snapToGrid) {
+      newX = Math.round(newX / 100) * 100 + 20;
+      newY = Math.round(newY / 100) * 100 + 20;
+    }
+    
+    updateIconPosition(id, newX, newY);
+  };
+
   return (
     <motion.div 
-      drag={!isMobile}
+      drag={!isMobile && !autoArrangeIcons}
       dragMomentum={false}
       onDragStart={() => setIsDragging(true)}
-      onDragEnd={(e, info) => {
-        setIsDragging(false);
-        updateIconPosition(id, x + info.offset.x, y + info.offset.y);
-      }}
+      onDragEnd={handleDragEnd}
       initial={{ x, y }}
       animate={{ x, y }}
       className={cn(
@@ -56,7 +66,9 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
       )}>
         <Icon size={24} className={isSelected ? "text-white" : "text-os-accent"} />
       </div>
-      <span className="text-xs font-medium text-center text-os-text drop-shadow-md select-none line-clamp-2">{app.name}</span>
+      {showLabels && (
+        <span className="text-xs font-medium text-center text-os-text drop-shadow-md select-none line-clamp-2">{app.name}</span>
+      )}
     </motion.div>
   );
 }

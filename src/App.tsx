@@ -7,6 +7,7 @@ import { Desktop } from './desktop/Desktop';
 import { BootSequence } from './core/BootSequence';
 import { useDesktopStore } from './store/useDesktopStore';
 import { useState } from 'react';
+import { OSProvider } from './components/OSProvider';
 
 export default function App() {
   const hasBooted = useDesktopStore(state => state.hasBooted);
@@ -17,6 +18,8 @@ export default function App() {
   }
 
   return (
-    <Desktop />
+    <OSProvider>
+      <Desktop />
+    </OSProvider>
   );
 }
