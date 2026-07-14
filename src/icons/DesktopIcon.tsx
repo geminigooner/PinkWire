@@ -4,11 +4,13 @@ import { useWindowStore } from '../store/useWindowStore';
 import { useDesktopStore } from '../store/useDesktopStore';
 import { AppRegistry } from '../applications/registry';
 import { cn } from '../utils/cn';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x: number, y: number }) {
   const openWindow = useWindowStore(state => state.openWindow);
   const { updateIconPosition, selectedIconId, selectIcon } = useDesktopStore();
   const [isDragging, setIsDragging] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
   
   const app = AppRegistry[appId];
 
@@ -18,7 +20,7 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
 
   return (
     <motion.div 
-      drag
+      drag={!isMobile}
       dragMomentum={false}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={(e, info) => {
@@ -35,9 +37,17 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
         e.stopPropagation();
         selectIcon(id);
       }}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (isMobile) {
+          openWindow(appId);
+        }
+      }}
       onDoubleClick={(e) => {
         e.stopPropagation();
-        openWindow(appId);
+        if (!isMobile) {
+          openWindow(appId);
+        }
       }}
     >
       <div className={cn(

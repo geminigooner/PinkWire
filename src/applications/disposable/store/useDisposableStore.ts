@@ -9,6 +9,7 @@ interface DisposableState {
   searchQuery: string;
   viewMode: ViewMode;
   selectedPhotoIds: string[];
+  isSidebarOpen: boolean;
   
   // Viewer state
   viewerPhotoUrl: string | null;
@@ -20,6 +21,7 @@ interface DisposableState {
   setViewMode: (mode: ViewMode) => void;
   togglePhotoSelection: (id: string) => void;
   clearSelection: () => void;
+  setSidebarOpen: (isOpen: boolean) => void;
   
   openViewer: (url: string) => void;
   closeViewer: () => void;
@@ -34,12 +36,13 @@ export const useDisposableStore = create<DisposableState>((set) => ({
   searchQuery: '',
   viewMode: 'medium',
   selectedPhotoIds: [],
+  isSidebarOpen: false,
 
   viewerPhotoUrl: null,
   isFullscreen: false,
   slideshowActive: false,
 
-  setCurrentAlbum: (id) => set({ currentAlbumId: id, selectedPhotoIds: [] }),
+  setCurrentAlbum: (id) => set({ currentAlbumId: id, selectedPhotoIds: [], isSidebarOpen: false }),
   setSearchQuery: (query) => set({ searchQuery: query }),
   setViewMode: (mode) => set({ viewMode: mode }),
   
@@ -49,6 +52,7 @@ export const useDisposableStore = create<DisposableState>((set) => ({
       : [...state.selectedPhotoIds, id]
   })),
   clearSelection: () => set({ selectedPhotoIds: [] }),
+  setSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
 
   openViewer: (url) => set({ viewerPhotoUrl: url, slideshowActive: false }),
   closeViewer: () => set({ viewerPhotoUrl: null, slideshowActive: false, isFullscreen: false }),

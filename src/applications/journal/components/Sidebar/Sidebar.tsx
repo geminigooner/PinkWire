@@ -10,7 +10,7 @@ export function Sidebar() {
   const allTags = Array.from(new Set(articles.flatMap(a => a.tags))).sort();
 
   return (
-    <div className="w-64 shrink-0 border-r border-os-window-border bg-os-window-bg/80 flex flex-col h-full">
+    <div className="w-full shrink-0 border-r border-os-window-border bg-os-window-bg/80 flex flex-col h-full">
       <div className="p-4 border-b border-os-window-border bg-os-titlebar-bg/50">
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-os-text-muted" />

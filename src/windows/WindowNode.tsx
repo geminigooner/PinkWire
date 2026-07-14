@@ -4,6 +4,7 @@ import { useWindowStore } from '../store/useWindowStore';
 import { AppRegistry } from '../applications/registry';
 import { Minus, Square, X } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export function WindowNode({ id }: { id: string }) {
   const windowState = useWindowStore(state => state.windows.find(w => w.id === id));
@@ -12,6 +13,7 @@ export function WindowNode({ id }: { id: string }) {
   const windowRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
   const [isResizing, setIsResizing] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   if (!windowState) return null;
 
@@ -19,13 +21,14 @@ export function WindowNode({ id }: { id: string }) {
   if (!appDef) return null;
 
   const isFocused = focusedWindowId === id;
-  const { isMaximized, isMinimized, zIndex, x, y, width, height } = windowState;
+  const { zIndex, x, y, width, height } = windowState;
+  const isMaximized = windowState.isMaximized || isMobile;
   const AppComponent = appDef.component;
   
-  if (isMinimized) return null;
+  if (windowState.isMinimized) return null;
 
-  const isResizable = appDef.resizable !== false;
-  const isDraggable = appDef.draggable !== false;
+  const isResizable = appDef.resizable !== false && !isMobile;
+  const isDraggable = appDef.draggable !== false && !isMobile;
 
   return (
     <motion.div
@@ -36,7 +39,7 @@ export function WindowNode({ id }: { id: string }) {
       dragListener={false}
       dragMomentum={false}
       onDragEnd={(e, info) => {
-        if (windowRef.current) {
+        if (windowRef.current && !isMobile) {
            const rect = windowRef.current.getBoundingClientRect();
            updateWindowPosition(id, rect.left, rect.top);
         }
@@ -51,8 +54,9 @@ export function WindowNode({ id }: { id: string }) {
       onPointerDown={() => focusWindow(id)}
       style={{ zIndex, position: 'absolute', top: 0, left: 0 }}
       className={cn(
-        "flex flex-col bg-os-window-bg backdrop-blur-md rounded-xl overflow-hidden border shadow-2xl pointer-events-auto",
-        isFocused ? "border-os-accent/50 shadow-os-accent/20" : "border-os-window-border shadow-black/50"
+        "flex flex-col bg-os-window-bg backdrop-blur-md overflow-hidden pointer-events-auto",
+        !isMaximized && "rounded-xl border shadow-2xl",
+        !isMaximized && isFocused ? "border-os-accent/50 shadow-os-accent/20" : (!isMaximized && "border-os-window-border shadow-black/50")
       )}
     >
       {/* Title Bar */}

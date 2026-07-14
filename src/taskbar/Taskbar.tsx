@@ -63,7 +63,7 @@ export function Taskbar() {
 
         <div className="flex items-center gap-1 h-full px-2">
           {/* System Tray Placeholder */}
-          <div className="flex items-center gap-2 px-3 h-9 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
+          <div className="hidden sm:flex items-center gap-2 px-3 h-9 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-pointer">
             <Wifi size={16} />
             <Volume2 size={16} />
             <BatteryMedium size={16} />

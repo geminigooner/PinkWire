@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePinkWireStore } from '../../store/usePinkWireStore';
 import { MessageList } from './MessageList';
-import { Hash, Phone, Video, Info } from 'lucide-react';
+import { Hash, Phone, Video, Info, ChevronLeft } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 
 const statusColors = {
@@ -13,7 +13,8 @@ const statusColors = {
 };
 
 export function MainPanel() {
-  const { conversations, activeConversationId } = usePinkWireStore();
+  const { conversations, activeConversationId, setActiveConversation } = usePinkWireStore();
+
   const conversation = conversations.find(c => c.id === activeConversationId);
 
   if (!conversation) {
@@ -32,8 +33,15 @@ export function MainPanel() {
   return (
     <div className="flex-1 flex flex-col min-w-0 bg-black/20">
       {/* Header */}
-      <div className="h-16 shrink-0 border-b border-os-window-border bg-os-titlebar-bg/50 px-6 flex items-center justify-between">
+      <div className="h-16 shrink-0 border-b border-os-window-border bg-os-titlebar-bg/50 px-4 md:px-6 flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
+          <button 
+            className="md:hidden p-2 -ml-2 text-os-text-muted hover:text-os-text shrink-0"
+            onClick={() => setActiveConversation(null)}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          
           <div className="relative shrink-0">
             {participant?.avatar ? (
               <img src={participant.avatar} alt="" className="w-10 h-10 rounded-full object-cover" />
