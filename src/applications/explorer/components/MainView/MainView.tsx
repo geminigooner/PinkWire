@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useExplorerStore } from '../../store/useExplorerStore';
 import { useWindowStore } from '../../../../store/useWindowStore';
+import { useAchievementStore } from '../../../../store/useAchievementStore';
 import { cn } from '../../../../utils/cn';
 import { 
   Folder, FileText, FileImage, FileAudio, File, 
@@ -12,7 +13,7 @@ export function MainView() {
   const { 
     files, currentPath, navigateToFolder, 
     selectedIds, toggleSelection, clearSelection, setSelectedIds,
-    searchQuery, viewMode
+    searchQuery, viewMode, showHiddenFiles
   } = useExplorerStore();
   
   const openWindow = useWindowStore(state => state.openWindow);
@@ -20,11 +21,18 @@ export function MainView() {
 
   let displayFiles = files.filter(f => f.parentId === currentFolderId);
   
+  if (!showHiddenFiles) {
+    displayFiles = displayFiles.filter(f => !f.isHidden);
+  }
+  
   if (searchQuery) {
     displayFiles = files.filter(f => 
       f.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
       (f.tags && f.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase())))
     );
+    if (!showHiddenFiles) {
+      displayFiles = displayFiles.filter(f => !f.isHidden);
+    }
   }
 
   const getFileIcon = (file: FileItem) => {
@@ -44,6 +52,9 @@ export function MainView() {
   const handleDoubleClick = (file: FileItem) => {
     if (file.type === 'folder') {
       navigateToFolder(file.id);
+      if (file.isHidden) {
+        useAchievementStore.getState().unlockAchievement('found_hidden_folder');
+      }
     } else if (file.type === 'markdown' && (file.content as any)?.articleId) {
       openWindow('journal', { articleId: (file.content as any).articleId });
     } else if (file.type === 'image' && (file.content as any)?.imageUrl) {

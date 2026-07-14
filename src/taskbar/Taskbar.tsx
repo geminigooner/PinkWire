@@ -18,7 +18,16 @@ export function Taskbar() {
     <>
       <div className="absolute bottom-0 left-0 right-0 h-12 bg-os-taskbar-bg backdrop-blur-xl border-t border-os-window-border flex items-center px-2 z-50 pointer-events-auto shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
         <button 
+          aria-label="Start Menu"
           onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
+          onDoubleClick={() => {
+            import('../store/useAchievementStore').then(({ useAchievementStore }) => {
+              useAchievementStore.getState().unlockAchievement('secret_shortcut_logo' as any);
+              import('../store/useDesktopStore').then(({ useDesktopStore }) => {
+                useDesktopStore.getState().addSticker({ type: '💖', x: window.innerWidth / 2 - 50, y: window.innerHeight / 2 - 50, rotation: 0, scale: 2 });
+              });
+            }).catch(e => console.error(e));
+          }}
           className={cn(
             "start-button h-9 px-3 rounded-lg flex items-center justify-center transition-colors",
             isStartMenuOpen ? "bg-os-accent/20 text-os-accent" : "hover:bg-white/10 text-os-text"
@@ -68,7 +77,15 @@ export function Taskbar() {
           
           <NotificationCenter />
           
-          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default">
+          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default" onDoubleClick={() => {
+            import('../store/useAchievementStore').then(({ useAchievementStore }) => {
+              useAchievementStore.getState().unlockAchievement('secret_shortcut_clock' as any);
+              // Create time travel effect logic? For now just unlock achievement and notify
+              import('../services/notifications/EventBus').then(({ osEvents }) => {
+                osEvents.publish({ type: 'Toast', payload: { message: "Whoa, did time just skip a beat?" } });
+              });
+            }).catch(e => console.error(e));
+          }}>
             <Clock />
           </div>
         </div>

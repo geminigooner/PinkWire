@@ -1,35 +1,56 @@
 # PinkWire OS
 
-PinkWire OS is a creative, client-side personal website styled as a desktop operating system. It features a window manager, customized applications, persistent state, and high visual polish.
+Welcome to PinkWire OS — a personal, web-based operating system experience built with React, TypeScript, and Tailwind CSS.
 
-## Applications
+Designed with nostalgia, curiosity, and a deep appreciation for digital personal spaces, PinkWire OS reimagines the concept of a portfolio and personal website as a fully functional, mobile-first operating system.
 
-- **PinkWire**: The conversational core.
-- **Journal**: Personal blog entries.
-- **Disposable**: Photo viewer.
-- **File Explorer**: A simulated file system.
-- **Internet ExplAmanda**: An embedded web browser.
-- **Control Panel**: Personalization and settings.
+## Features
 
-## Architecture
-
-PinkWire OS is fully client-side and relies heavily on Zustand stores for persistent state management.
-It utilizes Tailwind CSS for styling and Framer Motion for smooth, interruptible animations.
-Wallpapers uploaded by the user are stored via IndexedDB to prevent `localStorage` limits.
+- **Window Management:** Drag, resize, minimize, and maximize windows smoothly.
+- **File Explorer:** Navigate a virtual file system complete with hidden folders and easter eggs.
+- **Customization:** Change wallpapers, switch themes (Classic Pink, Bubblegum, Midnight, etc.), adjust cursor styles, and toggle system sounds.
+- **Journal:** A beautiful, markdown-supported reading experience.
+- **Spun (Music Player):** Listen to ambient tracks and control playback.
+- **Guestbook:** Leave a mark and see who else has visited.
+- **Mobile-First Design:** Fully responsive and optimized for touch devices.
+- **Achievements:** Digital lore and secrets hidden throughout the system to reward curiosity.
 
 ## Development
 
-```bash
-# Install dependencies
+PinkWire OS is built with Vite, React, and Zustand for state management.
+
+### Setup
+
+\`\`\`bash
 npm install
-
-# Start development server
 npm run dev
+\`\`\`
 
-# Build for production
+### Architecture
+
+- \`src/core/\`: Boot sequence and OS-level providers.
+- \`src/desktop/\`: Desktop icons, wallpaper management, and sticky notes.
+- \`src/windows/\`: Window state management and rendering.
+- \`src/taskbar/\`: Taskbar, Start Menu, System Tray, and Notification Center.
+- \`src/applications/\`: Individual app implementations (Explorer, Journal, Settings, etc.).
+- \`src/store/\`: Zustand stores for global state (windows, settings, audio, achievements).
+- \`src/services/\`: Event bus and audio synthesis.
+
+## Deployment
+
+The project can be built for production using:
+
+\`\`\`bash
 npm run build
-```
+\`\`\`
 
-## Storage Management
+This outputs optimized, minified static files to the \`dist/\` directory, ready to be served by any static hosting provider.
 
-To fully reset the operating system without clearing other site data, use the "Reset Desktop Layout" feature in Control Panel, or click "Restart Application" if a global error occurs. PinkWire OS carefully prefixes its storage keys (`pinkwire-`) to be good citizens of `localStorage`.
+## Accessibility
+
+PinkWire OS respects reduced motion preferences, offers high-contrast modes, and includes adjustable text sizes to ensure a comfortable experience for all visitors.
+
+## Credits
+
+Designed and developed by Amanda Danielle.
+Built with curiosity, humor, late nights, and entirely too much pink.

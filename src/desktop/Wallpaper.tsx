@@ -16,7 +16,7 @@ export function Wallpaper() {
   return (
     <div 
       className={cn(
-        "absolute inset-0 -z-10 transition-all duration-1000",
+        "absolute inset-0 -z-10 transition-all duration-1000 origin-center animate-[breathe_20s_ease-in-out_infinite_alternate]",
         !isUrl ? resolvedWallpaper : '',
         wallpaperBlur ? 'blur-md scale-105' : ''
       )}

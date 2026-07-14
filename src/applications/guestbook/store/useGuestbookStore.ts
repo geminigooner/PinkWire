@@ -128,6 +128,9 @@ export const useGuestbookStore = create<GuestbookStore>()(
                 returning: visitor.visitCount > 1
               }
             });
+            import('../../../store/useAchievementStore').then(({ useAchievementStore }) => {
+              useAchievementStore.getState().unlockAchievement('signed_guestbook');
+            }).catch(e => console.error(e));
           }
 
           return {

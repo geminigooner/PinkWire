@@ -15,7 +15,7 @@ export function AppearanceSettings() {
   ];
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-12">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 sm:space-y-12">
       <div>
         <h2 className="text-2xl font-light mb-6">Appearance</h2>
         
@@ -44,12 +44,12 @@ export function AppearanceSettings() {
           {/* Time & Atmosphere */}
           <section>
             <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider">Time & Atmosphere</h3>
-            <div className="bg-black/20 border border-os-window-border rounded-xl p-1 inline-flex">
+            <div className="bg-black/20 border border-os-window-border rounded-xl p-1 flex flex-col sm:inline-flex sm:flex-row">
               {(['auto', 'day', 'night'] as const).map(atm => (
                 <button
                   key={atm}
                   onClick={() => setAtmosphere(atm)}
-                  className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-4 sm:px-6 py-2 rounded-lg text-sm font-medium transition-all text-center ${
                     atmosphere === atm 
                       ? 'bg-os-accent text-white shadow-md' 
                       : 'text-os-text-muted hover:text-os-text hover:bg-white/5'

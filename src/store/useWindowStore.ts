@@ -46,6 +46,10 @@ export const useWindowStore = create<WindowStore>()(
         import('./useRecentStore').then(({ useRecentStore }) => {
           useRecentStore.getState().addRecentApp(appId, appMeta.name);
         }).catch(e => console.error(e));
+        
+        import('./useAchievementStore').then(({ useAchievementStore }) => {
+          useAchievementStore.getState().trackAppOpen(appId);
+        }).catch(e => console.error(e));
 
         const policy = appMeta.instancePolicy || 'multiple';
         const instanceKey = options.instanceKey;

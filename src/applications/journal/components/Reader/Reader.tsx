@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { cn } from '../../../../utils/cn';
 import { useWindowStore } from '../../../../store/useWindowStore';
 import { useAudioStore } from '../../../../store/useAudioStore';
+import { useAchievementStore } from '../../../../store/useAchievementStore';
 import { Music2, Play } from 'lucide-react';
 
 export function Reader() {
@@ -13,6 +14,12 @@ export function Reader() {
   const { tracks, playTrack } = useAudioStore();
   
   const article = articles.find(a => a.id === activeArticleId);
+
+  React.useEffect(() => {
+    if (activeArticleId) {
+      useAchievementStore.getState().trackPostRead(activeArticleId);
+    }
+  }, [activeArticleId]);
 
   if (!article) return null;
 

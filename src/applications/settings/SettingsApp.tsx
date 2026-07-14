@@ -5,8 +5,9 @@ import { DesktopSettings } from './components/DesktopSettings';
 import { SoundSettings } from './components/SoundSettings';
 import { AccessibilitySettings } from './components/AccessibilitySettings';
 import { AboutSettings } from './components/AboutSettings';
+import { AchievementSettings } from './components/AchievementSettings';
 
-export type SettingsTab = 'appearance' | 'desktop' | 'sound' | 'accessibility' | 'about';
+export type SettingsTab = 'appearance' | 'desktop' | 'sound' | 'accessibility' | 'about' | 'achievements';
 
 export function SettingsApp() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('appearance');
@@ -21,6 +22,7 @@ export function SettingsApp() {
         {activeTab === 'sound' && <SoundSettings />}
         {activeTab === 'accessibility' && <AccessibilitySettings />}
         {activeTab === 'about' && <AboutSettings />}
+        {activeTab === 'achievements' && <AchievementSettings />}
       </div>
     </div>
   );

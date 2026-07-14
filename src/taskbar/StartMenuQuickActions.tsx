@@ -20,10 +20,10 @@ export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="shrink-0 bg-black/20 p-3 rounded-2xl border border-white/5 flex gap-2 overflow-x-auto scrollbar-hide">
+    <div className="shrink-0 bg-black/20 p-3 rounded-2xl border border-white/5 grid grid-cols-4 gap-2">
       <button 
         onClick={() => handleAction(() => openWindow('settings'))}
-        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
+        className="flex flex-col items-center justify-center h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
       >
         <div className="p-2 bg-black/30 rounded-full shadow-inner border border-white/5">
           <Settings size={18} />
@@ -33,7 +33,7 @@ export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
 
       <button 
         onClick={toggleAtmosphere}
-        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
+        className="flex flex-col items-center justify-center h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
       >
         <div className="p-2 bg-black/30 rounded-full shadow-inner border border-white/5">
           {atmosphere === 'night' ? <Sun size={18} /> : <Moon size={18} />}
@@ -46,7 +46,7 @@ export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
           osEvents.publish({ type: 'PhotoDownloaded', payload: { filename: 'Screenshot-2026.png' } });
           onClose();
         }}
-        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
+        className="flex flex-col items-center justify-center h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-os-text"
       >
         <div className="p-2 bg-black/30 rounded-full shadow-inner border border-white/5">
           <Camera size={18} />
@@ -54,14 +54,12 @@ export function StartMenuQuickActions({ onClose }: { onClose: () => void }) {
         <span className="text-[10px] font-medium">Snip</span>
       </button>
 
-      <div className="w-px bg-white/10 mx-1 my-2 shrink-0" />
-
       <button 
         onClick={() => {
           // In a real app we'd sign out
           window.location.reload();
         }}
-        className="flex flex-col items-center justify-center min-w-[72px] h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-red-400 group ml-auto"
+        className="flex flex-col items-center justify-center h-[72px] rounded-xl hover:bg-white/10 transition-colors gap-1.5 text-os-text-muted hover:text-red-400 group"
       >
         <div className="p-2 bg-black/30 rounded-full shadow-inner border border-white/5 group-hover:bg-red-500/20 group-hover:border-red-500/50 transition-colors">
           <Power size={18} />

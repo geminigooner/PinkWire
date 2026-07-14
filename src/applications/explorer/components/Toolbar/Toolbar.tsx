@@ -2,7 +2,7 @@ import React from 'react';
 import { useExplorerStore } from '../../store/useExplorerStore';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, Search, 
-  Menu, Grid, LayoutGrid, List, AlignJustify 
+  Menu, Grid, LayoutGrid, List, AlignJustify, Eye, EyeOff 
 } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 import { ViewMode } from '../../types';
@@ -14,6 +14,7 @@ export function Toolbar() {
     searchQuery, setSearchQuery,
     viewMode, setViewMode,
     isSidebarOpen, setSidebarOpen,
+    showHiddenFiles, setShowHiddenFiles,
     files
   } = useExplorerStore();
 
@@ -100,6 +101,17 @@ export function Toolbar() {
               </button>
             );
           })}
+          <div className="w-px h-4 bg-os-window-border mx-1" />
+          <button
+            onClick={() => setShowHiddenFiles(!showHiddenFiles)}
+            title={showHiddenFiles ? "Hide Hidden Files" : "Show Hidden Files"}
+            className={cn(
+              "p-1.5 rounded-md transition-colors",
+              showHiddenFiles ? "text-os-accent hover:bg-white/5" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
+            )}
+          >
+            {showHiddenFiles ? <Eye size={14} /> : <EyeOff size={14} />}
+          </button>
         </div>
 
         <div className="relative">

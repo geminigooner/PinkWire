@@ -9,6 +9,7 @@ export interface FileItem {
   createdAt: string;
   modifiedAt: string;
   isFavorite?: boolean;
+  isHidden?: boolean;
   content?: unknown;
   tags?: string[];
   icon?: string;

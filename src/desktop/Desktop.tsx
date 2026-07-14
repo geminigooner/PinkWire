@@ -4,8 +4,10 @@ import { DesktopIcon } from '../icons/DesktopIcon';
 import { WindowManager } from '../windows/WindowManager';
 import { Taskbar } from '../taskbar/Taskbar';
 import { useDesktopStore } from '../store/useDesktopStore';
+import { useAchievementStore } from '../store/useAchievementStore';
 import { StickersRenderer } from './StickersRenderer';
 import { StickersDrawer } from './StickersDrawer';
+import { StickyNotesRenderer } from './StickyNotesRenderer';
 import { AudioService } from '../services/AudioService';
 import { MiniPlayer } from '../applications/spun/components/MiniPlayer';
 import { SearchProviders } from '../services/search/SearchProviders';
@@ -14,6 +16,15 @@ import { NotificationToasts } from '../components/notifications/NotificationToas
 
 export function Desktop() {
   const { desktopIcons, selectIcon, addSticker, autoArrangeIcons, updateIconPosition } = useDesktopStore();
+
+  useEffect(() => {
+    useAchievementStore.getState().trackDailyVisit();
+    
+    const hour = new Date().getHours();
+    if (hour >= 20 || hour < 5) {
+      useAchievementStore.getState().unlockAchievement('visited_at_night');
+    }
+  }, []);
 
   useEffect(() => {
     if (autoArrangeIcons) {
@@ -62,6 +73,7 @@ export function Desktop() {
       <Wallpaper />
       
       <StickersRenderer />
+      <StickyNotesRenderer />
       
       <div className="absolute inset-0 z-0">
         {desktopIcons.map((icon) => (

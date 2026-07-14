@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  
   --color-os-bg: var(--os-bg);
   --color-os-window-bg: var(--os-window-bg);
   --color-os-window-border: var(--os-window-border);
@@ -145,3 +146,5 @@ html.cursor-huge * {
     display: none;
   }
 }
+
+@keyframes breathe { 0% { transform: scale(1.0); } 100% { transform: scale(1.05); } }

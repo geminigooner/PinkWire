@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useAudioStore } from '../store/useAudioStore';
+import { useSettingsStore } from '../store/useSettingsStore';
 import { osEvents } from './notifications/EventBus';
 
 export function AudioService() {
@@ -18,8 +19,59 @@ export function AudioService() {
   const setProgress = useAudioStore(state => state.setProgress);
   
   const tracks = useAudioStore(state => state.tracks);
+  const { soundEnabled, sounds, volume: sysVolume } = useSettingsStore();
   
   const currentTrack = tracks.find(t => t.id === currentTrackId);
+
+  // Play system sounds on EventBus events
+  useEffect(() => {
+    const playSystemSound = (type: string) => {
+      if (!soundEnabled) return;
+      // Synthesize a short beep for sounds since we don't have audio files
+      try {
+        const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.value = (sysVolume / 100) * 0.1;
+
+        if (type === 'Notification') {
+          if (!sounds.notification) return;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.1);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.15);
+        } else if (type === 'Achievement') {
+          if (!sounds.success) return;
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(400, ctx.currentTime);
+          osc.frequency.setValueAtTime(600, ctx.currentTime + 0.1);
+          osc.frequency.setValueAtTime(800, ctx.currentTime + 0.2);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.3);
+        } else if (type === 'Error') {
+          if (!sounds.error) return;
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(200, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 0.2);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.2);
+        }
+      } catch (e) {
+        console.warn('AudioContext not supported or blocked', e);
+      }
+    };
+
+    const unsubscribe = osEvents.subscribe((event) => {
+      if (event.type === 'Toast') playSystemSound('Notification');
+      if (event.type === 'AchievementUnlocked') playSystemSound('Achievement');
+      if (event.type === 'AppError') playSystemSound('Error');
+    });
+
+    return unsubscribe;
+  }, [soundEnabled, sounds, sysVolume]);
 
   useEffect(() => {
     if (!audioRef.current) return;

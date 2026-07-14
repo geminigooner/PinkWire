@@ -24,7 +24,7 @@ export function AccessibilitySettings() {
   ];
 
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-12">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 sm:space-y-12">
       <div>
         <h2 className="text-2xl font-light mb-6">Accessibility & Display</h2>
         
@@ -66,12 +66,12 @@ export function AccessibilitySettings() {
                 {largerText ? <ToggleRight size={24} className="text-os-accent" /> : <ToggleLeft size={24} className="text-os-text-muted" />}
               </button>
 
-              <div className="flex items-center justify-between p-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 gap-3">
                 <div className="text-left">
                   <div className="font-medium text-sm">Animation Speed</div>
                   <div className="text-os-text-muted text-xs mt-0.5">Adjust the speed of OS transitions</div>
                 </div>
-                <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+                <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1 w-full sm:w-auto overflow-x-auto">
                   {(['slow', 'normal', 'fast'] as const).map(speed => (
                     <button
                       key={speed}
@@ -144,12 +144,12 @@ export function AccessibilitySettings() {
 
           <section>
             <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider">Clock</h3>
-            <div className="bg-black/20 border border-os-window-border rounded-xl p-4 flex items-center justify-between">
+            <div className="bg-black/20 border border-os-window-border rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
                 <div className="font-medium text-sm">Time Format</div>
                 <div className="text-xs text-os-text-muted mt-0.5">Change taskbar clock display</div>
               </div>
-              <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+              <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1 w-full sm:w-auto overflow-x-auto">
                 {[12, 24].map(format => (
                   <button
                     key={format}

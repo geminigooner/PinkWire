@@ -53,7 +53,7 @@ export function NotificationCenter() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="absolute bottom-12 right-0 sm:right-2 w-[calc(100vw-16px)] sm:w-96 bg-os-window-bg/95 backdrop-blur-2xl border border-os-window-border sm:rounded-2xl shadow-2xl z-50 flex flex-col max-h-[80vh] sm:max-h-[32rem] rounded-xl overflow-hidden pointer-events-auto"
+              className="fixed sm:absolute bottom-14 sm:bottom-12 left-2 right-2 sm:left-auto sm:right-2 sm:w-96 bg-os-window-bg/95 backdrop-blur-2xl border border-os-window-border sm:rounded-2xl shadow-2xl z-50 flex flex-col max-h-[80vh] sm:max-h-[32rem] rounded-xl overflow-hidden pointer-events-auto"
             >
               <div className="p-4 border-b border-os-window-border flex items-center justify-between bg-black/10">
                 <div className="flex items-center gap-2">

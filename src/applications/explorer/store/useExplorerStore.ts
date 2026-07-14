@@ -13,6 +13,7 @@ interface ExplorerState {
   sortField: SortField;
   sortDirection: SortDirection;
   isSidebarOpen: boolean;
+  showHiddenFiles: boolean;
 
   setCurrentPath: (path: string[]) => void;
   navigateUp: () => void;
@@ -28,6 +29,7 @@ interface ExplorerState {
   setViewMode: (mode: ViewMode) => void;
   setSort: (field: SortField) => void;
   setSidebarOpen: (isOpen: boolean) => void;
+  setShowHiddenFiles: (show: boolean) => void;
 }
 
 export const useExplorerStore = create<ExplorerState>((set, get) => ({
@@ -41,6 +43,7 @@ export const useExplorerStore = create<ExplorerState>((set, get) => ({
   sortField: 'name',
   sortDirection: 'asc',
   isSidebarOpen: false,
+  showHiddenFiles: false,
 
   setCurrentPath: (path) => set((state) => {
     const newHistory = state.history.slice(0, state.historyIndex + 1);
@@ -118,5 +121,6 @@ export const useExplorerStore = create<ExplorerState>((set, get) => ({
     sortField: field,
     sortDirection: state.sortField === field && state.sortDirection === 'asc' ? 'desc' : 'asc'
   })),
-  setSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen })
+  setSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
+  setShowHiddenFiles: (show) => set({ showHiddenFiles: show })
 }));

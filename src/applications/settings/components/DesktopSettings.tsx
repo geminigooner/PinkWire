@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useDesktopStore } from '../../../store/useDesktopStore';
 import { WALLPAPERS } from '../data/wallpapers';
-import { Upload, Star, LayoutGrid, Monitor, ToggleLeft, ToggleRight, Trash2 } from 'lucide-react';
+import { Upload, Star, LayoutGrid, Monitor, ToggleLeft, ToggleRight, Trash2, Heart, Calendar, User } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 import { handleWallpaperUpload } from '../../../store/wallpaperManager';
 
@@ -9,9 +9,9 @@ export function DesktopSettings() {
   const { 
     wallpaper, setWallpaper, wallpaperFit, setWallpaperFit, wallpaperBlur, setWallpaperBlur,
     autoArrangeIcons, setAutoArrangeIcons, snapToGrid, setSnapToGrid,
-    showLabels, setShowLabels, resetDesktop, stickers, removeSticker 
+    showLabels, setShowLabels, resetDesktop, stickers, removeSticker,
+    favoriteWallpapers, toggleFavoriteWallpaper
   } = useDesktopStore();
-
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,15 +21,17 @@ export function DesktopSettings() {
         const id = await handleWallpaperUpload(file);
         setWallpaper(id);
       } catch (err: any) {
-        alert(err.message || 'Failed to upload wallpaper.');
+        alert('Oops, that image was a little too weird even for me. Try another one? (Failed to upload wallpaper)');
       }
     }
   };
 
   const isGradient = (url: string) => url.startsWith('bg-');
+  
+  const currentWallpaperMeta = WALLPAPERS.find(w => w.url === wallpaper);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-12">
+    <div className="p-4 sm:p-8 max-w-5xl mx-auto space-y-8 sm:space-y-12">
       <div>
         <h2 className="text-2xl font-light mb-6">Desktop</h2>
         
@@ -85,35 +87,66 @@ export function DesktopSettings() {
               })}
             </div>
 
-            {/* Wallpaper Settings */}
-            <div className="bg-black/20 border border-os-window-border rounded-xl p-4 flex flex-wrap gap-6 items-center">
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-os-text-muted">Fit:</span>
-                <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
-                  {(['cover', 'contain', 'center'] as const).map(fit => (
-                    <button
-                      key={fit}
-                      onClick={() => setWallpaperFit(fit)}
-                      className={cn(
-                        "px-3 py-1 text-xs rounded-md transition-colors capitalize",
-                        wallpaperFit === fit ? "bg-os-accent text-white" : "text-os-text-muted hover:text-os-text"
-                      )}
-                    >
-                      {fit}
-                    </button>
-                  ))}
-                </div>
+            {/* Wallpaper Metadata & Settings */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-black/20 border border-os-window-border rounded-xl p-5 flex flex-col justify-between">
+                {currentWallpaperMeta ? (
+                  <>
+                    <div>
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="text-lg font-medium text-os-text">{currentWallpaperMeta.name}</h4>
+                        <button 
+                          onClick={() => toggleFavoriteWallpaper(currentWallpaperMeta.id)}
+                          className="text-os-text-muted hover:text-rose-400 transition-colors"
+                          title="Favorite this wallpaper"
+                        >
+                          <Heart size={18} fill={favoriteWallpapers?.includes(currentWallpaperMeta.id) ? "currentColor" : "none"} className={favoriteWallpapers?.includes(currentWallpaperMeta.id) ? "text-rose-400" : ""} />
+                        </button>
+                      </div>
+                      <p className="text-sm text-os-text-muted mb-4 italic">"{currentWallpaperMeta.description}"</p>
+                    </div>
+                    <div className="flex items-center gap-4 text-xs text-os-text-muted mt-auto">
+                      <span className="flex items-center gap-1.5"><User size={12} /> {currentWallpaperMeta.creator}</span>
+                      <span className="flex items-center gap-1.5"><Calendar size={12} /> {new Date(currentWallpaperMeta.dateAdded).toLocaleDateString()}</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="h-full flex flex-col items-center justify-center text-center text-os-text-muted py-4">
+                    <p className="text-sm">Custom wallpaper selected.</p>
+                    <p className="text-xs opacity-60 mt-1">No metadata available.</p>
+                  </div>
+                )}
               </div>
-              
-              <div className="w-px h-6 bg-os-window-border hidden sm:block" />
-              
-              <button
-                onClick={() => setWallpaperBlur(!wallpaperBlur)}
-                className="flex items-center gap-2 text-sm text-os-text-muted hover:text-os-text transition-colors"
-              >
-                {wallpaperBlur ? <ToggleRight size={20} className="text-os-accent" /> : <ToggleLeft size={20} />}
-                Blur Background
-              </button>
+
+              <div className="bg-black/20 border border-os-window-border rounded-xl p-5 flex flex-col justify-center gap-6">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-os-text-muted">Fit:</span>
+                  <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+                    {(['cover', 'contain', 'center'] as const).map(fit => (
+                      <button
+                        key={fit}
+                        onClick={() => setWallpaperFit(fit)}
+                        className={cn(
+                          "px-3 py-1 text-xs rounded-md transition-colors capitalize",
+                          wallpaperFit === fit ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text"
+                        )}
+                      >
+                        {fit}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="border-t border-os-window-border" />
+                
+                <button
+                  onClick={() => setWallpaperBlur(!wallpaperBlur)}
+                  className="w-full flex items-center justify-between text-sm text-os-text transition-colors"
+                >
+                  <span className="text-os-text-muted">Blur Background</span>
+                  {wallpaperBlur ? <ToggleRight size={20} className="text-os-accent" /> : <ToggleLeft size={20} className="text-os-text-muted" />}
+                </button>
+              </div>
             </div>
           </section>
 

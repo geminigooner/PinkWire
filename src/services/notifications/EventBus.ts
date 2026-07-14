@@ -8,7 +8,11 @@ export type OSEvent =
   | { type: 'BrowserFinishedLoading'; payload: { url: string } }
   | { type: 'ThemeChanged'; payload: { mode: string } }
   | { type: 'AtmosphereChanged'; payload: { mode: string } }
-  | { type: 'FileMoved'; payload: { filename: string } };
+  | { type: 'FileMoved'; payload: { filename: string } }
+  | { type: 'AchievementUnlocked'; payload: { title: string; message: string; icon?: string } }
+  | { type: 'Toast'; payload: { message: string } }
+  | { type: 'AppError'; payload: { message: string } }
+  | { type: 'SystemMessage'; payload: { title: string; message: string; icon?: string } };
 
 type Listener = (event: OSEvent) => void;
 

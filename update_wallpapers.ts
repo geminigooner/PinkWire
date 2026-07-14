@@ -1,4 +1,6 @@
-export interface WallpaperItem {
+import fs from 'fs';
+
+let content = `export interface WallpaperItem {
   id: string;
   name: string;
   url: string;
@@ -21,3 +23,6 @@ export const WALLPAPERS: WallpaperItem[] = [
   { id: 'glitter', name: 'Glitter', url: 'https://images.unsplash.com/photo-1550596334-7bb40a71b6bc?q=80&w=2000&auto=format&fit=crop', creator: 'Amanda', description: 'Never enough sparkles.', dateAdded: '2026-06-01' },
   { id: 'retro-gradient', name: 'Retro Gradient', url: 'bg-gradient-to-tr from-fuchsia-900 via-rose-800 to-orange-600', creator: 'Amanda', description: 'For when I feel edgy.', dateAdded: '2026-07-04' },
 ];
+`;
+
+fs.writeFileSync('src/applications/settings/data/wallpapers.ts', content);
