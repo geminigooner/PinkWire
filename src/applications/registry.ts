@@ -3,6 +3,7 @@ import { AppDefinition } from '../types/os';
 import { PlaceholderApp } from './PlaceholderApp';
 import { PinkWireApp } from './pinkwire/PinkWireApp';
 import { DisposableApp } from './disposable/DisposableApp';
+import { JournalApp } from './journal/JournalApp';
 import React from 'react';
 
 const createPlaceholder = (name: string) => () => React.createElement(PlaceholderApp, { name });
@@ -24,13 +25,13 @@ export const AppRegistry: Record<string, AppDefinition> = {
     id: 'journal',
     name: 'Journal',
     icon: Book,
-    defaultWidth: 700,
-    defaultHeight: 500,
-    minWidth: 400,
-    minHeight: 400,
+    defaultWidth: 900,
+    defaultHeight: 650,
+    minWidth: 600,
+    minHeight: 500,
     resizable: true,
     draggable: true,
-    component: createPlaceholder('Journal')
+    component: JournalApp
   },
   disposable: {
     id: 'disposable',

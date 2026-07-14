@@ -74,7 +74,7 @@ export const MOCK_CONVERSATIONS: Conversation[] = [
         senderId: 'me',
         timestamp: subMinutes(now, 4).toISOString(),
         type: 'text',
-        content: 'Also, check this out [Project repo](https://github.com/pinkwire) — I pushed the latest binaries.'
+        content: 'Also, check this out [Project repo](https://github.com/pinkwire) — I pushed the latest binaries. And wrote a bit about it [here](os://journal/a1).'
       }
     ]
   },

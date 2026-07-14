@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { WindowState } from '../types/os';
-import { AppRegistry } from '../applications/registry';
+import { APP_METADATA } from './appMetadata';
 
 interface WindowStore {
   windows: WindowState[];
@@ -27,8 +27,8 @@ export const useWindowStore = create<WindowStore>()(
 
       openWindow: (appId, appData) => {
         const { windows, highestZIndex } = get();
-        const app = AppRegistry[appId];
-        if (!app) return;
+        const appMeta = APP_METADATA[appId];
+        if (!appMeta) return;
 
         const existing = windows.find(w => w.appId === appId);
         if (existing) {
@@ -46,11 +46,11 @@ export const useWindowStore = create<WindowStore>()(
         const newWindow: WindowState = {
           id: `${appId}-${Date.now()}`,
           appId,
-          title: app.name,
+          title: appMeta.name,
           x: 50 + windows.length * 30,
           y: 50 + windows.length * 30,
-          width: app.defaultWidth || 600,
-          height: app.defaultHeight || 400,
+          width: appMeta.defaultWidth || 600,
+          height: appMeta.defaultHeight || 400,
           zIndex: newZ,
           isMinimized: false,
           isMaximized: false,
