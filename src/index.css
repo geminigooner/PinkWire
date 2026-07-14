@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-os-bg: var(--os-bg);
+  --color-os-window-bg: var(--os-window-bg);
+  --color-os-window-border: var(--os-window-border);
+  --color-os-titlebar-bg: var(--os-titlebar-bg);
+  --color-os-taskbar-bg: var(--os-taskbar-bg);
+  --color-os-text: var(--os-text);
+  --color-os-text-muted: var(--os-text-muted);
+  --color-os-accent: var(--os-accent);
+  --color-os-accent-hover: var(--os-accent-hover);
+}
+
+:root {
+  --os-bg: #000000;
+  --os-window-bg: rgba(15, 23, 42, 0.9);
+  --os-window-border: rgba(51, 65, 85, 0.5);
+  --os-titlebar-bg: rgba(30, 41, 59, 0.8);
+  --os-taskbar-bg: rgba(15, 23, 42, 0.95);
+  --os-text: #f1f5f9;
+  --os-text-muted: #94a3b8;
+  --os-accent: #ec4899;
+  --os-accent-hover: #db2777;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
