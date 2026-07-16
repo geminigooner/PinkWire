@@ -1,13 +1,16 @@
 import React from 'react';
 import { GuestbookEntryData, useGuestbookStore } from '../store/useGuestbookStore';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { MapPin, Globe, Star } from 'lucide-react';
+import { MapPin, Globe, Star, Trash2 } from 'lucide-react';
+import { useAuthStore } from '../../../store/useAuthStore';
 import { cn } from '../../../utils/cn';
 
 export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   const toggleFavorite = useGuestbookStore(state => state.toggleFavorite);
   const visitors = useGuestbookStore(state => state.visitors);
   const setSelectedVisitorId = useGuestbookStore(state => state.setSelectedVisitorId);
+  const deleteEntry = useGuestbookStore(state => state.deleteEntry);
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
   
   const visitor = visitors.find(v => v.id === entry.visitorId);
   if (!visitor) return null;
@@ -57,15 +60,34 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
               </div>
             </div>
             
-            <button
-              onClick={() => toggleFavorite(entry.id)}
-              className={cn(
+            <div className="flex items-center gap-1">
+              {isAuthenticated && (
+              <button
+                onClick={() => deleteEntry(entry.id)}
+                className="p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-500 hover:bg-red-50"
+                title="Delete Entry"
+              >
+                <Trash2 size={16} />
+              </button>
+            )}
+            {isAuthenticated ? (
+              <button
+                onClick={() => toggleFavorite(entry.id)}
+                className={cn(
                 "p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 sm:opacity-100",
                 entry.favorite ? "text-[#f59e0b] hover:bg-[#fef3c7]" : "text-[#d6c7c1] hover:text-[#f59e0b] hover:bg-[#fef3c7]"
               )}
             >
               <Star size={18} className={entry.favorite ? "fill-current" : ""} />
             </button>
+            ) : (
+              entry.favorite && (
+                <div className="p-2 text-[#f59e0b]">
+                  <Star size={18} className="fill-current" />
+                </div>
+              )
+            )}
+            </div>
           </div>
           
           <div className="mt-4 text-[#4a3f3a] text-sm md:text-base leading-relaxed whitespace-pre-wrap font-serif">

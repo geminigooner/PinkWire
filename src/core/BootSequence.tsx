@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useDesktopStore } from '../store/useDesktopStore';
+import { useAuthStore } from '../store/useAuthStore';
 
 export function BootSequence({ onComplete }: { onComplete: () => void }) {
   const [stage, setStage] = useState(0);

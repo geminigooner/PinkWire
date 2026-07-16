@@ -3,9 +3,11 @@ import { useDesktopStore } from '../../../store/useDesktopStore';
 import { WALLPAPERS } from '../data/wallpapers';
 import { Upload, Star, LayoutGrid, Monitor, ToggleLeft, ToggleRight, Trash2, Heart, Calendar, User } from 'lucide-react';
 import { cn } from '../../../utils/cn';
+import { useAuthStore } from '../../../store/useAuthStore';
 import { handleWallpaperUpload } from '../../../store/wallpaperManager';
 
 export function DesktopSettings() {
+  const { isAuthenticated } = useAuthStore();
   const { 
     wallpaper, setWallpaper, wallpaperFit, setWallpaperFit, wallpaperBlur, setWallpaperBlur,
     autoArrangeIcons, setAutoArrangeIcons, snapToGrid, setSnapToGrid,
@@ -203,12 +205,14 @@ export function DesktopSettings() {
                       <div className="text-4xl select-none" style={{ transform: `rotate(${sticker.rotation}deg) scale(${sticker.scale})` }}>
                         {sticker.type}
                       </div>
-                      <button 
-                        onClick={() => removeSticker(sticker.id)}
+                      {isAuthenticated && (
+                        <button 
+                          onClick={() => removeSticker(sticker.id)}
                         className="absolute top-1 right-1 p-1 bg-red-500/80 text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <Trash2 size={12} />
-                      </button>
+                        </button>
+                      )}
                     </div>
                   ))}
                 </div>

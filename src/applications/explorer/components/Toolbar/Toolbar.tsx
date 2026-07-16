@@ -6,8 +6,11 @@ import {
 } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 import { ViewMode } from '../../types';
+import { useAuthStore } from '../../../../store/useAuthStore';
+import { Upload } from 'lucide-react';
 
 export function Toolbar() {
+  const { isAuthenticated } = useAuthStore();
   const { 
     currentPath, history, historyIndex, 
     navigateBack, navigateForward, navigateUp, 
@@ -80,6 +83,11 @@ export function Toolbar() {
           <div className="bg-black/40 border border-os-window-border rounded-md px-3 py-1.5 text-xs text-os-text flex items-center min-w-[200px] max-w-[400px]">
             {currentFolder?.name || currentFolderId}
           </div>
+          {isAuthenticated && (
+            <button className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors">
+              <Upload size={14} /> Upload
+            </button>
+          )}
         </div>
       </div>
 

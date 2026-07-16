@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSpunStore } from '../store/useSpunStore';
 import { useAudioStore } from '../../../store/useAudioStore';
-import { Play, Menu } from 'lucide-react';
+import { Play, Menu, Upload } from 'lucide-react';
+import { useAuthStore } from '../../../store/useAuthStore';
 import { cn } from '../../../utils/cn';
 
 export function MainView() {
+  const { isAuthenticated } = useAuthStore();
   const { currentView, selectedId, toggleSidebar } = useSpunStore();
   const tracks = useAudioStore(state => state.tracks);
   const playTrack = useAudioStore(state => state.playTrack);
@@ -14,7 +16,17 @@ export function MainView() {
       case 'library':
         return (
           <div className="p-4 md:p-6">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Library</h2>
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h2 className="text-xl md:text-2xl font-bold">Library</h2>
+              {isAuthenticated && (
+                <button
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors"
+                >
+                  <Upload size={16} />
+                  <span className="hidden sm:inline">Upload</span>
+                </button>
+              )}
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
               {tracks.map(track => (
                 <div key={track.id} className="bg-[#181818] rounded-md p-3 md:p-4 hover:bg-[#282828] transition-colors group cursor-pointer" onClick={() => playTrack(track, tracks)}>

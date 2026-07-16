@@ -6,11 +6,13 @@ import { cn } from '../../../../utils/cn';
 import { useWindowStore } from '../../../../store/useWindowStore';
 import { useAudioStore } from '../../../../store/useAudioStore';
 import { useAchievementStore } from '../../../../store/useAchievementStore';
-import { Music2, Play } from 'lucide-react';
+import { Music2, Play, Edit3, Trash2 } from 'lucide-react';
+import { useAuthStore } from '../../../../store/useAuthStore';
 
 export function Reader() {
   const { articles, activeArticleId, textSize, readingMode } = useJournalStore();
   const openWindow = useWindowStore(state => state.openWindow);
+  const { isAuthenticated } = useAuthStore();
   const { tracks, playTrack } = useAudioStore();
   
   const article = articles.find(a => a.id === activeArticleId);
@@ -45,7 +47,17 @@ export function Reader() {
       readingMode ? "bg-[#FAF9F6] text-gray-900" : "bg-black/20 text-os-text"
     )}>
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-8 md:py-16">
-        <header className="mb-12 text-center">
+        <header className="mb-12 text-center relative">
+          {isAuthenticated && (
+            <div className="absolute top-0 right-0 flex gap-2">
+              <button title="Edit Post" className="p-2 bg-os-window-bg/80 hover:bg-os-accent/20 text-os-text-muted hover:text-os-accent rounded-lg transition-colors border border-os-window-border hover:border-os-accent/50 backdrop-blur-sm shadow-sm">
+                <Edit3 size={16} />
+              </button>
+              <button title="Delete Post" className="p-2 bg-os-window-bg/80 hover:bg-red-500/20 text-os-text-muted hover:text-red-400 rounded-lg transition-colors border border-os-window-border hover:border-red-500/50 backdrop-blur-sm shadow-sm">
+                <Trash2 size={16} />
+              </button>
+            </div>
+          )}
           <div className={cn(
             "flex items-center justify-center gap-3 mb-6 text-sm font-medium tracking-wider uppercase",
             readingMode ? "text-gray-500" : "text-os-text-muted"

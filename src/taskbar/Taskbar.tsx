@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Clock } from './Clock';
 import { StartMenu } from './StartMenu';
 import { useWindowStore } from '../store/useWindowStore';
+import { useAuthStore } from '../store/useAuthStore';
 import { AppRegistry } from '../applications/registry';
 import { cn } from '../utils/cn';
 import { Command } from 'lucide-react';
@@ -77,7 +78,7 @@ export function Taskbar() {
           
           <NotificationCenter />
           
-          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default" onDoubleClick={() => {
+          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default" onClick={() => useWindowStore.getState().openWindow('admin')} onDoubleClick={() => {
             import('../store/useAchievementStore').then(({ useAchievementStore }) => {
               useAchievementStore.getState().unlockAchievement('secret_shortcut_clock' as any);
               // Create time travel effect logic? For now just unlock achievement and notify

@@ -7,6 +7,8 @@ import { JournalApp } from './journal/JournalApp';
 import { ExplorerApp } from './explorer/ExplorerApp';
 import { BrowserApp } from './browser/BrowserApp';
 import { SettingsApp } from './settings/SettingsApp';
+import { AdminLoginApp } from './auth/AdminLoginApp';
+import { Lock } from 'lucide-react';
 import { SpunApp } from './spun/SpunApp';
 import { GuestbookApp } from './guestbook/GuestbookApp';
 

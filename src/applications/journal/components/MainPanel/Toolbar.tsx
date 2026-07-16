@@ -2,9 +2,12 @@ import React from 'react';
 import { useJournalStore } from '../../store/useJournalStore';
 import { ChevronLeft, Moon, Sun, Type, Menu } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
+import { useAuthStore } from '../../../../store/useAuthStore';
+import { FilePlus } from 'lucide-react';
 
 export function Toolbar() {
   const { activeArticleId, setActiveArticle, readingMode, toggleReadingMode, textSize, setTextSize, isSidebarOpen, setSidebarOpen } = useJournalStore();
+  const { isAuthenticated } = useAuthStore();
 
   const cycleTextSize = () => {
     const sizes: ('small' | 'medium' | 'large')[] = ['small', 'medium', 'large'];
@@ -15,6 +18,15 @@ export function Toolbar() {
   return (
     <div className="h-14 shrink-0 border-b border-os-window-border bg-os-titlebar-bg/70 px-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
+        {!activeArticleId && isAuthenticated && (
+          <button
+            onClick={() => {/* Create functionality goes here */}}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-os-accent/20 text-os-accent hover:bg-os-accent hover:text-white transition-colors mr-2"
+          >
+            <FilePlus size={16} />
+            <span className="hidden sm:inline">New Entry</span>
+          </button>
+        )}
         {!activeArticleId && (
           <button
             onClick={() => setSidebarOpen(!isSidebarOpen)}

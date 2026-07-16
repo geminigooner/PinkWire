@@ -3,6 +3,7 @@ import { useExplorerStore } from '../../store/useExplorerStore';
 import { useWindowStore } from '../../../../store/useWindowStore';
 import { useAchievementStore } from '../../../../store/useAchievementStore';
 import { cn } from '../../../../utils/cn';
+import { useAuthStore } from '../../../../store/useAuthStore';
 import { 
   Folder, FileText, FileImage, FileAudio, File, 
   ExternalLink, FileCode, FileJson
@@ -10,6 +11,7 @@ import {
 import { FileItem } from '../../types';
 
 export function MainView() {
+  const { isAuthenticated } = useAuthStore();
   const { 
     files, currentPath, navigateToFolder, 
     selectedIds, toggleSelection, clearSelection, setSelectedIds,
@@ -241,12 +243,16 @@ export function MainView() {
               Open With...
             </button>
             <div className="my-1 border-t border-os-window-border" />
-            <button className="w-full text-left px-4 py-1.5 text-sm hover:bg-os-accent hover:text-white transition-colors text-os-text-muted">
-              Rename
-            </button>
-            <button className="w-full text-left px-4 py-1.5 text-sm hover:bg-os-accent hover:text-white transition-colors text-os-text-muted">
-              Delete
-            </button>
+            {isAuthenticated && (
+              <>
+                <button className="w-full text-left px-4 py-1.5 text-sm hover:bg-os-accent hover:text-white transition-colors text-os-text-muted">
+                  Rename
+                </button>
+                <button className="w-full text-left px-4 py-1.5 text-sm hover:bg-red-500/80 hover:text-white transition-colors text-red-400">
+                  Delete
+                </button>
+              </>
+            )}
             <div className="my-1 border-t border-os-window-border" />
             <button 
               className="w-full text-left px-4 py-1.5 text-sm hover:bg-os-accent hover:text-white transition-colors"

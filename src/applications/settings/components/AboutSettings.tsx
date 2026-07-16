@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useSettingsStore } from '../../../store/useSettingsStore';
 import { useDesktopStore } from '../../../store/useDesktopStore';
 import { AppRegistry } from '../../registry';
+import { useAuthStore } from '../../../store/useAuthStore';
+import { useWindowStore } from '../../../store/useWindowStore';
+import { Lock, Unlock } from 'lucide-react';
 import { Monitor, Cpu, HardDrive, User, Package, Heart } from 'lucide-react';
 
 export function AboutSettings() {
   const { theme } = useSettingsStore();
   const { wallpaper } = useDesktopStore();
+  const { isAuthenticated, logout } = useAuthStore();
+  const { openWindow } = useWindowStore();
   
   const installedAppsCount = Object.keys(AppRegistry).length;
 
@@ -43,7 +48,7 @@ export function AboutSettings() {
             <Cpu size={16} /> System Status
           </h3>
           <div className="space-y-4">
-            <div className="flex justify-between items-center border-b border-os-window-border pb-2">
+            <div className="flex justify-between items-center border-b border-os-window-border pb-2 group">
               <span className="text-os-text-muted text-sm">Status</span>
               <span className="text-emerald-400 text-sm font-medium flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Running
@@ -81,9 +86,20 @@ export function AboutSettings() {
               <span className="text-os-text-muted text-sm">Installed Apps</span>
               <span className="text-os-text text-sm">{installedAppsCount} Applications</span>
             </div>
-            <div className="flex justify-between items-center border-b border-os-window-border pb-2">
+            <div className="flex justify-between items-center border-b border-os-window-border pb-2 group">
               <span className="text-os-text-muted text-sm">Developer</span>
-              <span className="text-os-text text-sm flex items-center gap-2"><User size={14} className="text-os-accent" /> Amanda Danielle</span>
+              <span className="text-os-text text-sm flex items-center gap-2">
+                <User size={14} className="text-os-accent" /> Amanda Danielle
+                {isAuthenticated ? (
+                  <button onClick={() => logout()} title="Lock System" className="ml-2 text-os-accent hover:text-red-400 transition-colors">
+                    <Unlock size={14} />
+                  </button>
+                ) : (
+                  <button onClick={() => openWindow('admin')} title="Admin Login" className="ml-2 text-os-text-muted hover:text-os-text transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+                    <Lock size={14} />
+                  </button>
+                )}
+              </span>
             </div>
           </div>
         </div>
