@@ -15,14 +15,14 @@ export function AchievementSettings() {
   return (
     <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 sm:space-y-12">
       <div className="text-center mb-12">
-        <div className="w-24 h-24 mx-auto bg-gradient-to-tr from-yellow-500 to-amber-700 rounded-2xl shadow-xl flex items-center justify-center mb-6">
-          <Trophy size={48} className="text-white drop-shadow-md" />
+        <div className="w-24 h-24 mx-auto bg-gradient-to-tr from-yellow-500 to-amber-700 rounded-os shadow-os flex items-center justify-center mb-6">
+          <Trophy size={48} className="text-white drop-shadow-os" />
         </div>
         <h1 className="text-4xl font-light tracking-tight mb-2">Digital Lore</h1>
         <p className="text-os-text-muted">Uncover hidden details across PinkWire OS</p>
       </div>
 
-      <div className="bg-black/20 border border-os-window-border rounded-xl p-6 backdrop-blur-sm shadow-inner">
+      <div className="bg-black/20 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os shadow-os">
         <div className="flex justify-between text-sm mb-2">
           <span className="text-os-text font-medium">Completion</span>
           <span className="text-os-text-muted">{unlockedCount} / {totalAchievements} Unlocked</span>
@@ -44,7 +44,7 @@ export function AchievementSettings() {
             <div 
               key={achievement.id}
               className={cn(
-                "p-4 rounded-xl border flex gap-4 transition-all duration-300",
+                "p-4 rounded-os border flex gap-4 transition-all duration-300",
                 isUnlocked 
                   ? "bg-black/30 border-yellow-500/30 shadow-[0_0_15px_rgba(234,179,8,0.05)]" 
                   : "bg-black/10 border-os-window-border/50 opacity-60 grayscale"

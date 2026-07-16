@@ -32,9 +32,9 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
               key={tab.id}
               onClick={() => setActiveTab(tab.id as SettingsTab)}
               className={cn(
-                "w-full flex items-center justify-center sm:justify-start gap-3 p-3 sm:px-3 sm:py-2.5 rounded-lg text-sm transition-all text-left",
+                "w-full flex items-center justify-center sm:justify-start gap-3 p-3 sm:px-3 sm:py-2.5 rounded-os text-sm transition-all text-left",
                 isActive 
-                  ? "bg-os-accent text-white shadow-sm" 
+                  ? "bg-os-accent text-white shadow-os" 
                   : "text-os-text-muted hover:bg-white/5 hover:text-os-text"
               )}
               title={tab.label}

@@ -63,8 +63,8 @@ export function MediaEditModal({ item, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-os-window-bg border border-os-window-border rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-os-os-os animate-in fade-in duration-200">
+      <div className="bg-os-window-bg border border-os-window-border rounded-os shadow-os w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row">
         
         {/* Preview Area */}
         <div className="w-full md:w-3/5 bg-black/50 flex flex-col relative border-b md:border-b-0 md:border-r border-os-window-border">
@@ -73,7 +73,7 @@ export function MediaEditModal({ item, onClose }: Props) {
               <button 
                 onClick={() => { if (isAuthenticated) toggleFavorite(item.id); }}
                 className={cn(
-                  "p-2 rounded-lg backdrop-blur-md transition-colors",
+                  "p-2 rounded-os backdrop-blur-os-os-os transition-colors",
                   item.favorite ? "bg-rose-500/20 text-rose-500 hover:bg-rose-500/30 border border-rose-500/30" : "bg-black/40 text-white/70 hover:text-white hover:bg-black/60 border border-white/10"
                 )}
                 title={item.favorite ? "Remove from Favorites" : "Add to Favorites"}
@@ -83,7 +83,7 @@ export function MediaEditModal({ item, onClose }: Props) {
             )}
             <button 
               onClick={onClose}
-              className="p-2 bg-black/40 hover:bg-black/60 text-white/70 hover:text-white rounded-lg backdrop-blur-md transition-colors border border-white/10 md:hidden"
+              className="p-2 bg-black/40 hover:bg-black/60 text-white/70 hover:text-white rounded-os backdrop-blur-os-os-os transition-colors border border-white/10 md:hidden"
             >
               <X size={18} />
             </button>
@@ -93,17 +93,17 @@ export function MediaEditModal({ item, onClose }: Props) {
             <img 
               src={item.url} 
               alt={item.displayName} 
-              className="max-w-full max-h-full object-contain drop-shadow-xl rounded-md" 
+              className="max-w-full max-h-full object-contain drop-shadow-os rounded-os" 
             />
           </div>
         </div>
         
         {/* Details Area */}
         <div className="w-full md:w-2/5 flex flex-col bg-os-window-bg overflow-y-auto custom-scrollbar">
-          <div className="p-4 border-b border-os-window-border flex items-center justify-between sticky top-0 bg-os-window-bg/95 backdrop-blur z-10 hidden md:flex">
+          <div className="p-4 border-b border-os-window-border flex items-center justify-between sticky top-0 bg-os-window-bg/95 backdrop-blur-os-os z-10 hidden md:flex">
             <h3 className="font-semibold text-os-text">Media Details</h3>
             <div className="flex gap-2">
-              <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-lg transition-colors">
+              <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-os transition-colors">
                 <X size={20} />
               </button>
             </div>
@@ -111,18 +111,18 @@ export function MediaEditModal({ item, onClose }: Props) {
           
           <div className="p-6 space-y-6">
             {showDeleteConfirm ? (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-center">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-os p-4 text-center">
                 <p className="text-red-400 text-sm font-medium mb-4">Are you sure you want to delete this media permanently?</p>
                 <div className="flex gap-2 justify-center">
                   <button 
                     onClick={() => setShowDeleteConfirm(false)}
-                    className="px-4 py-1.5 bg-white/5 hover:bg-white/10 text-os-text rounded-lg text-sm transition-colors"
+                    className="px-4 py-1.5 bg-white/5 hover:bg-white/10 text-os-text rounded-os text-sm transition-colors"
                   >
                     Cancel
                   </button>
                   <button 
                     onClick={handleDelete}
-                    className="px-4 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors"
+                    className="px-4 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-os text-sm font-medium transition-colors"
                   >
                     Yes, Delete
                   </button>
@@ -138,7 +138,7 @@ export function MediaEditModal({ item, onClose }: Props) {
                     type="text"
                     value={displayName}
                     onChange={e => setDisplayName(e.target.value)}
-                    className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
+                    className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
                   />
                 </div>
                 
@@ -147,7 +147,7 @@ export function MediaEditModal({ item, onClose }: Props) {
                   <select
                     value={category}
                     onChange={e => setCategory(e.target.value as MediaCategory)}
-                    className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 appearance-none"
+                    className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 appearance-none"
                   >
                     {CATEGORIES.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -161,7 +161,7 @@ export function MediaEditModal({ item, onClose }: Props) {
                     type="text"
                     value={tags}
                     onChange={e => setTags(e.target.value)}
-                    className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
+                    className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
                   />
                 </div>
                 
@@ -170,20 +170,20 @@ export function MediaEditModal({ item, onClose }: Props) {
                   <textarea
                     value={description}
                     onChange={e => setDescription(e.target.value)}
-                    className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 resize-none h-24"
+                    className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 resize-none h-24"
                   />
                 </div>
                 
                 <div className="flex gap-2 pt-2">
                   <button 
                     onClick={() => setIsEditing(false)}
-                    className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-lg text-sm font-medium transition-colors"
+                    className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-os text-sm font-medium transition-colors"
                   >
                     Cancel
                   </button>
                   <button 
                     onClick={handleSave}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-os-accent hover:bg-os-accent/90 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-os-accent hover:bg-os-accent/90 text-white rounded-os text-sm font-medium transition-colors shadow-os"
                   >
                     <Save size={16} /> Save Changes
                   </button>
@@ -212,7 +212,7 @@ export function MediaEditModal({ item, onClose }: Props) {
                     <h4 className="text-xs font-medium text-os-text-muted uppercase tracking-wider mb-2">Tags</h4>
                     <div className="flex flex-wrap gap-2">
                       {item.tags.map(tag => (
-                        <span key={tag} className="text-xs px-2 py-1 bg-black/40 border border-os-window-border rounded-md text-os-text">
+                        <span key={tag} className="text-xs px-2 py-1 bg-black/40 border border-os-window-border rounded-os text-os-text">
                           #{tag}
                         </span>
                       ))}
@@ -220,7 +220,7 @@ export function MediaEditModal({ item, onClose }: Props) {
                   </div>
                 )}
                 
-                <div className="space-y-3 bg-black/20 p-4 rounded-xl border border-os-window-border">
+                <div className="space-y-3 bg-black/20 p-4 rounded-os border border-os-window-border">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-os-text-muted flex items-center gap-2"><File size={14} /> Filename</span>
                     <span className="text-os-text truncate max-w-[150px]" title={item.filename}>{item.filename}</span>
@@ -243,13 +243,13 @@ export function MediaEditModal({ item, onClose }: Props) {
                   <div className="flex gap-2 pt-4">
                     <button 
                       onClick={() => setIsEditing(true)}
-                      className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-lg text-sm font-medium transition-colors"
+                      className="flex-1 px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-os text-sm font-medium transition-colors"
                     >
                       Edit Info
                     </button>
                     <button 
                       onClick={() => setShowDeleteConfirm(true)}
-                      className="flex items-center justify-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg text-sm font-medium transition-colors border border-red-500/20"
+                      className="flex items-center justify-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-os text-sm font-medium transition-colors border border-red-500/20"
                     >
                       <Trash2 size={16} /> Delete
                     </button>

@@ -33,19 +33,19 @@ export function MediaSidebar({ isOpen, onClose }: Props) {
       {/* Mobile overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-os-os-os md:hidden"
           onClick={onClose}
         />
       )}
       
       {/* Sidebar */}
       <div className={cn(
-        "absolute md:relative z-50 h-full w-64 bg-os-titlebar-bg/90 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none border-r border-os-window-border flex flex-col transition-transform duration-300 ease-out",
+        "absolute md:relative z-50 h-full w-64 bg-os-titlebar-bg/90 md:bg-transparent backdrop-blur-os-os-os md:backdrop-blur-os-os-none border-r border-os-window-border flex flex-col transition-transform duration-300 ease-out",
         isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       )}>
         <div className="flex items-center justify-between p-4 md:hidden border-b border-os-window-border">
           <span className="font-semibold">Media Library</span>
-          <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-md">
+          <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-os">
             <X size={18} />
           </button>
         </div>
@@ -55,7 +55,7 @@ export function MediaSidebar({ isOpen, onClose }: Props) {
             <button
               onClick={() => { setFilterCategory('All'); setFilterFavorite(false); if (isOpen) onClose(); }}
               className={cn(
-                "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors",
+                "w-full flex items-center justify-between px-3 py-2 rounded-os text-sm transition-colors",
                 filterCategory === 'All' && !filterFavorite
                   ? "bg-os-accent text-white"
                   : "text-os-text hover:bg-white/5"
@@ -70,7 +70,7 @@ export function MediaSidebar({ isOpen, onClose }: Props) {
             <button
               onClick={() => { setFilterFavorite(true); setFilterCategory('All'); if (isOpen) onClose(); }}
               className={cn(
-                "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors",
+                "w-full flex items-center justify-between px-3 py-2 rounded-os text-sm transition-colors",
                 filterFavorite
                   ? "bg-rose-500/20 text-rose-400"
                   : "text-os-text hover:bg-white/5"
@@ -95,7 +95,7 @@ export function MediaSidebar({ isOpen, onClose }: Props) {
                     key={cat.name}
                     onClick={() => { setFilterCategory(cat.name); setFilterFavorite(false); if (isOpen) onClose(); }}
                     className={cn(
-                      "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors",
+                      "w-full flex items-center justify-between px-3 py-2 rounded-os text-sm transition-colors",
                       isSelected
                         ? "bg-os-accent/20 text-os-accent"
                         : "text-os-text hover:bg-white/5"

@@ -19,7 +19,7 @@ export function NowPlayingWidget() {
     <button 
       onClick={() => openWindow('spun')}
       className={cn(
-        "hidden sm:flex items-center gap-2 px-3 h-9 rounded-lg transition-colors cursor-pointer max-w-[200px]",
+        "hidden sm:flex items-center gap-2 px-3 h-9 rounded-os transition-colors cursor-pointer max-w-[200px]",
         isPlaying ? "bg-os-accent/10 text-os-accent hover:bg-os-accent/20" : "text-os-text-muted hover:text-os-text hover:bg-white/10"
       )}
     >

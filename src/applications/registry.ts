@@ -12,6 +12,9 @@ import { MediaApp } from './media/MediaApp';
 import { Lock } from 'lucide-react';
 import { SpunApp } from './spun/SpunApp';
 import { GuestbookApp } from './guestbook/GuestbookApp';
+import { WallpaperApp } from './wallpaper/WallpaperApp';
+
+import { ThemeApp } from './theme/ThemeApp';
 
 export const AppRegistry: Record<string, AppDefinition> = {
   settings: {

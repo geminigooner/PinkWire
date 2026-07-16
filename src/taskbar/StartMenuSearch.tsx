@@ -36,12 +36,12 @@ export function StartMenuSearch({ onClose }: { onClose: () => void }) {
           placeholder="Search apps, files, guests..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full h-12 bg-black/30 border border-white/10 rounded-2xl pl-12 pr-12 text-os-text placeholder:text-os-text-muted/70 focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all shadow-inner"
+          className="w-full h-12 bg-black/30 border border-white/10 rounded-os pl-12 pr-12 text-os-text placeholder:text-os-text-muted/70 focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all shadow-os"
         />
         {query && (
           <button 
             onClick={() => setQuery('')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-os-text-muted hover:text-os-text p-1 rounded-md hover:bg-white/10 transition-colors"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-os-text-muted hover:text-os-text p-1 rounded-os hover:bg-white/10 transition-colors"
           >
             <X size={16} />
           </button>
@@ -77,9 +77,9 @@ export function StartMenuSearch({ onClose }: { onClose: () => void }) {
                           <button
                             key={result.id}
                             onClick={() => handleResultClick(result.action)}
-                            className="flex items-center gap-3 p-3 hover:bg-white/10 rounded-xl transition-colors text-left group border border-transparent hover:border-white/5"
+                            className="flex items-center gap-3 p-3 hover:bg-white/10 rounded-os transition-colors text-left group border border-transparent hover:border-white/5"
                           >
-                            <div className="w-10 h-10 rounded-lg bg-black/40 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-os-accent/50 transition-colors shadow-inner">
+                            <div className="w-10 h-10 rounded-os bg-black/40 flex items-center justify-center shrink-0 border border-white/10 group-hover:border-os-accent/50 transition-colors shadow-os">
                               {result.icon && React.createElement(result.icon, { size: 18, className: "text-os-accent" })}
                             </div>
                             <div className="flex-1 min-w-0">

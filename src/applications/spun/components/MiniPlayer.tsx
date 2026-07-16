@@ -23,7 +23,7 @@ export function MiniPlayer() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className="absolute right-4 bottom-16 z-[60] w-64 bg-os-window-bg/95 backdrop-blur-xl border border-os-window-border rounded-xl shadow-2xl overflow-hidden pointer-events-auto"
+      className="absolute right-4 bottom-16 z-[60] w-64 bg-os-window-bg/95 backdrop-blur-os-os-os border border-os-window-border rounded-os shadow-os overflow-hidden pointer-events-auto"
     >
       <div className="flex items-center justify-between px-3 py-2 border-b border-white/5 bg-black/20">
         <span className="text-xs font-semibold text-os-text/70 uppercase tracking-wider">Now Playing</span>
@@ -40,7 +40,7 @@ export function MiniPlayer() {
       {currentTrack ? (
         <div className="p-4 flex flex-col gap-4">
           <div className="flex gap-3 items-center">
-            <img src={currentTrack.coverArt} alt={currentTrack.title} className="w-12 h-12 rounded shadow-md object-cover" />
+            <img src={currentTrack.coverArt} alt={currentTrack.title} className="w-12 h-12 rounded shadow-os object-cover" />
             <div className="flex flex-col min-w-0">
               <span className="text-sm font-medium text-white truncate">{currentTrack.title}</span>
               <span className="text-xs text-os-text-muted truncate">{currentTrack.artist}</span>

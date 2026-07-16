@@ -64,26 +64,26 @@ export function Toolbar() {
           <button 
             onClick={() => goBack(activeTab.id)}
             disabled={!canGoBack}
-            className={cn("p-1.5 rounded-lg transition-colors", canGoBack ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed")}
+            className={cn("p-1.5 rounded-os transition-colors", canGoBack ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed")}
           >
             <ArrowLeft size={18} />
           </button>
           <button 
             onClick={() => goForward(activeTab.id)}
             disabled={!canGoForward}
-            className={cn("p-1.5 rounded-lg transition-colors", canGoForward ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed")}
+            className={cn("p-1.5 rounded-os transition-colors", canGoForward ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed")}
           >
             <ArrowRight size={18} />
           </button>
           <button 
             onClick={() => reload(activeTab.id)}
-            className="p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
           >
             <RotateCw size={16} className={cn(activeTab.isLoading && "animate-spin")} />
           </button>
           <button 
             onClick={() => navigate(activeTab.id, HOMEPAGE_URL)}
-            className="p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors hidden sm:block"
+            className="p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors hidden sm:block"
           >
             <Home size={18} />
           </button>
@@ -97,14 +97,14 @@ export function Toolbar() {
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="w-full bg-black/40 border border-os-window-border rounded-full pl-9 pr-10 py-1.5 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all font-mono shadow-inner"
+            className="w-full bg-black/40 border border-os-window-border rounded-full pl-9 pr-10 py-1.5 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all font-mono shadow-os"
           />
           <button type="button" className="absolute right-2 p-1 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-full transition-colors">
             <Star size={14} />
           </button>
         </form>
 
-        <button className="p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors hidden sm:block">
+        <button className="p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors hidden sm:block">
           <MoreVertical size={18} />
         </button>
       </div>
@@ -115,7 +115,7 @@ export function Toolbar() {
           <button
             key={bookmark.id}
             onClick={() => handleBookmarkClick(bookmark.url)}
-            className="flex items-center gap-2 px-2 py-1 rounded-md text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors whitespace-nowrap"
+            className="flex items-center gap-2 px-2 py-1 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors whitespace-nowrap"
           >
             <Globe size={12} className="opacity-70" />
             <span>{bookmark.title}</span>

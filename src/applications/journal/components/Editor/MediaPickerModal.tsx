@@ -12,11 +12,11 @@ export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, o
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="w-full max-w-4xl max-h-[80vh] bg-os-window-bg border border-os-window-border rounded-xl shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-os-os-os p-4">
+      <div className="w-full max-w-4xl max-h-[80vh] bg-os-window-bg border border-os-window-border rounded-os shadow-os flex flex-col overflow-hidden">
         <div className="h-12 border-b border-os-window-border bg-os-titlebar-bg flex items-center justify-between px-4">
           <h2 className="font-semibold text-os-text">Select Media</h2>
-          <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-lg text-os-text-muted hover:text-os-text transition-colors">
+          <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-os text-os-text-muted hover:text-os-text transition-colors">
             <X size={18} />
           </button>
         </div>
@@ -29,7 +29,7 @@ export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, o
               placeholder="Search media..." 
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full bg-black/20 border border-os-window-border rounded-lg pl-9 pr-4 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
+              className="w-full bg-black/20 border border-os-window-border rounded-os pl-9 pr-4 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
             />
           </div>
         </div>
@@ -45,7 +45,7 @@ export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, o
                 <div 
                   key={item.id} 
                   onClick={() => onSelect(item.url)}
-                  className="group relative aspect-square bg-black/40 rounded-lg border border-os-window-border overflow-hidden cursor-pointer hover:border-os-accent transition-colors"
+                  className="group relative aspect-square bg-black/40 rounded-os border border-os-window-border overflow-hidden cursor-pointer hover:border-os-accent transition-colors"
                 >
                   {item.mimeType.startsWith('image/') ? (
                     <img src={item.url} alt={item.displayName} className="w-full h-full object-cover transition-transform group-hover:scale-105" />

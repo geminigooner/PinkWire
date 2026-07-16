@@ -40,9 +40,9 @@ export function Sidebar() {
               key={fav.id}
               onClick={() => setCurrentPath([fav.id])}
               className={cn(
-                "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all text-left",
+                "w-full flex items-center gap-3 px-3 py-2 rounded-os text-sm transition-all text-left",
                 isActive 
-                  ? "bg-os-accent text-white shadow-sm" 
+                  ? "bg-os-accent text-white shadow-os" 
                   : "text-os-text-muted hover:bg-white/5 hover:text-os-text"
               )}
             >

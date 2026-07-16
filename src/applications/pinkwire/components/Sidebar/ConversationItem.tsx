@@ -50,7 +50,7 @@ export function ConversationItem({ conversation }: { conversation: Conversation 
         <div className="flex justify-between items-baseline mb-0.5">
           <h3 className={cn(
             "font-medium truncate text-sm",
-            isActive ? "text-os-accent text-shadow-sm" : "text-os-text"
+            isActive ? "text-os-accent text-shadow-os" : "text-os-text"
           )}>
             {conversation.title}
           </h3>
@@ -69,7 +69,7 @@ export function ConversationItem({ conversation }: { conversation: Conversation 
         {conversation.tags && conversation.tags.length > 0 && (
           <div className="flex gap-1 mt-1.5 overflow-hidden">
             {conversation.tags.map(tag => (
-              <span key={tag} className="inline-flex items-center text-[9px] px-1.5 py-0.5 rounded-sm bg-black/30 text-os-text-muted whitespace-nowrap">
+              <span key={tag} className="inline-flex items-center text-[9px] px-1.5 py-0.5 rounded-os bg-black/30 text-os-text-muted whitespace-nowrap">
                 <Hash size={8} className="mr-0.5 opacity-70" />
                 {tag}
               </span>

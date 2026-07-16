@@ -50,10 +50,10 @@ export function Reader() {
         <header className="mb-12 text-center relative">
           {isAuthenticated && (
             <div className="absolute top-0 right-0 flex gap-2">
-              <button onClick={() => startEditing(article.id)} title="Edit Post" className="p-2 bg-os-window-bg/80 hover:bg-os-accent/20 text-os-text-muted hover:text-os-accent rounded-lg transition-colors border border-os-window-border hover:border-os-accent/50 backdrop-blur-sm shadow-sm">
+              <button onClick={() => startEditing(article.id)} title="Edit Post" className="p-2 bg-os-window-bg/80 hover:bg-os-accent/20 text-os-text-muted hover:text-os-accent rounded-os transition-colors border border-os-window-border hover:border-os-accent/50 backdrop-blur-os-os-os shadow-os">
                 <Edit3 size={16} />
               </button>
-              <button onClick={() => deleteArticle(article.id)} title="Delete Post" className="p-2 bg-os-window-bg/80 hover:bg-red-500/20 text-os-text-muted hover:text-red-400 rounded-lg transition-colors border border-os-window-border hover:border-red-500/50 backdrop-blur-sm shadow-sm">
+              <button onClick={() => deleteArticle(article.id)} title="Delete Post" className="p-2 bg-os-window-bg/80 hover:bg-red-500/20 text-os-text-muted hover:text-red-400 rounded-os transition-colors border border-os-window-border hover:border-red-500/50 backdrop-blur-os-os-os shadow-os">
                 <Trash2 size={16} />
               </button>
             </div>
@@ -71,7 +71,7 @@ export function Reader() {
 
           <h1 className={cn(
             "text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight",
-            readingMode ? "text-gray-900" : "text-os-text text-shadow-sm"
+            readingMode ? "text-gray-900" : "text-os-text text-shadow-os"
           )}>
             {article.title}
           </h1>
@@ -91,14 +91,14 @@ export function Reader() {
         </header>
 
         {article.coverImage && (
-          <div className="mb-12 rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10">
+          <div className="mb-12 rounded-os overflow-hidden shadow-os ring-1 ring-white/10">
             <img src={article.coverImage} alt="Cover" className="w-full h-auto object-cover" />
           </div>
         )}
         
         {article.references && article.references.length > 0 && (
           <div className={cn(
-            "mb-10 p-4 rounded-xl border flex flex-col gap-3 max-w-2xl mx-auto",
+            "mb-10 p-4 rounded-os border flex flex-col gap-3 max-w-2xl mx-auto",
             readingMode ? "bg-gray-100 border-gray-200" : "bg-black/20 border-os-window-border"
           )}>
             <div className={cn("text-xs font-semibold uppercase tracking-wider", readingMode ? "text-gray-500" : "text-os-text-muted")}>
@@ -110,11 +110,11 @@ export function Reader() {
                   key={`${ref.type}-${ref.id}`}
                   onClick={() => handlePlayReference(ref.type, ref.id)}
                   className={cn(
-                    "flex items-center gap-3 p-3 rounded-lg transition-colors text-left group",
+                    "flex items-center gap-3 p-3 rounded-os transition-colors text-left group",
                     readingMode ? "bg-white border border-gray-200 hover:bg-gray-50" : "bg-black/40 border border-os-window-border hover:bg-white/5"
                   )}
                 >
-                  <div className={cn("p-2 rounded-md shadow-sm", readingMode ? "bg-rose-100 text-rose-600" : "bg-os-accent/20 text-os-accent")}>
+                  <div className={cn("p-2 rounded-os shadow-os", readingMode ? "bg-rose-100 text-rose-600" : "bg-os-accent/20 text-os-accent")}>
                     {ref.type === 'track' && <Music2 size={16} />}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -147,7 +147,7 @@ export function Reader() {
               ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-6 space-y-2 opacity-90" {...props} />,
               ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-6 space-y-2 opacity-90" {...props} />,
               img: ({node, src, alt, ...props}) => (
-                <span className="block my-8 group relative overflow-hidden rounded-xl border border-os-window-border shadow-lg cursor-pointer" onClick={() => src && openWindow('disposable', { imageUrl: src })}>
+                <span className="block my-8 group relative overflow-hidden rounded-os border border-os-window-border shadow-os cursor-pointer" onClick={() => src && openWindow('disposable', { imageUrl: src })}>
                   <img src={src} alt={alt} className="w-full h-auto transition-transform hover:scale-[1.02]" {...props} />
                   {alt && <span className="block text-center text-sm mt-3 opacity-60 font-sans px-4 pb-3">{alt}</span>}
                 </span>
@@ -157,7 +157,7 @@ export function Reader() {
                 const isInline = !match && !node?.position?.start.line;
                 if (!isInline && match) {
                   return (
-                    <div className="my-6 rounded-lg overflow-hidden border border-os-window-border font-mono text-[13px] bg-black/60">
+                    <div className="my-6 rounded-os overflow-hidden border border-os-window-border font-mono text-[13px] bg-black/60">
                       <div className="bg-black/40 px-4 py-2 border-b border-os-window-border flex items-center gap-2 text-os-text-muted text-xs">
                         <span className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
                         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />

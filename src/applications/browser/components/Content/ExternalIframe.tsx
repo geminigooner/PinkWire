@@ -37,7 +37,7 @@ export function ExternalIframe({ url, onLoad }: ExternalIframeProps) {
       
       {showFallback && (
         <div className="absolute inset-0 z-20 pointer-events-none p-4 flex items-end justify-start">
-          <div className="pointer-events-auto bg-os-window-bg border border-os-window-border shadow-xl rounded-lg max-w-sm p-4 backdrop-blur-md opacity-90 hover:opacity-100 transition-opacity">
+          <div className="pointer-events-auto bg-os-window-bg border border-os-window-border shadow-os rounded-os max-w-sm p-4 backdrop-blur-os-os-os opacity-90 hover:opacity-100 transition-opacity">
             <div className="flex items-start gap-3">
               <AlertTriangle className="text-yellow-500 shrink-0 mt-0.5" size={20} />
               <div>

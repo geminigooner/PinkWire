@@ -13,7 +13,7 @@ export function Sidebar() {
 
   return (
     <div className={cn(
-      "w-64 shrink-0 border-r border-os-window-border bg-os-window-bg/95 flex flex-col h-full absolute md:relative z-20 transition-transform duration-300 backdrop-blur-xl",
+      "w-64 shrink-0 border-r border-os-window-border bg-os-window-bg/95 flex flex-col h-full absolute md:relative z-20 transition-transform duration-300 backdrop-blur-os-os-os",
       isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
     )}>
       <div className="p-4 border-b border-os-window-border bg-os-titlebar-bg/50">
@@ -24,7 +24,7 @@ export function Sidebar() {
             placeholder="Search journal..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-black/40 border border-os-window-border rounded-lg pl-9 pr-4 py-1.5 text-sm text-os-text placeholder:text-os-text-muted focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
+            className="w-full bg-black/40 border border-os-window-border rounded-os pl-9 pr-4 py-1.5 text-sm text-os-text placeholder:text-os-text-muted focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
           />
         </div>
       </div>
@@ -36,7 +36,7 @@ export function Sidebar() {
             <button
               onClick={() => setActiveCategory('all')}
               className={cn(
-                "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                "w-full flex items-center gap-3 px-2 py-1.5 rounded-os text-sm transition-colors",
                 activeCategoryId === 'all' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
               )}
             >
@@ -46,7 +46,7 @@ export function Sidebar() {
             <button
               onClick={() => setActiveCategory('favorites')}
               className={cn(
-                "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                "w-full flex items-center gap-3 px-2 py-1.5 rounded-os text-sm transition-colors",
                 activeCategoryId === 'favorites' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
               )}
             >
@@ -59,7 +59,7 @@ export function Sidebar() {
                 <button
                   onClick={() => { setSearchQuery('draft'); setActiveCategory('all'); }}
                   className={cn(
-                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-os text-sm transition-colors",
                     searchQuery === 'draft' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
                   )}
                 >
@@ -69,7 +69,7 @@ export function Sidebar() {
                 <button
                   onClick={() => { setSearchQuery('archived'); setActiveCategory('all'); }}
                   className={cn(
-                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-os text-sm transition-colors",
                     searchQuery === 'archived' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
                   )}
                 >
@@ -89,7 +89,7 @@ export function Sidebar() {
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                  "w-full flex items-center gap-3 px-2 py-1.5 rounded-os text-sm transition-colors",
                   activeCategoryId === category.id ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
                 )}
               >
@@ -110,7 +110,7 @@ export function Sidebar() {
                   setSearchQuery(tag);
                   setActiveCategory('all');
                 }}
-                className="inline-flex items-center text-[11px] px-2 py-1 rounded-md bg-black/40 border border-os-window-border text-os-text-muted hover:text-os-text hover:border-os-accent/50 transition-colors"
+                className="inline-flex items-center text-[11px] px-2 py-1 rounded-os bg-black/40 border border-os-window-border text-os-text-muted hover:text-os-text hover:border-os-accent/50 transition-colors"
               >
                 <Hash size={10} className="mr-0.5 opacity-70" />
                 {tag}

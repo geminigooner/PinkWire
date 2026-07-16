@@ -20,7 +20,7 @@ export function Toolbar() {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setSidebarOpen(!isSidebarOpen)}
-          className="md:hidden flex items-center gap-1.5 p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
+          className="md:hidden flex items-center gap-1.5 p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
         >
           <Menu size={20} />
         </button>
@@ -37,7 +37,7 @@ export function Toolbar() {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-        <div className="hidden sm:flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+        <div className="hidden sm:flex items-center bg-black/40 border border-os-window-border rounded-os p-1">
           {viewModes.map(mode => {
             const Icon = mode.icon;
             return (
@@ -46,8 +46,8 @@ export function Toolbar() {
                 onClick={() => setViewMode(mode.id)}
                 title={mode.label}
                 className={cn(
-                  "p-1.5 rounded-md transition-colors",
-                  viewMode === mode.id ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
+                  "p-1.5 rounded-os transition-colors",
+                  viewMode === mode.id ? "bg-os-accent text-white shadow-os" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
                 )}
               >
                 <Icon size={14} />
@@ -58,7 +58,7 @@ export function Toolbar() {
         <button 
           onClick={toggleSlideshow}
           className={cn(
-            "flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border",
+            "flex items-center gap-2 px-3 py-1.5 rounded-os text-xs font-medium transition-colors border",
             slideshowActive 
               ? "bg-os-accent border-os-accent text-white" 
               : "bg-black/40 border-os-window-border text-os-text hover:bg-white/10"

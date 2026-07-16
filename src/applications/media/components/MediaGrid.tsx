@@ -17,7 +17,7 @@ export function MediaGrid({ items }: { items: MediaItem[] }) {
         {items.map(item => (
           <div 
             key={item.id} 
-            className="group relative bg-black/40 border border-os-window-border rounded-xl overflow-hidden cursor-pointer hover:border-os-accent/50 transition-colors shadow-sm"
+            className="group relative bg-black/40 border border-os-window-border rounded-os overflow-hidden cursor-pointer hover:border-os-accent/50 transition-colors shadow-os"
             onClick={() => setSelectedItem(item)}
             onDoubleClick={() => useWindowStore.getState().openWindow('disposable', { imageUrl: item.url })}
           >
@@ -46,7 +46,7 @@ export function MediaGrid({ items }: { items: MediaItem[] }) {
                 </button>
               )}
               
-              <div className="absolute bottom-2 left-2 right-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity truncate font-medium drop-shadow-md">
+              <div className="absolute bottom-2 left-2 right-2 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity truncate font-medium drop-shadow-os">
                 {item.displayName}
               </div>
             </div>

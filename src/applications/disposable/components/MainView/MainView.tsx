@@ -44,7 +44,7 @@ export function MainView() {
               <div 
                 key={photo.id}
                 onDoubleClick={() => openViewer(photo.url)}
-                className="bg-white p-3 pb-10 shadow-lg cursor-pointer transition-transform hover:scale-105 hover:z-10 group"
+                className="bg-white p-3 pb-10 shadow-os cursor-pointer transition-transform hover:scale-105 hover:z-10 group"
                 style={{ transform: `rotate(${rotation}deg)` }}
               >
                 <div className="aspect-square overflow-hidden bg-black/5">
@@ -73,7 +73,7 @@ export function MainView() {
             <div 
               key={photo.id}
               onDoubleClick={() => openViewer(photo.url)}
-              className="relative group cursor-pointer overflow-hidden rounded-lg aspect-square bg-black/20 border border-os-window-border"
+              className="relative group cursor-pointer overflow-hidden rounded-os aspect-square bg-black/20 border border-os-window-border"
             >
               <img 
                 src={photo.url} 

@@ -17,7 +17,7 @@ export function Taskbar() {
 
   return (
     <>
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-os-taskbar-bg backdrop-blur-xl border-t border-os-window-border flex items-center px-2 z-50 pointer-events-auto shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+      <div className="absolute bottom-0 left-0 right-0 h-12 bg-os-taskbar-bg backdrop-blur-os-os-os border-t border-os-window-border flex items-center px-2 z-50 pointer-events-auto shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
         <button 
           aria-label="Start Menu"
           onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
@@ -30,7 +30,7 @@ export function Taskbar() {
             }).catch(e => console.error(e));
           }}
           className={cn(
-            "start-button h-9 px-3 rounded-lg flex items-center justify-center transition-colors",
+            "start-button h-9 px-3 rounded-os flex items-center justify-center transition-colors",
             isStartMenuOpen ? "bg-os-accent/20 text-os-accent" : "hover:bg-white/10 text-os-text"
           )}
         >
@@ -59,9 +59,9 @@ export function Taskbar() {
                   }
                 }}
                 className={cn(
-                  "h-9 px-3 rounded-lg flex items-center gap-2 max-w-[160px] transition-all",
+                  "h-9 px-3 rounded-os flex items-center gap-2 max-w-[160px] transition-all",
                   isFocused 
-                    ? "bg-os-titlebar-bg text-os-text shadow-inner border border-os-window-border" 
+                    ? "bg-os-titlebar-bg text-os-text shadow-os border border-os-window-border" 
                     : "hover:bg-white/10 text-os-text-muted"
                 )}
               >
@@ -78,7 +78,7 @@ export function Taskbar() {
           
           <NotificationCenter />
           
-          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-lg transition-colors cursor-default" onClick={() => useWindowStore.getState().openWindow('admin')} onDoubleClick={() => {
+          <div className="px-3 h-9 flex items-center text-sm font-medium text-os-text hover:bg-white/10 rounded-os transition-colors cursor-default" onClick={() => useWindowStore.getState().openWindow('admin')} onDoubleClick={() => {
             import('../store/useAchievementStore').then(({ useAchievementStore }) => {
               useAchievementStore.getState().unlockAchievement('secret_shortcut_clock' as any);
               // Create time travel effect logic? For now just unlock achievement and notify

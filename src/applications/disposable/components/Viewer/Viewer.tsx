@@ -62,7 +62,7 @@ export function Viewer() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center overflow-hidden"
+        className="absolute inset-0 z-50 bg-black/95 backdrop-blur-os-os-os flex items-center justify-center overflow-hidden"
       >
         {/* Top Controls */}
         <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent z-10">
@@ -111,7 +111,7 @@ export function Viewer() {
           <img 
             src={viewerPhotoUrl} 
             alt="Viewer" 
-            className="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm"
+            className="max-w-full max-h-[85vh] object-contain shadow-os rounded-os"
           />
         </motion.div>
         

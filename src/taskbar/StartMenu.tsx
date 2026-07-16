@@ -47,7 +47,7 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: '100%', opacity: 0.8 }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="w-full sm:w-[28rem] max-h-full sm:h-[40rem] bg-os-taskbar-bg/95 backdrop-blur-2xl sm:border border-os-window-border sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden rounded-t-3xl sm:rounded-t-2xl"
+        className="w-full sm:w-[28rem] max-h-full sm:h-[40rem] bg-os-taskbar-bg/95 backdrop-blur-os-os-os sm:border border-os-window-border sm:rounded-os shadow-os flex flex-col overflow-hidden rounded-t-3xl sm:rounded-t-2xl"
       >
         <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mt-3 mb-1 sm:hidden shrink-0" />
         

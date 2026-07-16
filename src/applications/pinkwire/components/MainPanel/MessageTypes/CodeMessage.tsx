@@ -4,7 +4,7 @@ import { Message } from '../../../types';
 
 export function CodeMessage({ message }: { message: Message }) {
   return (
-    <div className="text-[13px] bg-black/50 border border-os-window-border rounded-lg p-3 overflow-x-auto font-mono">
+    <div className="text-[13px] bg-black/50 border border-os-window-border rounded-os p-3 overflow-x-auto font-mono">
       <ReactMarkdown
         components={{
           pre: ({node, ...props}) => <pre className="m-0 bg-transparent p-0 text-os-accent-hover" {...props} />,

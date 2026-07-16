@@ -60,7 +60,7 @@ export function DesktopSettings() {
                 />
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-3 py-1.5 bg-black/20 hover:bg-black/40 border border-os-window-border rounded-lg text-sm text-os-text transition-colors"
+                  className="flex items-center gap-2 px-3 py-1.5 bg-black/20 hover:bg-black/40 border border-os-window-border rounded-os text-sm text-os-text transition-colors"
                 >
                   <Upload size={14} /> Upload
                 </button>
@@ -75,7 +75,7 @@ export function DesktopSettings() {
                     key={w.id}
                     onClick={() => setWallpaper(w.url)}
                     className={cn(
-                      "relative aspect-video rounded-xl overflow-hidden border-2 transition-all group",
+                      "relative aspect-video rounded-os overflow-hidden border-2 transition-all group",
                       isActive ? "border-os-accent shadow-[0_0_15px_rgba(var(--os-accent),0.3)]" : "border-transparent hover:border-os-text-muted/50"
                     )}
                   >
@@ -85,10 +85,10 @@ export function DesktopSettings() {
                       <img src={w.url} alt={w.name} className="w-full h-full object-cover" />
                     )}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                      <span className="text-white text-xs font-medium drop-shadow-md">{w.name}</span>
+                      <span className="text-white text-xs font-medium drop-shadow-os">{w.name}</span>
                     </div>
                     {isActive && (
-                      <div className="absolute top-2 right-2 p-1 bg-os-accent rounded-full text-white shadow-md">
+                      <div className="absolute top-2 right-2 p-1 bg-os-accent rounded-full text-white shadow-os">
                         <Star size={12} fill="currentColor" />
                       </div>
                     )}
@@ -99,7 +99,7 @@ export function DesktopSettings() {
 
             {/* Wallpaper Metadata & Settings */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-black/20 border border-os-window-border rounded-xl p-5 flex flex-col justify-between">
+              <div className="bg-black/20 border border-os-window-border rounded-os p-5 flex flex-col justify-between">
                 {currentWallpaperMeta ? (
                   <>
                     <div>
@@ -128,17 +128,17 @@ export function DesktopSettings() {
                 )}
               </div>
 
-              <div className="bg-black/20 border border-os-window-border rounded-xl p-5 flex flex-col justify-center gap-6">
+              <div className="bg-black/20 border border-os-window-border rounded-os p-5 flex flex-col justify-center gap-6">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-os-text-muted">Fit:</span>
-                  <div className="flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+                  <div className="flex items-center bg-black/40 border border-os-window-border rounded-os p-1">
                     {(['cover', 'contain', 'center'] as const).map(fit => (
                       <button
                         key={fit}
                         onClick={() => setWallpaperFit(fit)}
                         className={cn(
-                          "px-3 py-1 text-xs rounded-md transition-colors capitalize",
-                          wallpaperFit === fit ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text"
+                          "px-3 py-1 text-xs rounded-os transition-colors capitalize",
+                          wallpaperFit === fit ? "bg-os-accent text-white shadow-os" : "text-os-text-muted hover:text-os-text"
                         )}
                       >
                         {fit}
@@ -164,10 +164,10 @@ export function DesktopSettings() {
           <section>
             <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider">Layout</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-black/20 border border-os-window-border rounded-xl p-4 space-y-4">
+              <div className="bg-black/20 border border-os-window-border rounded-os p-4 space-y-4">
                 <button
                   onClick={() => setAutoArrangeIcons(!autoArrangeIcons)}
-                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-os transition-colors"
                 >
                   <span className="flex items-center gap-2"><LayoutGrid size={16} className="text-os-accent" /> Auto Arrange Icons</span>
                   {autoArrangeIcons ? <ToggleRight size={20} className="text-os-accent" /> : <ToggleLeft size={20} className="text-os-text-muted" />}
@@ -175,7 +175,7 @@ export function DesktopSettings() {
                 
                 <button
                   onClick={() => setSnapToGrid(!snapToGrid)}
-                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-os transition-colors"
                 >
                   <span className="flex items-center gap-2"><Monitor size={16} className="text-os-accent" /> Snap to Grid</span>
                   {snapToGrid ? <ToggleRight size={20} className="text-os-accent" /> : <ToggleLeft size={20} className="text-os-text-muted" />}
@@ -183,18 +183,18 @@ export function DesktopSettings() {
                 
                 <button
                   onClick={() => setShowLabels(!showLabels)}
-                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-lg transition-colors"
+                  className="w-full flex items-center justify-between text-sm text-os-text hover:bg-white/5 p-2 rounded-os transition-colors"
                 >
                   <span className="flex items-center gap-2"><Monitor size={16} className="text-os-accent" /> Show Desktop Labels</span>
                   {showLabels ? <ToggleRight size={20} className="text-os-accent" /> : <ToggleLeft size={20} className="text-os-text-muted" />}
                 </button>
               </div>
               
-              <div className="bg-black/20 border border-os-window-border rounded-xl p-4 flex flex-col justify-center items-center text-center">
+              <div className="bg-black/20 border border-os-window-border rounded-os p-4 flex flex-col justify-center items-center text-center">
                 <p className="text-sm text-os-text-muted mb-4">Messed up your desktop? You can reset icon positions to default.</p>
                 <button 
                   onClick={resetDesktop}
-                  className="px-4 py-2 bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-500/30 rounded-lg text-sm transition-colors font-medium"
+                  className="px-4 py-2 bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-500/30 rounded-os text-sm transition-colors font-medium"
                 >
                   Reset Desktop Layout
                 </button>
@@ -206,17 +206,17 @@ export function DesktopSettings() {
           {stickers.length > 0 && (
             <section>
               <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider">Active Stickers</h3>
-              <div className="bg-black/20 border border-os-window-border rounded-xl p-4">
+              <div className="bg-black/20 border border-os-window-border rounded-os p-4">
                 <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
                   {stickers.map(sticker => (
-                    <div key={sticker.id} className="relative group bg-black/40 border border-os-window-border rounded-lg p-2 flex flex-col items-center justify-center gap-2 aspect-square">
+                    <div key={sticker.id} className="relative group bg-black/40 border border-os-window-border rounded-os p-2 flex flex-col items-center justify-center gap-2 aspect-square">
                       <div className="text-4xl select-none" style={{ transform: `rotate(${sticker.rotation}deg) scale(${sticker.scale})` }}>
                         {sticker.type}
                       </div>
                       {isAuthenticated && (
                         <button 
                           onClick={() => removeSticker(sticker.id)}
-                        className="absolute top-1 right-1 p-1 bg-red-500/80 text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="absolute top-1 right-1 p-1 bg-red-500/80 text-white rounded-os opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <Trash2 size={12} />
                         </button>

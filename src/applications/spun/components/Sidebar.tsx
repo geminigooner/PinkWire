@@ -38,7 +38,7 @@ export function Sidebar() {
                 if (window.innerWidth < 768) toggleSidebar();
               }}
               className={cn(
-                "flex items-center gap-3 px-2 py-2 rounded-md text-sm transition-colors",
+                "flex items-center gap-3 px-2 py-2 rounded-os text-sm transition-colors",
                 currentView === item.id 
                   ? "bg-[#282828] text-white font-medium" 
                   : "text-[#a7a7a7] hover:text-white hover:bg-[#282828]/50"
@@ -63,7 +63,7 @@ export function Sidebar() {
                 if (window.innerWidth < 768) toggleSidebar();
               }}
               className={cn(
-                "flex items-center gap-3 px-2 py-2 rounded-md text-sm transition-colors",
+                "flex items-center gap-3 px-2 py-2 rounded-os text-sm transition-colors",
                 currentView === item.id 
                   ? "bg-[#282828] text-white font-medium" 
                   : "text-[#a7a7a7] hover:text-white hover:bg-[#282828]/50"
@@ -85,7 +85,7 @@ export function Sidebar() {
                 if (window.innerWidth < 768) toggleSidebar();
               }}
               className={cn(
-                "flex items-center gap-3 px-2 py-2 rounded-md text-sm transition-colors truncate text-left",
+                "flex items-center gap-3 px-2 py-2 rounded-os text-sm transition-colors truncate text-left",
                 currentView === 'playlist_detail' && useSpunStore.getState().selectedId === playlist.id
                   ? "bg-[#282828] text-white font-medium" 
                   : "text-[#a7a7a7] hover:text-white hover:bg-[#282828]/50"

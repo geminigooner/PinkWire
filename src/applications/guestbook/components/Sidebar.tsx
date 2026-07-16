@@ -29,7 +29,7 @@ export function Sidebar() {
     <>
       {isSidebarOpen && (
         <div 
-          className="md:hidden fixed inset-0 bg-[#4a3f3a]/20 backdrop-blur-sm z-[40]" 
+          className="md:hidden fixed inset-0 bg-[#4a3f3a]/20 backdrop-blur-os-os-os z-[40]" 
           onClick={toggleSidebar}
         />
       )}
@@ -57,8 +57,8 @@ export function Sidebar() {
               <button
                 onClick={() => { setFilter('all'); setArchiveMonthYear(null); if (window.innerWidth < 768) toggleSidebar(); }}
                 className={cn(
-                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-xl text-sm transition-colors",
-                  filter === 'all' ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-sm" : "text-[#7a6f6a] hover:bg-[#f0e6e2]/50"
+                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-os text-sm transition-colors",
+                  filter === 'all' ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-os" : "text-[#7a6f6a] hover:bg-[#f0e6e2]/50"
                 )}
               >
                 <span className="flex items-center gap-3">
@@ -70,8 +70,8 @@ export function Sidebar() {
               <button
                 onClick={() => { setFilter('favorites'); setArchiveMonthYear(null); if (window.innerWidth < 768) toggleSidebar(); }}
                 className={cn(
-                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-xl text-sm transition-colors",
-                  filter === 'favorites' ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-sm" : "text-[#7a6f6a] hover:bg-[#f0e6e2]/50"
+                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-os text-sm transition-colors",
+                  filter === 'favorites' ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-os" : "text-[#7a6f6a] hover:bg-[#f0e6e2]/50"
                 )}
               >
                 <span className="flex items-center gap-3">
@@ -95,9 +95,9 @@ export function Sidebar() {
                   key={arch.key}
                   onClick={() => { setFilter('archive'); setArchiveMonthYear(arch.key); if (window.innerWidth < 768) toggleSidebar(); }}
                   className={cn(
-                    "w-full flex items-center justify-between gap-3 px-3 py-1.5 rounded-xl text-sm transition-colors",
+                    "w-full flex items-center justify-between gap-3 px-3 py-1.5 rounded-os text-sm transition-colors",
                     filter === 'archive' && archiveMonthYear === arch.key 
-                      ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-sm" 
+                      ? "bg-[#f0e6e2] text-[#4a3f3a] font-medium shadow-os" 
                       : "text-[#7a6f6a] hover:bg-[#f0e6e2]/50"
                   )}
                 >

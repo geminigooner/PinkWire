@@ -47,7 +47,7 @@ export function SoundSettings() {
       <div>
         <h2 className="text-2xl font-light mb-6">Sound</h2>
         
-        <div className="bg-black/20 border border-os-window-border rounded-xl p-6 space-y-8">
+        <div className="bg-black/20 border border-os-window-border rounded-os p-6 space-y-8">
           
           <div className="flex items-center justify-between">
             <div>
@@ -74,7 +74,7 @@ export function SoundSettings() {
                 max="100"
                 value={volume}
                 onChange={(e) => setVolume(Number(e.target.value))}
-                className="w-full h-2 bg-black/40 rounded-lg appearance-none cursor-pointer accent-os-accent"
+                className="w-full h-2 bg-black/40 rounded-os appearance-none cursor-pointer accent-os-accent"
                 disabled={!soundEnabled}
               />
               <span className="text-sm text-os-text-muted w-8 text-right">{volume}%</span>
@@ -83,7 +83,7 @@ export function SoundSettings() {
 
         </div>
 
-        <div className="mt-8 bg-black/20 border border-os-window-border rounded-xl p-6">
+        <div className="mt-8 bg-black/20 border border-os-window-border rounded-os p-6">
           <h3 className="text-os-text font-medium mb-4">Individual Sounds</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {soundOptions.map((option) => {
@@ -92,7 +92,7 @@ export function SoundSettings() {
                 <div 
                   key={option.id}
                   className={cn(
-                    "flex items-center justify-between p-3 rounded-lg border transition-all",
+                    "flex items-center justify-between p-3 rounded-os border transition-all",
                     !soundEnabled ? "opacity-50 pointer-events-none" : "",
                     isEnabled ? "bg-os-accent/10 border-os-accent/30" : "bg-black/40 border-transparent"
                   )}

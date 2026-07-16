@@ -18,7 +18,7 @@ export function MediaToolbar({ onToggleSidebar, onUploadClick }: Props) {
       <div className="flex items-center gap-2">
         <button
           onClick={onToggleSidebar}
-          className="md:hidden flex items-center justify-center p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
+          className="md:hidden flex items-center justify-center p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
         >
           <Menu size={18} />
         </button>
@@ -26,7 +26,7 @@ export function MediaToolbar({ onToggleSidebar, onUploadClick }: Props) {
         {isAuthenticated && (
           <button 
             onClick={onUploadClick}
-            className="flex items-center gap-2 px-3 py-1.5 bg-os-accent text-white rounded-lg text-sm font-medium hover:bg-os-accent/90 transition-colors shadow-sm"
+            className="flex items-center gap-2 px-3 py-1.5 bg-os-accent text-white rounded-os text-sm font-medium hover:bg-os-accent/90 transition-colors shadow-os"
           >
             <Upload size={16} />
             <span className="hidden sm:inline">Upload Media</span>
@@ -46,12 +46,12 @@ export function MediaToolbar({ onToggleSidebar, onUploadClick }: Props) {
           />
         </div>
 
-        <div className="hidden sm:flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+        <div className="hidden sm:flex items-center bg-black/40 border border-os-window-border rounded-os p-1">
           <button
             onClick={() => setViewMode('grid')}
             className={cn(
-              "p-1.5 rounded-md transition-colors",
-              viewMode === 'grid' ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
+              "p-1.5 rounded-os transition-colors",
+              viewMode === 'grid' ? "bg-os-accent text-white shadow-os" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
             )}
             title="Grid View"
           >
@@ -60,8 +60,8 @@ export function MediaToolbar({ onToggleSidebar, onUploadClick }: Props) {
           <button
             onClick={() => setViewMode('list')}
             className={cn(
-              "p-1.5 rounded-md transition-colors",
-              viewMode === 'list' ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
+              "p-1.5 rounded-os transition-colors",
+              viewMode === 'list' ? "bg-os-accent text-white shadow-os" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
             )}
             title="List View"
           >

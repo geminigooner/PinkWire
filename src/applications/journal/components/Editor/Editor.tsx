@@ -173,13 +173,13 @@ export function Editor() {
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10 flex justify-center">
         <div className="w-full max-w-3xl flex flex-col gap-6 pb-20">
           
-          <div className="group relative w-full h-48 bg-black/20 border border-dashed border-os-window-border rounded-xl flex items-center justify-center overflow-hidden hover:border-os-accent/50 transition-colors">
+          <div className="group relative w-full h-48 bg-black/20 border border-dashed border-os-window-border rounded-os flex items-center justify-center overflow-hidden hover:border-os-accent/50 transition-colors">
             {coverImage ? (
               <>
                 <img src={coverImage} alt="Cover" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                  <button onClick={() => { setMediaPickerMode('cover'); setShowMediaPicker(true); }} className="px-4 py-2 rounded-lg bg-os-accent text-white text-sm font-medium">Change Cover</button>
-                  <button onClick={() => setCoverImage('')} className="px-4 py-2 rounded-lg bg-black/60 text-white text-sm font-medium hover:bg-red-500 transition-colors">Remove</button>
+                  <button onClick={() => { setMediaPickerMode('cover'); setShowMediaPicker(true); }} className="px-4 py-2 rounded-os bg-os-accent text-white text-sm font-medium">Change Cover</button>
+                  <button onClick={() => setCoverImage('')} className="px-4 py-2 rounded-os bg-black/60 text-white text-sm font-medium hover:bg-red-500 transition-colors">Remove</button>
                 </div>
               </>
             ) : (
@@ -214,7 +214,7 @@ export function Editor() {
               <select 
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="bg-black/30 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
+                className="bg-black/30 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
               >
                 {categories.filter(c => c.id !== 'all' && c.id !== 'favorites').map(c => (
                   <option key={c.id} value={c.id}>{c.name}</option>
@@ -228,7 +228,7 @@ export function Editor() {
                 placeholder="e.g. design, react, os"
                 value={tagsInput}
                 onChange={(e) => setTagsInput(e.target.value)}
-                className="w-full bg-black/30 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
+                className="w-full bg-black/30 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
               />
             </div>
           </div>

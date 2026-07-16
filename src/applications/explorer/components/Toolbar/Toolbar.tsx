@@ -40,7 +40,7 @@ export function Toolbar() {
       <div className="flex items-center gap-1 sm:gap-2">
         <button
           onClick={() => setSidebarOpen(!isSidebarOpen)}
-          className="md:hidden flex items-center justify-center p-1.5 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
+          className="md:hidden flex items-center justify-center p-1.5 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
         >
           <Menu size={18} />
         </button>
@@ -50,7 +50,7 @@ export function Toolbar() {
             onClick={navigateBack}
             disabled={!canGoBack}
             className={cn(
-              "p-1.5 rounded-lg transition-colors",
+              "p-1.5 rounded-os transition-colors",
               canGoBack ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed"
             )}
           >
@@ -60,7 +60,7 @@ export function Toolbar() {
             onClick={navigateForward}
             disabled={!canGoForward}
             className={cn(
-              "p-1.5 rounded-lg transition-colors",
+              "p-1.5 rounded-os transition-colors",
               canGoForward ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed"
             )}
           >
@@ -70,7 +70,7 @@ export function Toolbar() {
             onClick={navigateUp}
             disabled={!canGoUp}
             className={cn(
-              "p-1.5 rounded-lg transition-colors",
+              "p-1.5 rounded-os transition-colors",
               canGoUp ? "text-os-text-muted hover:text-os-text hover:bg-white/10" : "text-os-text-muted/30 cursor-not-allowed"
             )}
           >
@@ -80,11 +80,11 @@ export function Toolbar() {
         
         {/* Breadcrumbs simplified as just the folder name for now, or address bar style */}
         <div className="hidden sm:flex items-center ml-2">
-          <div className="bg-black/40 border border-os-window-border rounded-md px-3 py-1.5 text-xs text-os-text flex items-center min-w-[200px] max-w-[400px]">
+          <div className="bg-black/40 border border-os-window-border rounded-os px-3 py-1.5 text-xs text-os-text flex items-center min-w-[200px] max-w-[400px]">
             {currentFolder?.name || currentFolderId}
           </div>
           {isAuthenticated && (
-            <button className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors">
+            <button className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-os text-xs font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors">
               <Upload size={14} /> Upload
             </button>
           )}
@@ -92,7 +92,7 @@ export function Toolbar() {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
-        <div className="hidden lg:flex items-center bg-black/40 border border-os-window-border rounded-lg p-1">
+        <div className="hidden lg:flex items-center bg-black/40 border border-os-window-border rounded-os p-1">
           {viewModes.map(mode => {
             const Icon = mode.icon;
             return (
@@ -101,8 +101,8 @@ export function Toolbar() {
                 onClick={() => setViewMode(mode.id)}
                 title={mode.label}
                 className={cn(
-                  "p-1.5 rounded-md transition-colors",
-                  viewMode === mode.id ? "bg-os-accent text-white shadow-sm" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
+                  "p-1.5 rounded-os transition-colors",
+                  viewMode === mode.id ? "bg-os-accent text-white shadow-os" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
                 )}
               >
                 <Icon size={14} />
@@ -114,7 +114,7 @@ export function Toolbar() {
             onClick={() => setShowHiddenFiles(!showHiddenFiles)}
             title={showHiddenFiles ? "Hide Hidden Files" : "Show Hidden Files"}
             className={cn(
-              "p-1.5 rounded-md transition-colors",
+              "p-1.5 rounded-os transition-colors",
               showHiddenFiles ? "text-os-accent hover:bg-white/5" : "text-os-text-muted hover:text-os-text hover:bg-white/5"
             )}
           >

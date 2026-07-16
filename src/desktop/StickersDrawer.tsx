@@ -29,7 +29,7 @@ export function StickersDrawer() {
     <div className="absolute right-4 bottom-16 z-50 flex flex-col items-end pointer-events-none">
       <div 
         className={cn(
-          "bg-os-window-bg/90 backdrop-blur-md border border-os-window-border rounded-xl shadow-xl overflow-hidden transition-all duration-300 mb-4 pointer-events-auto",
+          "bg-os-window-bg/90 backdrop-blur-os-os-os border border-os-window-border rounded-os shadow-os overflow-hidden transition-all duration-300 mb-4 pointer-events-auto",
           isOpen ? "w-64 max-h-96 opacity-100" : "w-0 max-h-0 opacity-0 border-none"
         )}
       >
@@ -59,7 +59,7 @@ export function StickersDrawer() {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-10 h-10 rounded-full bg-os-accent hover:bg-os-accent-hover text-white flex items-center justify-center shadow-lg pointer-events-auto transition-transform hover:scale-105 active:scale-95"
+        className="w-10 h-10 rounded-full bg-os-accent hover:bg-os-accent-hover text-white flex items-center justify-center shadow-os pointer-events-auto transition-transform hover:scale-105 active:scale-95"
       >
         <StickerIcon size={20} />
       </button>

@@ -46,29 +46,29 @@ export function ArticleList() {
             <div
               key={article.id}
               className={cn(
-                "group relative cursor-pointer rounded-xl border border-os-window-border bg-os-titlebar-bg/30 overflow-hidden transition-all hover:bg-os-titlebar-bg/80 hover:border-os-accent/50 flex flex-col h-full",
+                "group relative cursor-pointer rounded-os border border-os-window-border bg-os-titlebar-bg/30 overflow-hidden transition-all hover:bg-os-titlebar-bg/80 hover:border-os-accent/50 flex flex-col h-full",
                 activeArticleId === article.id && "border-os-accent shadow-[0_0_15px_rgba(var(--os-accent),0.2)]",
                 article.status === 'draft' && "opacity-80"
               )}
             >
               {isAuthenticated && (
-                <div className="absolute top-2 right-2 z-10 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 backdrop-blur-sm rounded-lg p-1 border border-white/10">
-                  <button onClick={(e) => { e.stopPropagation(); startEditing(article.id); }} className="p-1.5 hover:bg-white/20 rounded-md text-white transition-colors" title="Edit">
+                <div className="absolute top-2 right-2 z-10 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 backdrop-blur-os-os-os rounded-os p-1 border border-white/10">
+                  <button onClick={(e) => { e.stopPropagation(); startEditing(article.id); }} className="p-1.5 hover:bg-white/20 rounded-os text-white transition-colors" title="Edit">
                     <Edit2 size={14} />
                   </button>
-                  <button onClick={(e) => { e.stopPropagation(); duplicateArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-md text-white transition-colors" title="Duplicate">
+                  <button onClick={(e) => { e.stopPropagation(); duplicateArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-os text-white transition-colors" title="Duplicate">
                     <Copy size={14} />
                   </button>
                   {article.status !== 'archived' ? (
-                    <button onClick={(e) => { e.stopPropagation(); archiveArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-md text-white transition-colors" title="Archive">
+                    <button onClick={(e) => { e.stopPropagation(); archiveArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-os text-white transition-colors" title="Archive">
                       <Archive size={14} />
                     </button>
                   ) : (
-                    <button onClick={(e) => { e.stopPropagation(); restoreArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-md text-white transition-colors" title="Restore">
+                    <button onClick={(e) => { e.stopPropagation(); restoreArticle(article.id); }} className="p-1.5 hover:bg-white/20 rounded-os text-white transition-colors" title="Restore">
                       <Globe size={14} />
                     </button>
                   )}
-                  <button onClick={(e) => { e.stopPropagation(); deleteArticle(article.id); }} className="p-1.5 hover:bg-red-500/80 rounded-md text-white transition-colors" title="Delete">
+                  <button onClick={(e) => { e.stopPropagation(); deleteArticle(article.id); }} className="p-1.5 hover:bg-red-500/80 rounded-os text-white transition-colors" title="Delete">
                     <Trash2 size={14} />
                   </button>
                 </div>

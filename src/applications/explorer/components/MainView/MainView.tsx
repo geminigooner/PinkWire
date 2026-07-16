@@ -113,7 +113,7 @@ export function MainView() {
               onDoubleClick={() => handleDoubleClick(file)}
               onContextMenu={(e) => handleContextMenu(e, file)}
               className={cn(
-                "flex flex-col items-center gap-2 p-2 rounded-lg cursor-default select-none border transition-colors",
+                "flex flex-col items-center gap-2 p-2 rounded-os cursor-default select-none border transition-colors",
                 isSelected 
                   ? "bg-os-accent/20 border-os-accent/40" 
                   : "border-transparent hover:bg-white/5"
@@ -159,7 +159,7 @@ export function MainView() {
               onDoubleClick={() => handleDoubleClick(file)}
               onContextMenu={(e) => handleContextMenu(e, file)}
               className={cn(
-                "flex items-center gap-3 px-3 py-1.5 rounded-lg cursor-default select-none transition-colors",
+                "flex items-center gap-3 px-3 py-1.5 rounded-os cursor-default select-none transition-colors",
                 isDetails ? "grid grid-cols-[2fr_1fr_1fr_1fr] gap-4" : "",
                 isSelected 
                   ? "bg-os-accent/20 text-os-accent" 
@@ -224,7 +224,7 @@ export function MainView() {
             onContextMenu={(e) => { e.preventDefault(); setContextMenu(null); }}
           />
           <div 
-            className="fixed z-50 w-48 bg-os-window-bg/95 backdrop-blur-xl border border-os-window-border rounded-lg shadow-xl py-1"
+            className="fixed z-50 w-48 bg-os-window-bg/95 backdrop-blur-os-os-os border border-os-window-border rounded-os shadow-os py-1"
             style={{ 
               left: Math.min(contextMenu.x, window.innerWidth - 192), 
               top: Math.min(contextMenu.y, window.innerHeight - 200) 
@@ -269,10 +269,10 @@ export function MainView() {
 
       {/* Properties Modal */}
       {propertiesModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-os-window-bg border border-os-window-border rounded-xl shadow-2xl w-full max-w-sm overflow-hidden flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-os-os-os p-4">
+          <div className="bg-os-window-bg border border-os-window-border rounded-os shadow-os w-full max-w-sm overflow-hidden flex flex-col">
             <div className="px-4 py-3 border-b border-os-window-border bg-os-titlebar-bg/50 flex items-center gap-3">
-              <div className="p-2 bg-os-accent/20 rounded-lg">
+              <div className="p-2 bg-os-accent/20 rounded-os">
                 {(() => {
                   const Icon = getFileIcon(propertiesModal);
                   return <Icon size={20} className="text-os-accent" />;
@@ -308,7 +308,7 @@ export function MainView() {
               {propertiesModal.properties?.previousNames && propertiesModal.properties.previousNames.length > 0 && (
                 <div className="border-t border-os-window-border/50 pt-4">
                   <span className="text-os-text-muted block mb-2">Previous Names:</span>
-                  <div className="bg-black/30 border border-os-window-border/50 rounded-md p-2 space-y-1">
+                  <div className="bg-black/30 border border-os-window-border/50 rounded-os p-2 space-y-1">
                     {propertiesModal.properties.previousNames.map((name, idx) => (
                       <div key={idx} className="text-os-text text-xs opacity-80 pl-2 border-l-2 border-os-window-border/50">
                         {name}
@@ -322,7 +322,7 @@ export function MainView() {
             <div className="px-4 py-3 border-t border-os-window-border bg-os-titlebar-bg/30 flex justify-end">
               <button 
                 onClick={() => setPropertiesModal(null)}
-                className="px-4 py-1.5 bg-white/10 hover:bg-white/20 text-os-text rounded-lg transition-colors text-sm font-medium"
+                className="px-4 py-1.5 bg-white/10 hover:bg-white/20 text-os-text rounded-os transition-colors text-sm font-medium"
               >
                 Close
               </button>

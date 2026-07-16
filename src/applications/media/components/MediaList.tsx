@@ -25,11 +25,11 @@ export function MediaList({ items }: { items: MediaItem[] }) {
         {items.map(item => (
           <div 
             key={item.id} 
-            className="flex items-center gap-4 bg-black/40 border border-os-window-border rounded-xl p-2 cursor-pointer hover:border-os-accent/50 hover:bg-black/60 transition-colors shadow-sm"
+            className="flex items-center gap-4 bg-black/40 border border-os-window-border rounded-os p-2 cursor-pointer hover:border-os-accent/50 hover:bg-black/60 transition-colors shadow-os"
             onClick={() => setSelectedItem(item)}
             onDoubleClick={() => useWindowStore.getState().openWindow('disposable', { imageUrl: item.url })}
           >
-            <div className="w-16 h-16 shrink-0 bg-black/50 rounded-lg flex items-center justify-center overflow-hidden border border-white/5">
+            <div className="w-16 h-16 shrink-0 bg-black/50 rounded-os flex items-center justify-center overflow-hidden border border-white/5">
               {item.url ? (
                 <img src={item.url} alt={item.displayName} className="w-full h-full object-cover" loading="lazy" />
               ) : (

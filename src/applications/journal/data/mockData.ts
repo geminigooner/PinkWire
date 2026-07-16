@@ -40,7 +40,7 @@ We chose a glossy, premium UI style, moving away from flat design and embracing:
 
 Here is some of the code for the windows:
 \`\`\`tsx
-<div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl">
+<div className="bg-black/40 backdrop-blur-os-os-os border border-white/10 rounded-os shadow-os">
   {children}
 </div>
 \`\`\`

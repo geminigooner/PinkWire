@@ -29,12 +29,12 @@ export function AboutSettings() {
   return (
     <div className="p-4 sm:p-8 max-w-4xl mx-auto space-y-8 sm:space-y-12">
       <div className="text-center mb-12">
-        <div className="w-24 h-24 mx-auto bg-gradient-to-tr from-os-accent to-purple-500 rounded-2xl shadow-xl flex items-center justify-center mb-6 cursor-help transition-transform hover:scale-105 active:scale-95" onDoubleClick={() => {
+        <div className="w-24 h-24 mx-auto bg-gradient-to-tr from-os-accent to-purple-500 rounded-os shadow-os flex items-center justify-center mb-6 cursor-help transition-transform hover:scale-105 active:scale-95" onDoubleClick={() => {
           import('../../../store/useAchievementStore').then(({ useAchievementStore }) => {
             useAchievementStore.getState().unlockAchievement('visited_three_days'); // Fun shortcut trigger
           }).catch(e => console.error(e));
         }}>
-          <Monitor size={48} className="text-white drop-shadow-md" />
+          <Monitor size={48} className="text-white drop-shadow-os" />
         </div>
         <h1 className="text-4xl font-light tracking-tight mb-2">PinkWire OS</h1>
         <p className="text-os-text-muted">Version 2.4.1 (Stable)</p>
@@ -43,7 +43,7 @@ export function AboutSettings() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <div className="bg-black/20 border border-os-window-border rounded-xl p-6 backdrop-blur-sm shadow-inner">
+        <div className="bg-black/20 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os shadow-os">
           <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider flex items-center gap-2">
             <Cpu size={16} /> System Status
           </h3>
@@ -69,7 +69,7 @@ export function AboutSettings() {
           </div>
         </div>
 
-        <div className="bg-black/20 border border-os-window-border rounded-xl p-6 backdrop-blur-sm shadow-inner">
+        <div className="bg-black/20 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os shadow-os">
           <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider flex items-center gap-2">
             <Package size={16} /> Configuration
           </h3>
@@ -104,7 +104,7 @@ export function AboutSettings() {
           </div>
         </div>
         
-        <div className="md:col-span-2 bg-black/20 border border-os-window-border rounded-xl p-6 backdrop-blur-sm shadow-inner text-center space-y-4">
+        <div className="md:col-span-2 bg-black/20 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os shadow-os text-center space-y-4">
           <h3 className="text-sm font-medium text-os-text-muted uppercase tracking-wider flex items-center justify-center gap-2">
             <Heart size={16} className="text-os-accent" /> Credits
           </h3>

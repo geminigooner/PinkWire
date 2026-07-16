@@ -16,11 +16,11 @@ export function VisitorProfile() {
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6">
       <div 
-        className="absolute inset-0 bg-[#4a3f3a]/20 backdrop-blur-sm"
+        className="absolute inset-0 bg-[#4a3f3a]/20 backdrop-blur-os-os-os"
         onClick={() => setSelectedVisitorId(null)}
       />
       
-      <div className="bg-[#f8f4f0] border border-[#eaddd7] rounded-3xl shadow-xl w-full max-w-sm relative z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-[#f8f4f0] border border-[#eaddd7] rounded-3xl shadow-os w-full max-w-sm relative z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         <div 
           className="h-24 w-full opacity-50"
           style={{ backgroundColor: visitor.favoriteColor || '#cf8c8c' }}
@@ -36,9 +36,9 @@ export function VisitorProfile() {
         <div className="px-6 pb-6 relative">
           <div className="-mt-12 mb-4">
             {visitor.avatar ? (
-              <img src={visitor.avatar} alt={visitor.displayName} className="w-24 h-24 rounded-full object-cover ring-4 ring-[#f8f4f0] bg-white shadow-sm" />
+              <img src={visitor.avatar} alt={visitor.displayName} className="w-24 h-24 rounded-full object-cover ring-4 ring-[#f8f4f0] bg-white shadow-os" />
             ) : (
-              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-[#cf8c8c] font-medium text-3xl ring-4 ring-[#f8f4f0] shadow-sm">
+              <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-[#cf8c8c] font-medium text-3xl ring-4 ring-[#f8f4f0] shadow-os">
                 {visitor.displayName.charAt(0).toUpperCase()}
               </div>
             )}

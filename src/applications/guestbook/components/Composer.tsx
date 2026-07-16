@@ -97,11 +97,11 @@ export function Composer() {
   };
 
   return (
-    <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-sm">
+    <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-os">
       <h3 className="font-serif font-medium text-[#4a3f3a] text-xl mb-6">Sign the Guestbook</h3>
       
       {error && (
-        <div className="mb-6 p-4 rounded-xl bg-red-50 text-red-600 text-sm flex items-start gap-3">
+        <div className="mb-6 p-4 rounded-os bg-red-50 text-red-600 text-sm flex items-start gap-3">
           <AlertCircle size={16} className="mt-0.5 shrink-0" />
           <p>{error}</p>
         </div>
@@ -117,7 +117,7 @@ export function Composer() {
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="How should we call you?"
               maxLength={50}
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-xl px-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os px-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>
@@ -154,7 +154,7 @@ export function Composer() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Leave a friendly note..."
             rows={4}
-            className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-xl px-4 py-3 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-serif resize-none"
+            className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os px-4 py-3 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-serif resize-none"
             disabled={isSubmitting}
           />
         </div>
@@ -168,7 +168,7 @@ export function Composer() {
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Where are you from?"
               maxLength={100}
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>
@@ -180,7 +180,7 @@ export function Composer() {
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               placeholder="Your website (https://...)"
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-xl pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>

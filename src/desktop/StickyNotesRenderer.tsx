@@ -29,7 +29,7 @@ function StickyNote({ note }: { note: StickyNoteState }) {
       initial={false}
       animate={{ x: note.x, y: note.y }}
       className={cn(
-        "absolute w-48 min-h-[160px] p-4 shadow-xl cursor-default flex flex-col font-handwriting rotate-[-1deg]",
+        "absolute w-48 min-h-[160px] p-4 shadow-os cursor-default flex flex-col font-handwriting rotate-[-1deg]",
         note.color
       )}
       style={{ 

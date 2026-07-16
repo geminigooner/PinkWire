@@ -20,7 +20,7 @@ export function MainPanel() {
   if (!conversation) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center bg-black/20 text-os-text-muted">
-        <div className="w-16 h-16 rounded-2xl bg-os-window-bg border border-os-window-border flex items-center justify-center mb-4 shadow-lg">
+        <div className="w-16 h-16 rounded-os bg-os-window-bg border border-os-window-border flex items-center justify-center mb-4 shadow-os">
           <Hash size={32} className="text-os-accent/50" />
         </div>
         <p>Select a conversation to start reading.</p>
@@ -77,7 +77,7 @@ export function MainPanel() {
 
       {/* Input area (disabled for phase 4) */}
       <div className="p-4 border-t border-os-window-border bg-os-titlebar-bg/30">
-        <div className="bg-black/40 border border-os-window-border rounded-lg p-3 text-sm text-os-text-muted/50 cursor-not-allowed">
+        <div className="bg-black/40 border border-os-window-border rounded-os p-3 text-sm text-os-text-muted/50 cursor-not-allowed">
           Viewing conversation history...
         </div>
       </div>

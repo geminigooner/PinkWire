@@ -1,4 +1,4 @@
-import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart, Lock, Film } from 'lucide-react';
+import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart, Lock, Film, Monitor } from 'lucide-react';
 import { AppDefinition } from '../types/os';
 
 // Exclude component from AppDefinition for metadata

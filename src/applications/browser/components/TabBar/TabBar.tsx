@@ -29,7 +29,7 @@ export function TabBar() {
             
             <button
               onClick={(e) => { e.stopPropagation(); closeTab(tab.id); }}
-              className="shrink-0 p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all ml-1"
+              className="shrink-0 p-1 rounded-os opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all ml-1"
             >
               <X size={12} />
             </button>
@@ -39,7 +39,7 @@ export function TabBar() {
       
       <button
         onClick={() => createTab()}
-        className="shrink-0 p-1.5 ml-1 rounded-lg text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
+        className="shrink-0 p-1.5 ml-1 rounded-os text-os-text-muted hover:text-os-text hover:bg-white/10 transition-colors"
       >
         <Plus size={16} />
       </button>

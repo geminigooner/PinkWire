@@ -7,11 +7,11 @@ export function Toolbar() {
   const { searchQuery, setSearchQuery, sortOrder, setSortOrder, toggleSidebar } = useGuestbookStore();
 
   return (
-    <div className="h-14 px-4 border-b border-[#eaddd7] bg-[#f8f4f0]/80 backdrop-blur-md flex items-center justify-between shrink-0 z-10">
+    <div className="h-14 px-4 border-b border-[#eaddd7] bg-[#f8f4f0]/80 backdrop-blur-os-os-os flex items-center justify-between shrink-0 z-10">
       <div className="flex items-center gap-2">
         <button 
           onClick={toggleSidebar}
-          className="md:hidden p-1.5 -ml-2 text-[#a3948e] hover:bg-[#f0e6e2] hover:text-[#4a3f3a] rounded-lg transition-colors"
+          className="md:hidden p-1.5 -ml-2 text-[#a3948e] hover:bg-[#f0e6e2] hover:text-[#4a3f3a] rounded-os transition-colors"
         >
           <Menu size={20} />
         </button>
@@ -33,21 +33,21 @@ export function Toolbar() {
         <div className="flex items-center gap-1 sm:border-l sm:border-[#eaddd7] sm:pl-4">
           <button 
             onClick={() => setSortOrder('newest')}
-            className={cn("p-1.5 rounded-lg transition-colors", sortOrder === 'newest' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
+            className={cn("p-1.5 rounded-os transition-colors", sortOrder === 'newest' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
             title="Sort Newest First"
           >
             <SortDesc size={18} />
           </button>
           <button 
             onClick={() => setSortOrder('oldest')}
-            className={cn("p-1.5 rounded-lg transition-colors", sortOrder === 'oldest' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
+            className={cn("p-1.5 rounded-os transition-colors", sortOrder === 'oldest' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
             title="Sort Oldest First"
           >
             <SortAsc size={18} />
           </button>
           <button 
             onClick={() => setSortOrder('alphabetical')}
-            className={cn("p-1.5 rounded-lg transition-colors", sortOrder === 'alphabetical' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
+            className={cn("p-1.5 rounded-os transition-colors", sortOrder === 'alphabetical' ? "bg-[#f0e6e2] text-[#4a3f3a]" : "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50")}
             title="Sort Alphabetical"
           >
             <Filter size={18} />

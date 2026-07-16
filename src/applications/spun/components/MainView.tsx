@@ -29,11 +29,11 @@ export function MainView() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
               {tracks.map(track => (
-                <div key={track.id} className="bg-[#181818] rounded-md p-3 md:p-4 hover:bg-[#282828] transition-colors group cursor-pointer" onClick={() => playTrack(track, tracks)}>
+                <div key={track.id} className="bg-[#181818] rounded-os p-3 md:p-4 hover:bg-[#282828] transition-colors group cursor-pointer" onClick={() => playTrack(track, tracks)}>
                   <div className="relative aspect-square mb-3 md:mb-4">
-                    <img src={track.coverArt} alt={track.title} className="w-full h-full object-cover rounded-md shadow-md" />
+                    <img src={track.coverArt} alt={track.title} className="w-full h-full object-cover rounded-os shadow-os" />
                     <button 
-                      className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-os-accent text-white flex items-center justify-center shadow-lg opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity translate-y-0 md:translate-y-2 md:group-hover:translate-y-0"
+                      className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-os-accent text-white flex items-center justify-center shadow-os opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity translate-y-0 md:translate-y-2 md:group-hover:translate-y-0"
                       onClick={(e) => {
                         e.stopPropagation();
                         playTrack(track, tracks);
@@ -69,7 +69,7 @@ export function MainView() {
 
   return (
     <div className="flex-1 bg-[#121212] overflow-y-auto flex flex-col min-h-0 relative">
-      <div className="sticky top-0 z-10 bg-[#121212]/90 backdrop-blur flex items-center p-4 border-b border-transparent md:hidden">
+      <div className="sticky top-0 z-10 bg-[#121212]/90 backdrop-blur-os-os flex items-center p-4 border-b border-transparent md:hidden">
         <button 
           onClick={toggleSidebar}
           className="p-2 -ml-2 text-white hover:bg-white/10 rounded-full transition-colors"

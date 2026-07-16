@@ -38,7 +38,7 @@ export function StickersRenderer() {
             e.stopPropagation();
             setDraggedSticker(sticker.id);
           }}
-          className="absolute cursor-grab active:cursor-grabbing text-4xl select-none pointer-events-auto filter drop-shadow-md"
+          className="absolute cursor-grab active:cursor-grabbing text-4xl select-none pointer-events-auto filter drop-shadow-os"
           style={{
             transform: `translate(${sticker.x}px, ${sticker.y}px) rotate(${sticker.rotation}deg) scale(${sticker.scale})`,
             touchAction: 'none'

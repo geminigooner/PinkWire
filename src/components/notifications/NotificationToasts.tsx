@@ -75,15 +75,15 @@ export function NotificationToasts() {
                   dismissToast(toast.id);
                 }
               }}
-              className="pointer-events-auto w-full max-w-sm bg-os-window-bg/90 backdrop-blur-xl border border-os-window-border shadow-2xl rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:bg-os-window-bg transition-colors"
+              className="pointer-events-auto w-full max-w-sm bg-os-window-bg/90 backdrop-blur-os-os-os border border-os-window-border shadow-os rounded-os overflow-hidden flex flex-col cursor-pointer hover:bg-os-window-bg transition-colors"
               onClick={() => handleToastClick(toast)}
             >
               <div className="flex items-start gap-3 p-4">
                 {toast.imageUrl ? (
-                  <img src={toast.imageUrl} alt="" className="w-10 h-10 rounded-lg object-cover shadow-sm bg-black/20" />
+                  <img src={toast.imageUrl} alt="" className="w-10 h-10 rounded-os object-cover shadow-os bg-black/20" />
                 ) : (
                   <div className={cn(
-                    "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border shadow-inner",
+                    "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border shadow-os",
                     toast.type === 'success' ? "bg-emerald-500/20 text-emerald-500 border-emerald-500/30" :
                     toast.type === 'error' ? "bg-red-500/20 text-red-500 border-red-500/30" :
                     toast.type === 'warning' ? "bg-amber-500/20 text-amber-500 border-amber-500/30" :
@@ -104,7 +104,7 @@ export function NotificationToasts() {
                     e.stopPropagation();
                     dismissToast(toast.id);
                   }}
-                  className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-lg transition-colors shrink-0 -mt-1 -mr-1"
+                  className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-os transition-colors shrink-0 -mt-1 -mr-1"
                 >
                   <X size={16} />
                 </button>
@@ -116,7 +116,7 @@ export function NotificationToasts() {
                     <button
                       key={action.actionId}
                       onClick={(e) => handleActionClick(toast, action.actionId, e)}
-                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-xs font-medium text-os-text rounded-lg transition-colors border border-white/5"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-xs font-medium text-os-text rounded-os transition-colors border border-white/5"
                     >
                       {action.label}
                     </button>

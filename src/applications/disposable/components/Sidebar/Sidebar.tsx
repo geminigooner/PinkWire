@@ -29,7 +29,7 @@ export function Sidebar() {
                 key={album.id}
                 onClick={() => setCurrentAlbum(album.id)}
                 className={cn(
-                  "w-full flex items-center gap-3 px-3 py-1.5 rounded-md text-sm transition-colors",
+                  "w-full flex items-center gap-3 px-3 py-1.5 rounded-os text-sm transition-colors",
                   currentAlbumId === album.id 
                     ? "bg-os-accent text-white" 
                     : "text-os-text hover:bg-white/10"
@@ -54,7 +54,7 @@ export function Sidebar() {
                 key={album.id}
                 onClick={() => setCurrentAlbum(album.id)}
                 className={cn(
-                  "w-full flex items-center gap-3 px-3 py-1.5 rounded-md text-sm transition-colors",
+                  "w-full flex items-center gap-3 px-3 py-1.5 rounded-os text-sm transition-colors",
                   currentAlbumId === album.id 
                     ? "bg-os-accent text-white" 
                     : "text-os-text hover:bg-white/10"

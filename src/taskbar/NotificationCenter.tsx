@@ -31,7 +31,7 @@ export function NotificationCenter() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "h-9 px-3 flex items-center justify-center rounded-lg transition-colors relative",
+          "h-9 px-3 flex items-center justify-center rounded-os transition-colors relative",
           isOpen ? "bg-white/10 text-os-text" : "text-os-text-muted hover:text-os-text hover:bg-white/10"
         )}
       >
@@ -53,7 +53,7 @@ export function NotificationCenter() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="fixed sm:absolute bottom-14 sm:bottom-12 left-2 right-2 sm:left-auto sm:right-2 sm:w-96 bg-os-window-bg/95 backdrop-blur-2xl border border-os-window-border sm:rounded-2xl shadow-2xl z-50 flex flex-col max-h-[80vh] sm:max-h-[32rem] rounded-xl overflow-hidden pointer-events-auto"
+              className="fixed sm:absolute bottom-14 sm:bottom-12 left-2 right-2 sm:left-auto sm:right-2 sm:w-96 bg-os-window-bg/95 backdrop-blur-os-os-os border border-os-window-border sm:rounded-os shadow-os z-50 flex flex-col max-h-[80vh] sm:max-h-[32rem] rounded-os overflow-hidden pointer-events-auto"
             >
               <div className="p-4 border-b border-os-window-border flex items-center justify-between bg-black/10">
                 <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export function NotificationCenter() {
                   <button
                     onClick={toggleQuietMode}
                     className={cn(
-                      "p-1.5 rounded-md transition-colors",
+                      "p-1.5 rounded-os transition-colors",
                       quietMode ? "bg-os-accent/20 text-os-accent" : "text-os-text-muted hover:text-os-text hover:bg-white/10"
                     )}
                     title="Quiet Mode"
@@ -79,14 +79,14 @@ export function NotificationCenter() {
                     <>
                       <button 
                         onClick={markAllAsRead}
-                        className="p-1.5 text-os-text-muted hover:text-os-text transition-colors rounded-md hover:bg-white/10"
+                        className="p-1.5 text-os-text-muted hover:text-os-text transition-colors rounded-os hover:bg-white/10"
                         title="Mark all as read"
                       >
                         <CheckCircle2 size={14} />
                       </button>
                       <button 
                         onClick={clearAll}
-                        className="p-1.5 text-os-text-muted hover:text-os-text transition-colors rounded-md hover:bg-white/10"
+                        className="p-1.5 text-os-text-muted hover:text-os-text transition-colors rounded-os hover:bg-white/10"
                         title="Clear all"
                       >
                         <X size={14} />
@@ -111,17 +111,17 @@ export function NotificationCenter() {
                       <div 
                         key={n.id}
                         className={cn(
-                          "p-3 rounded-xl border relative group transition-colors flex gap-3",
+                          "p-3 rounded-os border relative group transition-colors flex gap-3",
                           !n.read ? "bg-white/5 border-white/10" : "bg-black/20 border-transparent",
                           n.onClickApp ? "cursor-pointer hover:bg-white/10" : ""
                         )}
                         onClick={() => handleNotificationClick(n.onClickApp, n.id)}
                       >
                         {n.imageUrl ? (
-                          <img src={n.imageUrl} alt="" className="w-10 h-10 rounded-lg object-cover shadow-sm bg-black/20 shrink-0" />
+                          <img src={n.imageUrl} alt="" className="w-10 h-10 rounded-os object-cover shadow-os bg-black/20 shrink-0" />
                         ) : (
                           <div className={cn(
-                            "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border shadow-inner",
+                            "w-10 h-10 rounded-full flex items-center justify-center shrink-0 border shadow-os",
                             n.type === 'success' ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20" :
                             n.type === 'error' ? "bg-red-500/10 text-red-500 border-red-500/20" :
                             n.type === 'warning' ? "bg-amber-500/10 text-amber-500 border-amber-500/20" :
@@ -144,7 +144,7 @@ export function NotificationCenter() {
 
                         <button
                           onClick={(e) => { e.stopPropagation(); removeNotification(n.id); }}
-                          className="absolute top-3 right-3 p-1.5 text-os-text-muted hover:text-os-text opacity-0 group-hover:opacity-100 transition-opacity rounded-lg hover:bg-white/10"
+                          className="absolute top-3 right-3 p-1.5 text-os-text-muted hover:text-os-text opacity-0 group-hover:opacity-100 transition-opacity rounded-os hover:bg-white/10"
                         >
                           <X size={14} />
                         </button>

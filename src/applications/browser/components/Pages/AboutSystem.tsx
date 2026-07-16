@@ -8,7 +8,7 @@ export function AboutSystem() {
       <div className="space-y-6">
         <section>
           <h2 className="text-os-accent mb-2">OS Information</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-lg shadow-inner">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-os shadow-os">
             <div className="text-os-text-muted">OS Name</div>
             <div className="col-span-1 sm:col-span-2">PinkWire OS</div>
             
@@ -28,7 +28,7 @@ export function AboutSystem() {
 
         <section>
           <h2 className="text-os-accent mb-2">Browser Engine</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-lg shadow-inner">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-os shadow-os">
             <div className="text-os-text-muted">Name</div>
             <div className="col-span-1 sm:col-span-2">Internet ExplAmanda</div>
             
@@ -42,7 +42,7 @@ export function AboutSystem() {
         
         <section>
           <h2 className="text-os-accent mb-2">Storage</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-lg shadow-inner">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm bg-black/40 p-4 border border-os-window-border rounded-os shadow-os">
             <div className="text-os-text-muted">Total Space</div>
             <div className="col-span-1 sm:col-span-2">4.0 TB</div>
             

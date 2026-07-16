@@ -68,8 +68,8 @@ export function WindowNode({ id }: { id: string }) {
       onPointerDown={() => focusWindow(id)}
       style={{ zIndex, position: 'absolute', top: 0, left: 0 }}
       className={cn(
-        "flex flex-col bg-os-window-bg backdrop-blur-md overflow-hidden pointer-events-auto",
-        !isMaximized && "rounded-xl border shadow-2xl",
+        "flex flex-col bg-os-window-bg backdrop-blur-os-os-os overflow-hidden pointer-events-auto",
+        !isMaximized && "rounded-os border shadow-os",
         !isMaximized && isFocused ? "border-os-accent/50 shadow-os-accent/20" : (!isMaximized && "border-os-window-border shadow-black/50")
       )}
     >
@@ -92,15 +92,15 @@ export function WindowNode({ id }: { id: string }) {
            <span className="text-sm font-medium text-os-text">{windowState.title}</span>
         </div>
         <div className="flex items-center gap-2">
-          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => minimizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors" aria-label="Minimize">
+          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => minimizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-os transition-colors" aria-label="Minimize">
             <Minus size={14} />
           </button>
           {isResizable && (
-            <button onPointerDown={(e) => e.stopPropagation()} onClick={() => toggleMaximizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-md transition-colors" aria-label="Maximize">
+            <button onPointerDown={(e) => e.stopPropagation()} onClick={() => toggleMaximizeWindow(id)} className="p-1.5 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-os transition-colors" aria-label="Maximize">
               <Square size={12} />
             </button>
           )}
-          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => closeWindow(id)} className="p-1.5 text-os-text-muted hover:text-white hover:bg-red-500 rounded-md transition-colors" aria-label="Close">
+          <button onPointerDown={(e) => e.stopPropagation()} onClick={() => closeWindow(id)} className="p-1.5 text-os-text-muted hover:text-white hover:bg-red-500 rounded-os transition-colors" aria-label="Close">
             <X size={14} />
           </button>
         </div>

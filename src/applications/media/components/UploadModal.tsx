@@ -179,14 +179,14 @@ export function UploadModal({ onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-os-window-bg border border-os-window-border rounded-xl shadow-2xl w-full max-w-xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-os-os-os animate-in fade-in duration-200">
+      <div className="bg-os-window-bg border border-os-window-border rounded-os shadow-os w-full max-w-xl overflow-hidden flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-os-window-border bg-os-titlebar-bg/50">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <UploadCloud size={20} className="text-os-accent" />
             Upload Media
           </h2>
-          <button onClick={onClose} disabled={isUploading} className="p-1 hover:bg-white/10 rounded-lg transition-colors">
+          <button onClick={onClose} disabled={isUploading} className="p-1 hover:bg-white/10 rounded-os transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -204,7 +204,7 @@ export function UploadModal({ onClose }: Props) {
             <div 
               onDragOver={handleDragOver}
               onDrop={handleDrop}
-              className="border-2 border-dashed border-os-window-border hover:border-os-accent/50 rounded-xl p-12 flex flex-col items-center justify-center text-center transition-colors cursor-pointer bg-black/20"
+              className="border-2 border-dashed border-os-window-border hover:border-os-accent/50 rounded-os p-12 flex flex-col items-center justify-center text-center transition-colors cursor-pointer bg-black/20"
               onClick={() => fileInputRef.current?.click()}
             >
               <UploadCloud size={48} className="text-os-text-muted mb-4" />
@@ -225,13 +225,13 @@ export function UploadModal({ onClose }: Props) {
           ) : (
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row gap-6">
-                <div className="w-full sm:w-1/3 aspect-square bg-black/40 rounded-xl border border-os-window-border overflow-hidden relative group">
+                <div className="w-full sm:w-1/3 aspect-square bg-black/40 rounded-os border border-os-window-border overflow-hidden relative group">
                   <img src={previewUrl!} alt="Preview" className="w-full h-full object-cover" />
                   <button 
                     onClick={() => setFile(null)}
                     className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <span className="text-sm font-medium bg-red-500/80 px-3 py-1.5 rounded-lg text-white flex items-center gap-2">
+                    <span className="text-sm font-medium bg-red-500/80 px-3 py-1.5 rounded-os text-white flex items-center gap-2">
                       <X size={16} /> Remove
                     </span>
                   </button>
@@ -244,7 +244,7 @@ export function UploadModal({ onClose }: Props) {
                       type="text"
                       value={displayName}
                       onChange={e => setDisplayName(e.target.value)}
-                      className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
+                      className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
                       placeholder="Give it a nice name"
                     />
                   </div>
@@ -254,7 +254,7 @@ export function UploadModal({ onClose }: Props) {
                     <select
                       value={category}
                       onChange={e => setCategory(e.target.value as MediaCategory)}
-                      className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 appearance-none"
+                      className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 appearance-none"
                     >
                       {CATEGORIES.map(cat => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -270,7 +270,7 @@ export function UploadModal({ onClose }: Props) {
                   type="text"
                   value={tags}
                   onChange={e => setTags(e.target.value)}
-                  className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
+                  className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50"
                   placeholder="e.g. funny, reaction, 2026"
                 />
               </div>
@@ -280,7 +280,7 @@ export function UploadModal({ onClose }: Props) {
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
-                  className="w-full bg-black/40 border border-os-window-border rounded-lg px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 resize-none h-24"
+                  className="w-full bg-black/40 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 resize-none h-24"
                   placeholder="Context, origins, or notes..."
                 />
               </div>
@@ -288,7 +288,7 @@ export function UploadModal({ onClose }: Props) {
           )}
           
           {error && (
-            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-3 text-red-400 text-sm">
+            <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded-os flex items-center gap-3 text-red-400 text-sm">
               <AlertCircle size={16} className="shrink-0" />
               <p>{error}</p>
             </div>
@@ -315,14 +315,14 @@ export function UploadModal({ onClose }: Props) {
               <button 
                 onClick={onClose}
                 disabled={isUploading}
-                className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                className="flex-1 sm:flex-none px-4 py-2 bg-white/5 hover:bg-white/10 text-os-text rounded-os text-sm font-medium transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>
               <button 
                 onClick={handleUpload}
                 disabled={isUploading || !file}
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2 bg-os-accent hover:bg-os-accent/90 text-white rounded-lg text-sm font-medium transition-colors shadow-sm disabled:opacity-50"
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2 bg-os-accent hover:bg-os-accent/90 text-white rounded-os text-sm font-medium transition-colors shadow-os disabled:opacity-50"
               >
                 {isUploading ? (
                   <><Loader2 size={16} className="animate-spin" /> Uploading...</>

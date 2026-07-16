@@ -44,7 +44,7 @@ export function Homepage({ tabId }: { tabId: string }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sections.map(section => (
-          <div key={section.title} className="bg-os-window-bg/40 border border-os-window-border rounded-xl p-6 backdrop-blur-sm">
+          <div key={section.title} className="bg-os-window-bg/40 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os">
             <h2 className="text-lg font-medium mb-4 text-os-text/90 border-b border-os-window-border pb-2">{section.title}</h2>
             <div className="space-y-3">
               {section.items.map(item => {
@@ -53,9 +53,9 @@ export function Homepage({ tabId }: { tabId: string }) {
                   <button
                     key={item.label}
                     onClick={() => handleLink(item.url)}
-                    className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-white/10 transition-colors text-left group"
+                    className="w-full flex items-center gap-3 p-2 rounded-os hover:bg-white/10 transition-colors text-left group"
                   >
-                    <div className="p-2 bg-black/40 rounded-md group-hover:scale-110 transition-transform shadow-inner border border-white/5">
+                    <div className="p-2 bg-black/40 rounded-os group-hover:scale-110 transition-transform shadow-os border border-white/5">
                       <Icon size={16} className={item.color} />
                     </div>
                     <span className="text-sm font-medium text-os-text-muted group-hover:text-os-text transition-colors">{item.label}</span>
@@ -67,7 +67,7 @@ export function Homepage({ tabId }: { tabId: string }) {
         ))}
       </div>
 
-      <div className="mt-12 bg-os-window-bg/40 border border-os-window-border rounded-xl p-6 backdrop-blur-sm">
+      <div className="mt-12 bg-os-window-bg/40 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os">
         <h2 className="text-lg font-medium mb-4 text-os-text/90 border-b border-os-window-border pb-2 flex items-center gap-2">
           <Globe size={18} className="text-os-accent" /> External Links
         </h2>
@@ -76,7 +76,7 @@ export function Homepage({ tabId }: { tabId: string }) {
             <button
               key={bookmark.id}
               onClick={() => handleLink(bookmark.url)}
-              className="px-4 py-2 bg-black/40 border border-os-window-border rounded-full text-sm text-os-text-muted hover:text-os-text hover:bg-white/10 hover:border-os-accent/50 transition-all shadow-inner"
+              className="px-4 py-2 bg-black/40 border border-os-window-border rounded-full text-sm text-os-text-muted hover:text-os-text hover:bg-white/10 hover:border-os-accent/50 transition-all shadow-os"
             >
               {bookmark.title}
             </button>

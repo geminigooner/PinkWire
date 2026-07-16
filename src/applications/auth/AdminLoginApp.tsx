@@ -46,7 +46,7 @@ export function AdminLoginApp({ windowId }: { windowId: string }) {
 
   if (isAuthenticated) {
     return (
-      <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-black/40 backdrop-blur-md">
+      <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-black/40 backdrop-blur-os-os-os">
         <div className="w-20 h-20 rounded-full bg-os-accent/20 flex items-center justify-center mb-6">
           <Unlock size={40} className="text-os-accent" />
         </div>
@@ -57,7 +57,7 @@ export function AdminLoginApp({ windowId }: { windowId: string }) {
             logout();
             closeWindow(windowId);
           }}
-          className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors border border-white/10"
+          className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-os transition-colors border border-white/10"
         >
           Lock System
         </button>
@@ -66,9 +66,9 @@ export function AdminLoginApp({ windowId }: { windowId: string }) {
   }
 
   return (
-    <div className="h-full flex flex-col p-8 bg-black/40 backdrop-blur-md">
+    <div className="h-full flex flex-col p-8 bg-black/40 backdrop-blur-os-os-os">
       <div className="flex-1 flex flex-col items-center justify-center max-w-sm mx-auto w-full">
-        <div className="w-16 h-16 rounded-full bg-black/50 border border-white/10 flex items-center justify-center mb-6 shadow-inner">
+        <div className="w-16 h-16 rounded-full bg-black/50 border border-white/10 flex items-center justify-center mb-6 shadow-os">
           <Lock size={32} className="text-os-text-muted" />
         </div>
         <h2 className="text-2xl font-semibold text-white mb-2">Authentication Required</h2>
@@ -85,7 +85,7 @@ export function AdminLoginApp({ windowId }: { windowId: string }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password..."
-                className="w-full h-12 bg-black/50 border border-white/10 rounded-xl pl-12 pr-4 text-os-text placeholder:text-os-text-muted/70 focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
+                className="w-full h-12 bg-black/50 border border-white/10 rounded-os pl-12 pr-4 text-os-text placeholder:text-os-text-muted/70 focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
                 autoFocus
                 disabled={isLoading}
               />
@@ -98,7 +98,7 @@ export function AdminLoginApp({ windowId }: { windowId: string }) {
           <button
             type="submit"
             disabled={isLoading || !password.trim()}
-            className="w-full h-12 bg-os-accent hover:bg-os-accent/80 disabled:opacity-50 disabled:hover:bg-os-accent text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full h-12 bg-os-accent hover:bg-os-accent/80 disabled:opacity-50 disabled:hover:bg-os-accent text-white font-medium rounded-os transition-colors flex items-center justify-center gap-2"
           >
             {isLoading ? <Loader2 size={18} className="animate-spin" /> : 'Unlock'}
           </button>

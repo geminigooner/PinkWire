@@ -28,13 +28,13 @@ export function AppearanceSettings() {
                 <button
                   key={t.id}
                   onClick={() => setTheme(t.id)}
-                  className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
+                  className={`flex items-center gap-3 p-3 rounded-os border transition-all ${
                     theme === t.id 
                       ? 'bg-os-accent/10 border-os-accent shadow-[0_0_15px_rgba(var(--os-accent),0.2)]' 
                       : 'bg-black/20 border-os-window-border hover:bg-black/40 hover:border-os-text-muted/50'
                   }`}
                 >
-                  <div className={`w-6 h-6 rounded-full shadow-inner border border-white/20 ${t.color}`} />
+                  <div className={`w-6 h-6 rounded-full shadow-os border border-white/20 ${t.color}`} />
                   <span className="text-sm font-medium text-os-text">{t.name}</span>
                 </button>
               ))}
@@ -44,14 +44,14 @@ export function AppearanceSettings() {
           {/* Time & Atmosphere */}
           <section>
             <h3 className="text-sm font-medium text-os-text-muted mb-4 uppercase tracking-wider">Time & Atmosphere</h3>
-            <div className="bg-black/20 border border-os-window-border rounded-xl p-1 flex flex-col sm:inline-flex sm:flex-row">
+            <div className="bg-black/20 border border-os-window-border rounded-os p-1 flex flex-col sm:inline-flex sm:flex-row">
               {(['auto', 'day', 'night'] as const).map(atm => (
                 <button
                   key={atm}
                   onClick={() => setAtmosphere(atm)}
-                  className={`px-4 sm:px-6 py-2 rounded-lg text-sm font-medium transition-all text-center ${
+                  className={`px-4 sm:px-6 py-2 rounded-os text-sm font-medium transition-all text-center ${
                     atmosphere === atm 
-                      ? 'bg-os-accent text-white shadow-md' 
+                      ? 'bg-os-accent text-white shadow-os' 
                       : 'text-os-text-muted hover:text-os-text hover:bg-white/5'
                   }`}
                 >

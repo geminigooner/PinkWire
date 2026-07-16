@@ -15,7 +15,7 @@ export function SearchBar() {
           placeholder="Search conversations, tags..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-black/40 border border-os-window-border rounded-lg pl-9 pr-4 py-2 text-sm text-os-text placeholder:text-os-text-muted focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
+          className="w-full bg-black/40 border border-os-window-border rounded-os pl-9 pr-4 py-2 text-sm text-os-text placeholder:text-os-text-muted focus:outline-none focus:border-os-accent/50 focus:ring-1 focus:ring-os-accent/50 transition-all"
         />
       </div>
     </div>

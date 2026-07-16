@@ -39,7 +39,7 @@ export function BottomPlayer() {
       <div className="flex items-center gap-2 md:gap-4 w-1/3 md:w-1/4 md:min-w-[200px]">
         {currentTrack ? (
           <>
-            <img src={currentTrack.coverArt} alt={currentTrack.title} className="w-10 h-10 md:w-14 md:h-14 rounded-md object-cover shadow-md shrink-0" />
+            <img src={currentTrack.coverArt} alt={currentTrack.title} className="w-10 h-10 md:w-14 md:h-14 rounded-os object-cover shadow-os shrink-0" />
             <div className="flex flex-col min-w-0">
               <span className="text-xs md:text-sm text-white font-medium truncate">{currentTrack.title}</span>
               <span className="text-[10px] md:text-xs text-[#a7a7a7] truncate">{currentTrack.artist}</span>

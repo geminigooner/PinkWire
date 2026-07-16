@@ -63,7 +63,7 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
             className="absolute inset-0 flex items-center justify-center bg-black z-10"
           >
             <div className="flex flex-col items-center gap-6">
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center shadow-[0_0_50px_rgba(236,72,153,0.5)]">
+              <div className="w-24 h-24 rounded-os bg-gradient-to-tr from-pink-500 to-purple-500 flex items-center justify-center shadow-[0_0_50px_rgba(236,72,153,0.5)]">
                 <div className="w-12 h-12 border-4 border-white rounded-full border-t-transparent animate-spin" />
               </div>
               <h1 className="text-4xl font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 tracking-tight">

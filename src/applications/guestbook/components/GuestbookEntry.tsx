@@ -16,7 +16,7 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   if (!visitor) return null;
 
   return (
-    <div className="group relative bg-white border border-[#eaddd7] rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <div className="group relative bg-white border border-[#eaddd7] rounded-os p-5 md:p-6 shadow-os hover:shadow-os transition-shadow">
       <div 
         className="absolute top-0 left-0 w-full h-1 rounded-t-2xl opacity-50"
         style={{ backgroundColor: visitor.favoriteColor || '#cf8c8c' }}

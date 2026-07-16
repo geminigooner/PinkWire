@@ -19,7 +19,7 @@ export function AboutHistory() {
       
       <div className="space-y-1">
         {historyItems.map((item, idx) => (
-          <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 hover:bg-white/5 rounded-lg border border-transparent hover:border-os-window-border transition-colors">
+          <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 hover:bg-white/5 rounded-os border border-transparent hover:border-os-window-border transition-colors">
             <span className="text-os-text-muted text-sm w-24 shrink-0">{item.time}</span>
             <span className="text-os-accent text-sm w-20 shrink-0">{item.action}</span>
             <span className="text-os-text text-sm truncate">{item.query}</span>

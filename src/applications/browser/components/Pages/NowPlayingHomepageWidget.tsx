@@ -20,11 +20,11 @@ export function NowPlayingHomepageWidget() {
       <button
         onClick={() => openWindow('spun')}
         className={cn(
-          "flex items-center gap-4 bg-os-window-bg/40 border border-os-window-border rounded-xl p-4 backdrop-blur-sm hover:bg-os-window-bg/60 transition-all text-left group w-full max-w-sm",
+          "flex items-center gap-4 bg-os-window-bg/40 border border-os-window-border rounded-os p-4 backdrop-blur-os-os-os hover:bg-os-window-bg/60 transition-all text-left group w-full max-w-sm",
           isPlaying ? "border-os-accent/30 shadow-[0_0_15px_rgba(236,72,153,0.15)]" : ""
         )}
       >
-        <div className="relative w-12 h-12 rounded-md overflow-hidden shrink-0 shadow-md">
+        <div className="relative w-12 h-12 rounded-os overflow-hidden shrink-0 shadow-os">
           <img src={currentTrack.coverArt} alt={currentTrack.title} className="w-full h-full object-cover" />
           {isPlaying && (
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">

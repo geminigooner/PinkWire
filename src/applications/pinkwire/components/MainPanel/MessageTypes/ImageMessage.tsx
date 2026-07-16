@@ -16,7 +16,7 @@ export function ImageMessage({ message }: { message: Message }) {
         <div 
           key={att.id} 
           onDoubleClick={() => openWindow('disposable', { imageUrl: att.url })}
-          className="relative group cursor-pointer overflow-hidden rounded-lg border border-os-window-border max-w-md"
+          className="relative group cursor-pointer overflow-hidden rounded-os border border-os-window-border max-w-md"
         >
           <img 
             src={att.url} 

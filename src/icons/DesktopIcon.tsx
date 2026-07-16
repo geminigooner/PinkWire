@@ -40,7 +40,7 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
       initial={{ x, y }}
       animate={{ x, y }}
       className={cn(
-        "absolute flex flex-col items-center gap-1.5 w-24 p-2 rounded-lg cursor-pointer transition-colors group",
+        "absolute flex flex-col items-center gap-1.5 w-24 p-2 rounded-os cursor-pointer transition-colors group",
         isSelected ? "bg-white/20" : "hover:bg-white/10"
       )}
       onPointerDown={(e) => {
@@ -61,13 +61,13 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
       }}
     >
       <div className={cn(
-        "w-12 h-12 rounded-xl flex items-center justify-center shadow-lg border transition-colors",
+        "w-12 h-12 rounded-os flex items-center justify-center shadow-os border transition-colors",
         isSelected ? "bg-os-accent/20 border-os-accent" : "bg-os-window-bg border-os-window-border group-hover:border-os-accent/50"
       )}>
         <Icon size={24} className={isSelected ? "text-white" : "text-os-accent"} />
       </div>
       {showLabels && (
-        <span className="text-xs font-medium text-center text-os-text drop-shadow-md select-none line-clamp-2">{app.name}</span>
+        <span className="text-xs font-medium text-center text-os-text drop-shadow-os select-none line-clamp-2">{app.name}</span>
       )}
     </motion.div>
   );

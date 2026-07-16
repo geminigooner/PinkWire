@@ -45,9 +45,9 @@ export function MessageItem({ message, prevMessage, participants }: { message: M
       <div className="w-8 shrink-0 flex flex-col items-end">
         {!isGrouped && sender && (
           sender.avatar ? (
-            <img src={sender.avatar} alt="" className="w-8 h-8 rounded-lg object-cover" />
+            <img src={sender.avatar} alt="" className="w-8 h-8 rounded-os object-cover" />
           ) : (
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white font-medium text-xs">
+            <div className="w-8 h-8 rounded-os bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white font-medium text-xs">
               {sender.name.charAt(0)}
             </div>
           )

@@ -30,7 +30,7 @@ export function StartMenuProfile() {
   };
 
   return (
-    <div className="flex items-center gap-4 bg-black/20 p-4 rounded-2xl border border-white/10 shadow-inner shrink-0 relative overflow-hidden group">
+    <div className="flex items-center gap-4 bg-black/20 p-4 rounded-os border border-white/10 shadow-os shrink-0 relative overflow-hidden group">
       <div className="absolute inset-0 opacity-20 pointer-events-none transition-opacity group-hover:opacity-30" 
            style={{ background: 'linear-gradient(135deg, rgba(236,72,153,0.5) 0%, rgba(99,102,241,0.5) 100%)' }} />
       
@@ -56,7 +56,7 @@ export function StartMenuProfile() {
       
       <button 
         onClick={() => openWindow('settings')}
-        className="p-2.5 rounded-xl hover:bg-white/10 transition-colors z-10 text-os-text-muted hover:text-os-text shrink-0 border border-transparent hover:border-white/5"
+        className="p-2.5 rounded-os hover:bg-white/10 transition-colors z-10 text-os-text-muted hover:text-os-text shrink-0 border border-transparent hover:border-white/5"
       >
         <Settings size={20} />
       </button>
