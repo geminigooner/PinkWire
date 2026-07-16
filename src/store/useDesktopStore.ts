@@ -80,7 +80,7 @@ export const useDesktopStore = create<DesktopStore>()(
       stickers: [],
       stickyNotes: [
         { id: 'note-1', text: "buy iced coffee", x: typeof window !== "undefined" ? window.innerWidth - 250 : 800, y: 100, color: "bg-yellow-200 text-yellow-900" },
-        { id: 'note-2', text: "don't trust past me", x: typeof window !== "undefined" ? window.innerWidth - 220 : 830, y: 300, color: "bg-pink-200 text-pink-900" }
+        { id: 'note-2', text: "remember to hydrate the embeddings", x: typeof window !== "undefined" ? window.innerWidth - 220 : 830, y: 300, color: "bg-pink-200 text-pink-900" }
       ],
       autoArrangeIcons: false,
       snapToGrid: false,

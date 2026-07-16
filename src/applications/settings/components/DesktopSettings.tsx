@@ -5,6 +5,7 @@ import { Upload, Star, LayoutGrid, Monitor, ToggleLeft, ToggleRight, Trash2, Hea
 import { cn } from '../../../utils/cn';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { handleWallpaperUpload } from '../../../store/wallpaperManager';
+import { useMediaStore } from '../../media/store/useMediaStore';
 
 export function DesktopSettings() {
   const { isAuthenticated } = useAuthStore();
@@ -15,6 +16,13 @@ export function DesktopSettings() {
     favoriteWallpapers, toggleFavoriteWallpaper
   } = useDesktopStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const mediaItems = useMediaStore(state => state.items);
+  const uploadedWallpapers = mediaItems.filter(item => item.category === 'Wallpapers').map(item => ({
+    id: item.url,
+    url: item.url,
+    title: item.displayName,
+    author: 'Uploaded'
+  }));
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

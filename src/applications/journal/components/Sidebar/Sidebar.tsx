@@ -1,16 +1,21 @@
 import React from 'react';
 import { useJournalStore } from '../../store/useJournalStore';
-import { Search, Folder, Heart, BookOpen, Hash } from 'lucide-react';
+import { useAuthStore } from '../../../../store/useAuthStore';
+import { Search, Folder, Heart, BookOpen, Hash, Edit3, Archive } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 
 export function Sidebar() {
-  const { categories, activeCategoryId, setActiveCategory, articles, searchQuery, setSearchQuery } = useJournalStore();
-
+  const { categories, activeCategoryId, setActiveCategory, articles, searchQuery, setSearchQuery, isSidebarOpen } = useJournalStore();
+  const { isAuthenticated } = useAuthStore();
+  
   // Extract unique tags from articles
   const allTags = Array.from(new Set(articles.flatMap(a => a.tags))).sort();
 
   return (
-    <div className="w-56 md:w-64 hidden sm:flex shrink-0 border-r border-os-window-border bg-os-window-bg/80 flex flex-col h-full">
+    <div className={cn(
+      "w-64 shrink-0 border-r border-os-window-border bg-os-window-bg/95 flex flex-col h-full absolute md:relative z-20 transition-transform duration-300 backdrop-blur-xl",
+      isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+    )}>
       <div className="p-4 border-b border-os-window-border bg-os-titlebar-bg/50">
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-os-text-muted" />
@@ -48,6 +53,31 @@ export function Sidebar() {
               <Heart size={16} className={activeCategoryId === 'favorites' ? "text-white" : "text-os-accent"} />
               Favorites
             </button>
+            
+            {isAuthenticated && (
+              <>
+                <button
+                  onClick={() => { setSearchQuery('draft'); setActiveCategory('all'); }}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                    searchQuery === 'draft' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
+                  )}
+                >
+                  <Edit3 size={16} className={searchQuery === 'draft' ? "text-white" : "text-yellow-500"} />
+                  Drafts
+                </button>
+                <button
+                  onClick={() => { setSearchQuery('archived'); setActiveCategory('all'); }}
+                  className={cn(
+                    "w-full flex items-center gap-3 px-2 py-1.5 rounded-md text-sm transition-colors",
+                    searchQuery === 'archived' ? "bg-os-accent text-white" : "text-os-text hover:bg-white/10"
+                  )}
+                >
+                  <Archive size={16} className={searchQuery === 'archived' ? "text-white" : "text-os-text-muted"} />
+                  Archived
+                </button>
+              </>
+            )}
           </div>
         </div>
 

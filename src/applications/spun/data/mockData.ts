@@ -4,7 +4,7 @@ export const SPUN_TRACKS: Track[] = [
   {
     id: 't1',
     title: 'Rain Dance',
-    artist: 'The Echoes',
+    artist: 'ResidualBro',
     album: 'Silence & Sound',
     duration: 215,
     coverArt: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&q=80',
@@ -17,7 +17,7 @@ export const SPUN_TRACKS: Track[] = [
   {
     id: 't2',
     title: 'Neon Nights',
-    artist: 'Synthwave Society',
+    artist: 'GPU Obsession',
     album: 'Future Past',
     duration: 284,
     coverArt: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&q=80',
@@ -30,7 +30,7 @@ export const SPUN_TRACKS: Track[] = [
   {
     id: 't3',
     title: 'Ocean Drive',
-    artist: 'Miami Dreams',
+    artist: 'Cold Plunge Capital',
     album: 'Summer 98',
     duration: 198,
     coverArt: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80',
@@ -43,7 +43,7 @@ export const SPUN_TRACKS: Track[] = [
   {
     id: 't4',
     title: 'Midnight Coding',
-    artist: 'Coffee & Code',
+    artist: 'Caffeine Addiction',
     album: 'Focus Sessions',
     duration: 320,
     coverArt: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80',
@@ -59,7 +59,7 @@ export const SPUN_ALBUMS: Album[] = [
   {
     id: 'a1',
     title: 'Silence & Sound',
-    artist: 'The Echoes',
+    artist: 'ResidualBro',
     coverArt: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&q=80',
     year: 2025,
     trackIds: ['t1']
@@ -67,7 +67,7 @@ export const SPUN_ALBUMS: Album[] = [
   {
     id: 'a2',
     title: 'Future Past',
-    artist: 'Synthwave Society',
+    artist: 'GPU Obsession',
     coverArt: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&q=80',
     year: 2024,
     trackIds: ['t2']
@@ -75,7 +75,7 @@ export const SPUN_ALBUMS: Album[] = [
   {
     id: 'a3',
     title: 'Summer 98',
-    artist: 'Miami Dreams',
+    artist: 'Cold Plunge Capital',
     coverArt: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80',
     year: 1998,
     trackIds: ['t3']
@@ -83,7 +83,7 @@ export const SPUN_ALBUMS: Album[] = [
   {
     id: 'a4',
     title: 'Focus Sessions',
-    artist: 'Coffee & Code',
+    artist: 'Caffeine Addiction',
     coverArt: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80',
     year: 2026,
     trackIds: ['t4']
@@ -93,24 +93,24 @@ export const SPUN_ALBUMS: Album[] = [
 export const SPUN_ARTISTS: Artist[] = [
   {
     id: 'ar1',
-    name: 'The Echoes',
+    name: 'ResidualBro',
     coverArt: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=500&q=80',
     trackIds: ['t1']
   },
   {
     id: 'ar2',
-    name: 'Synthwave Society',
+    name: 'GPU Obsession',
     coverArt: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=500&q=80',
     trackIds: ['t2']
   },
   {
     id: 'ar3',
-    name: 'Miami Dreams',
+    name: 'Cold Plunge Capital',
     trackIds: ['t3']
   },
   {
     id: 'ar4',
-    name: 'Coffee & Code',
+    name: 'Caffeine Addiction',
     trackIds: ['t4']
   }
 ];

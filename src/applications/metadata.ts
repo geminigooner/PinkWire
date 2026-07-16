@@ -1,4 +1,4 @@
-import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart } from 'lucide-react';
+import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart, Lock, Film } from 'lucide-react';
 import { AppDefinition } from '../types/os';
 
 // Exclude component from AppDefinition for metadata
@@ -96,6 +96,30 @@ export const AppMetadataRegistry: Record<string, AppMetadata> = {
     defaultWidth: 1000,
     defaultHeight: 700,
     minWidth: 600,
+    minHeight: 500,
+    resizable: true,
+    draggable: true,
+    instancePolicy: 'single'
+  }
+  ,admin: {
+    id: 'admin',
+    name: 'Authentication',
+    icon: Lock,
+    defaultWidth: 400,
+    defaultHeight: 500,
+    minWidth: 400,
+    minHeight: 500,
+    resizable: false,
+    draggable: true,
+    instancePolicy: 'single'
+  }
+  ,media: {
+    id: 'media',
+    name: 'Media Library',
+    icon: Film,
+    defaultWidth: 900,
+    defaultHeight: 650,
+    minWidth: 700,
     minHeight: 500,
     resizable: true,
     draggable: true,

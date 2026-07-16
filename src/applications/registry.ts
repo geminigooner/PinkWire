@@ -8,6 +8,7 @@ import { ExplorerApp } from './explorer/ExplorerApp';
 import { BrowserApp } from './browser/BrowserApp';
 import { SettingsApp } from './settings/SettingsApp';
 import { AdminLoginApp } from './auth/AdminLoginApp';
+import { MediaApp } from './media/MediaApp';
 import { Lock } from 'lucide-react';
 import { SpunApp } from './spun/SpunApp';
 import { GuestbookApp } from './guestbook/GuestbookApp';
@@ -44,5 +45,13 @@ export const AppRegistry: Record<string, AppDefinition> = {
   guestbook: {
     ...AppMetadataRegistry.guestbook,
     component: GuestbookApp
+  }
+  ,admin: {
+    ...AppMetadataRegistry.admin,
+    component: AdminLoginApp
+  }
+  ,media: {
+    ...AppMetadataRegistry.media,
+    component: MediaApp
   }
 };

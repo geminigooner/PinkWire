@@ -166,13 +166,34 @@ export const useGuestbookStore = create<GuestbookStore>()(
         const mockVisitors: Visitor[] = [
           {
             id: v1Id,
-            displayName: 'CyberSurfer99',
-            avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop',
-            location: 'Seattle, WA',
-            favoriteColor: '#ec4899',
-            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
+            displayName: 'H100Daddy',
+            avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
+            location: 'San Francisco, CA',
+            favoriteColor: '#10b981',
+            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 7).toISOString(),
+            visitCount: 42,
+            lastVisit: new Date(now - 1000 * 60 * 60 * 2).toISOString(),
+            badge: 'GPU Rich'
+          },
+          {
+            id: v2Id,
+            displayName: 'ContextMaxxer',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
+            location: 'Miami, FL',
+            favoriteColor: '#8b5cf6',
+            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 3).toISOString(),
+            visitCount: 3,
+            lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 1).toISOString(),
+          },
+          {
+            id: v3Id,
+            displayName: 'PeptidePrince',
+            avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop',
+            location: 'Austin, TX',
+            favoriteColor: '#3b82f6',
+            joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 1).toISOString(),
             visitCount: 1,
-            lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
+            lastVisit: new Date(now - 1000 * 60 * 60 * 24 * 1).toISOString(),
           }
         ];
 
@@ -180,8 +201,24 @@ export const useGuestbookStore = create<GuestbookStore>()(
           {
             id: uuidv4(),
             visitorId: v1Id,
-            timestamp: new Date(now - 1000 * 60 * 60 * 24 * 2).toISOString(),
-            message: 'Love the new site layout!',
+            timestamp: new Date(now - 1000 * 60 * 60 * 2).toISOString(),
+            message: 'wife left me but i finally got H100 allocation.',
+            favorite: true,
+            moderationStatus: 'Publish'
+          },
+          {
+            id: uuidv4(),
+            visitorId: v2Id,
+            timestamp: new Date(now - 1000 * 60 * 60 * 24 * 1).toISOString(),
+            message: 'bro if your embeddings aren\'t hydrated don\'t even talk to me.',
+            favorite: false,
+            moderationStatus: 'Publish'
+          },
+          {
+            id: uuidv4(),
+            visitorId: v3Id,
+            timestamp: new Date(now - 1000 * 60 * 60 * 24 * 1 - 1000 * 60 * 30).toISOString(),
+            message: 'cold plunge at 5. inference at 7.',
             favorite: true,
             moderationStatus: 'Publish'
           }
