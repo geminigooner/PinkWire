@@ -4,7 +4,7 @@ import { useJournalStore } from '../../journal/store/useJournalStore';
 import { useThemeStore } from '../../theme/store/useThemeStore';
 import { useMediaStore } from '../../media/store/useMediaStore';
 import { CheckCircle2, AlertTriangle, XCircle, RefreshCw } from 'lucide-react';
-import { AppRegistry } from '../../../applications/registry';
+import { AppMetadataRegistry } from '../../../applications/metadata';
 
 interface CheckResult {
   id: string;
@@ -30,7 +30,7 @@ export function PreflightChecklist() {
       const checks: CheckResult[] = [];
       
       // 1. Registry Check
-      const appCount = Object.keys(AppRegistry).length;
+      const appCount = Object.keys(AppMetadataRegistry).length;
       checks.push({
         id: 'registry',
         name: 'Application Registry',
