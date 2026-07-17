@@ -15,6 +15,7 @@ import { GuestbookApp } from './guestbook/GuestbookApp';
 import { WallpaperApp } from './wallpaper/WallpaperApp';
 
 import { ThemeApp } from './theme/ThemeApp';
+import { ReleaseManagerApp } from './release/ReleaseManagerApp';
 
 export const AppRegistry: Record<string, AppDefinition> = {
   settings: {
@@ -56,5 +57,9 @@ export const AppRegistry: Record<string, AppDefinition> = {
   ,media: {
     ...AppMetadataRegistry.media,
     component: MediaApp
+  },
+  release: {
+    ...AppMetadataRegistry.release,
+    component: ReleaseManagerApp
   }
 };

@@ -3,7 +3,7 @@ import { AppRegistry } from '../applications/registry';
 import { useWindowStore } from '../store/useWindowStore';
 
 // In a real app we'd persist pinned apps in a store. For now, hardcode the defaults based on design.
-const DEFAULT_PINNED = ['pinkwire', 'journal', 'guestbook', 'browser', 'explorer', 'settings'];
+const DEFAULT_PINNED = ['pinkwire', 'journal', 'guestbook', 'browser', 'explorer', 'settings', 'release'];
 
 export function StartMenuPinned({ onClose }: { onClose: () => void }) {
   const openWindow = useWindowStore(state => state.openWindow);

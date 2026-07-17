@@ -100,5 +100,6 @@ export const CORE_BACKUP_KEYS = [
   'pinkwire-notifications',
   'pinkwire-recent-store',
   'pinkwire-wallpaper-store',
-  'pinkwire-window-store'
+  'pinkwire-window-store',
+  'pinkwire-release-store'
 ];

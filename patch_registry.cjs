@@ -1,47 +1,59 @@
 const fs = require('fs');
 
-// Patch metadata
-let metadata = fs.readFileSync('src/applications/metadata.ts', 'utf8');
-if (!metadata.includes('theme: {')) {
-  metadata = metadata.replace(
-    `export const APP_METADATA: Record<string, AppMetadata> = {`,
-    `export const APP_METADATA: Record<string, AppMetadata> = {
-  theme: {
-    title: 'Theme Studio',
-    icon: 'Palette',
-    defaultWidth: 1000,
-    defaultHeight: 700,
-    minWidth: 800,
-    minHeight: 600,
-    maximizable: true,
-    singleton: true,
-    adminOnly: false
-  },`
+// Patch metadata.ts
+let metadataContent = fs.readFileSync('src/applications/metadata.ts', 'utf8');
+if (!metadataContent.includes('release')) {
+  metadataContent = metadataContent.replace(
+    `import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart, Lock, Film, Monitor } from 'lucide-react';`,
+    `import { Zap, Book, Image as ImageIcon, Globe, Folder, Settings, Disc, BookHeart, Lock, Film, Monitor, Rocket } from 'lucide-react';`
   );
-  fs.writeFileSync('src/applications/metadata.ts', metadata);
+  
+  metadataContent = metadataContent.replace(
+    `}
+};`,
+    `  },
+  release: {
+    id: 'release',
+    name: 'Deployment Center',
+    icon: Rocket,
+    defaultWidth: 900,
+    defaultHeight: 650,
+    minWidth: 700,
+    minHeight: 500,
+    resizable: true,
+    draggable: true,
+    instancePolicy: 'single'
+  }
+};`
+  );
+  
+  fs.writeFileSync('src/applications/metadata.ts', metadataContent);
 }
 
-// Patch registry
-let registry = fs.readFileSync('src/applications/registry.ts', 'utf8');
-if (!registry.includes('ThemeApp')) {
-  registry = registry.replace(
-    `export const AppRegistry`,
-    `import { ThemeApp } from './theme/ThemeApp';\n\nexport const AppRegistry`
+// Patch registry.ts
+let registryContent = fs.readFileSync('src/applications/registry.ts', 'utf8');
+if (!registryContent.includes('release')) {
+  registryContent = registryContent.replace(
+    `import { ThemeApp } from './theme/ThemeApp';`,
+    `import { ThemeApp } from './theme/ThemeApp';\nimport { ReleaseManagerApp } from './release/ReleaseManagerApp';`
   );
-  registry = registry.replace(
-    `export const AppRegistry = {`,
-    `export const AppRegistry = {\n  theme: ThemeApp,`
+  
+  registryContent = registryContent.replace(
+    `  media: {
+    ...AppMetadataRegistry.media,
+    component: MediaApp
+  }
+};`,
+    `  media: {
+    ...AppMetadataRegistry.media,
+    component: MediaApp
+  },
+  release: {
+    ...AppMetadataRegistry.release,
+    component: ReleaseManagerApp
+  }
+};`
   );
-  fs.writeFileSync('src/applications/registry.ts', registry);
+  
+  fs.writeFileSync('src/applications/registry.ts', registryContent);
 }
-
-// Patch DesktopStore icons
-let desktop = fs.readFileSync('src/store/useDesktopStore.ts', 'utf8');
-if (!desktop.includes('appId: \'theme\'')) {
-  desktop = desktop.replace(
-    `{ id: 'wallpaper', appId: 'wallpaper', x: 24, y: 120 },`,
-    `{ id: 'wallpaper', appId: 'wallpaper', x: 24, y: 120 },\n      { id: 'theme', appId: 'theme', x: 24, y: 216 },`
-  );
-  fs.writeFileSync('src/store/useDesktopStore.ts', desktop);
-}
-
