@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette, Monitor, Volume2, Accessibility, Info, Trophy, UserCircle } from 'lucide-react';
+import { Palette, Monitor, Volume2, Accessibility, Info, Trophy, UserCircle, Database } from 'lucide-react';
 import { SettingsTab } from '../SettingsApp';
 import { cn } from '../../../utils/cn';
 
@@ -16,6 +16,7 @@ export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProp
     { id: 'sound', label: 'Sound', icon: Volume2 },
     { id: 'accessibility', label: 'Accessibility', icon: Accessibility },
     { id: 'achievements', label: 'Lore', icon: Trophy },
+    { id: 'backup', label: 'Backup & Restore', icon: Database },
     { id: 'about', label: 'About', icon: Info },
   ] as const;
 
