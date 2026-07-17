@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../services/sync/syncStorage';
 import { osEvents } from '../services/notifications/EventBus';
 
 interface AuthState {
@@ -27,6 +28,7 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'pinkwire-auth',
+      storage: createJSONStorage(() => createSyncStorage('auth')),
     }
   )
 );

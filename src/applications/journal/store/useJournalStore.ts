@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../../../services/sync/syncStorage';
 import { Article, Category } from '../types';
 import { MOCK_ARTICLES, MOCK_CATEGORIES } from '../data/mockData';
 
@@ -222,6 +223,7 @@ export const useJournalStore = create<JournalState>()(
     }),
     {
       name: 'pinkwire-journal',
+      storage: createJSONStorage(() => createSyncStorage('journal')),
       partialize: (state) => ({
         articles: state.articles,
         categories: state.categories

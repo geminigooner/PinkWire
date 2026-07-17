@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../../../services/sync/syncStorage';
 import { v4 as uuidv4 } from 'uuid';
 import { Theme } from '../../../services/theme/ThemeTypes';
 import { DEFAULT_THEMES } from '../../../services/theme/defaultThemes';
@@ -96,6 +97,7 @@ export const useThemeStore = create<ThemeStore>()(
     }),
     {
       name: 'pinkwire-theme-store',
+      storage: createJSONStorage(() => createSyncStorage('theme')),
       version: 1,
       partialize: (state) => ({
         themes: state.themes,

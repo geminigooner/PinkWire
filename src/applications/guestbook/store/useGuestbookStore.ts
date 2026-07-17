@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../../../services/sync/syncStorage';
 import { v4 as uuidv4 } from 'uuid';
 import { osEvents } from '../../../services/notifications/EventBus';
 
@@ -232,6 +233,7 @@ export const useGuestbookStore = create<GuestbookStore>()(
     }),
     {
       name: 'pinkwire-guestbook-v2',
+      storage: createJSONStorage(() => createSyncStorage('guestbook')),
       partialize: (state) => ({
         visitors: state.visitors,
         entries: state.entries,

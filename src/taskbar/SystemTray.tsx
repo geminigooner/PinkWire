@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Wifi, Volume2, BatteryMedium, Moon, Sun } from 'lucide-react';
+import { SyncIndicator } from '../components/sync/SyncIndicator';
 import { useSettingsStore } from '../store/useSettingsStore';
 
 export function SystemTray() {
@@ -19,6 +20,7 @@ export function SystemTray() {
 
   return (
     <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-3 h-9 text-os-text-muted hover:text-os-text hover:bg-white/10 rounded-os transition-colors cursor-pointer group">
+      <SyncIndicator />
       <div className="flex items-center gap-1.5 opacity-70 group-hover:opacity-100 transition-opacity hidden sm:flex">
         <Wifi size={14} />
       </div>

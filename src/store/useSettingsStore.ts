@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../services/sync/syncStorage';
 import { osEvents } from '../services/notifications/EventBus';
 
 interface SettingsStore {
@@ -89,6 +90,7 @@ export const useSettingsStore = create<SettingsStore>()(
     }),
     { 
       name: 'pinkwire-settings-store',
+      storage: createJSONStorage(() => createSyncStorage('settings')),
       version: 1,
     }
   )

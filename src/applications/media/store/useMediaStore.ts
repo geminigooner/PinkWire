@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../../../services/sync/syncStorage';
 import { v4 as uuidv4 } from 'uuid';
 import { osEvents } from '../../../services/notifications/EventBus';
 
@@ -84,6 +85,7 @@ export const useMediaStore = create<MediaStore>()(
     }),
     {
       name: 'pinkwire-media-store',
+      storage: createJSONStorage(() => createSyncStorage('media')),
       partialize: (state) => ({
         items: state.items,
         viewMode: state.viewMode

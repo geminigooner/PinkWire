@@ -9,6 +9,7 @@ import { useDesktopStore } from './store/useDesktopStore';
 import { useState } from 'react';
 import { OSProvider } from './components/OSProvider';
 import { ThemeProvider } from './services/theme/ThemeProvider';
+import { SyncProvider } from './components/sync/SyncProvider';
 
 export default function App() {
   const hasBooted = useDesktopStore(state => state.hasBooted);
@@ -21,8 +22,10 @@ export default function App() {
   return (
     <OSProvider>
       <ThemeProvider>
+        <SyncProvider>
       <Desktop />
-    </ThemeProvider>
+    </SyncProvider>
+      </ThemeProvider>
     </OSProvider>
   );
 }

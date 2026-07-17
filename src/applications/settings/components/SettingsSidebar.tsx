@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette, Monitor, Volume2, Accessibility, Info, Trophy } from 'lucide-react';
+import { Palette, Monitor, Volume2, Accessibility, Info, Trophy, UserCircle } from 'lucide-react';
 import { SettingsTab } from '../SettingsApp';
 import { cn } from '../../../utils/cn';
 
@@ -10,6 +10,7 @@ interface SettingsSidebarProps {
 
 export function SettingsSidebar({ activeTab, setActiveTab }: SettingsSidebarProps) {
   const tabs = [
+    { id: 'profile', label: 'Account', icon: UserCircle },
     { id: 'appearance', label: 'Appearance', icon: Palette },
     { id: 'desktop', label: 'Desktop', icon: Monitor },
     { id: 'sound', label: 'Sound', icon: Volume2 },

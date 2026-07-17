@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SettingsSidebar } from './components/SettingsSidebar';
+import { ProfileSettings } from './components/ProfileSettings';
 import { AppearanceSettings } from './components/AppearanceSettings';
 import { DesktopSettings } from './components/DesktopSettings';
 import { SoundSettings } from './components/SoundSettings';
@@ -7,16 +8,17 @@ import { AccessibilitySettings } from './components/AccessibilitySettings';
 import { AboutSettings } from './components/AboutSettings';
 import { AchievementSettings } from './components/AchievementSettings';
 
-export type SettingsTab = 'appearance' | 'desktop' | 'sound' | 'accessibility' | 'about' | 'achievements';
+export type SettingsTab = 'profile' | 'appearance' | 'desktop' | 'sound' | 'accessibility' | 'about' | 'achievements';
 
 export function SettingsApp() {
-  const [activeTab, setActiveTab] = useState<SettingsTab>('appearance');
+  const [activeTab, setActiveTab] = useState<SettingsTab>('profile');
 
   return (
     <div className="flex w-full h-full bg-os-window-bg text-os-text overflow-hidden font-sans">
       <SettingsSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       
       <div className="flex-1 overflow-y-auto bg-black/10">
+        {activeTab === 'profile' && <ProfileSettings />}
         {activeTab === 'appearance' && <AppearanceSettings />}
         {activeTab === 'desktop' && <DesktopSettings />}
         {activeTab === 'sound' && <SoundSettings />}

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage }  from 'zustand/middleware';
+import { createSyncStorage } from '../services/sync/syncStorage';
 import { DesktopIconState } from '../types/os';
 import { osEvents } from '../services/notifications/EventBus';
 
@@ -141,6 +142,7 @@ export const useDesktopStore = create<DesktopStore>()(
     }),
     { 
       name: 'pinkwire-desktop-store',
+      storage: createJSONStorage(() => createSyncStorage('desktop')),
       version: 1,
       partialize: (state) => ({
         hasBooted: state.hasBooted,
