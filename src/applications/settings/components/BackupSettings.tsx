@@ -3,12 +3,14 @@ import { useBackupStore } from '../../../services/backup/useBackupStore';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { Database, Plus, RefreshCw, Upload, Download, Trash2, Heart, Clock, HardDrive, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export function BackupSettings() {
   const { backups, isBackingUp, isRestoring, loadBackups, createBackup, restoreBackup, deleteBackup, toggleFavorite, exportBackup, importBackup } = useBackupStore();
   const { isAuthenticated } = useAuthStore();
   const [description, setDescription] = useState('');
   const [showPreview, setShowPreview] = useState<string | null>(null);
+  const [backupToDelete, setBackupToDelete] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -147,7 +149,7 @@ export function BackupSettings() {
                       <Download size={16} />
                     </button>
                     <button 
-                      onClick={() => deleteBackup(backup.id)}
+                      onClick={() => setBackupToDelete(backup.id)}
                       className="p-2 hover:bg-white/10 rounded-os text-os-text-muted hover:text-red-400 transition-colors"
                       title="Delete"
                     >
@@ -207,6 +209,17 @@ export function BackupSettings() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        isOpen={!!backupToDelete}
+        title="Delete Backup"
+        message="Are you sure you want to delete this backup? It cannot be recovered."
+        confirmText="Delete Backup"
+        onConfirm={() => {
+          if (backupToDelete) deleteBackup(backupToDelete);
+        }}
+        onCancel={() => setBackupToDelete(null)}
+      />
 
     </div>
   );

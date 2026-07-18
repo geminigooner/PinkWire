@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useThemeStore } from '../store/useThemeStore';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { ChevronLeft, Check, Heart, Edit2, Trash2, Copy } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 import { formatDistanceToNow } from 'date-fns';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export function ThemePreview({ onEdit }: { onEdit: () => void }) {
   const { previewThemeId, setPreviewThemeId, themes, activeThemeId, applyTheme, updateTheme, deleteTheme, duplicateTheme } = useThemeStore();
   const { isAuthenticated } = useAuthStore();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const theme = themes.find(t => t.id === previewThemeId);
 
@@ -27,10 +29,7 @@ export function ThemePreview({ onEdit }: { onEdit: () => void }) {
   };
 
   const handleDelete = () => {
-    if (confirm('Are you sure you want to delete this theme?')) {
-      deleteTheme(theme.id);
-      setPreviewThemeId(null);
-    }
+    setShowDeleteConfirm(true);
   };
   
   const handleDuplicate = () => {
@@ -198,6 +197,18 @@ export function ThemePreview({ onEdit }: { onEdit: () => void }) {
           </div>
         </div>
       </div>
+
+      <ConfirmDialog
+        isOpen={showDeleteConfirm}
+        title="Delete Theme"
+        message="Are you sure you want to delete this theme? This action cannot be undone."
+        confirmText="Delete Theme"
+        onConfirm={() => {
+          deleteTheme(theme.id);
+          setPreviewThemeId(null);
+        }}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
     </div>
   );
 }

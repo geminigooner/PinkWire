@@ -3,6 +3,7 @@ import { useGuestbookStore } from '../store/useGuestbookStore';
 import { GuestbookEntry } from './GuestbookEntry';
 import { Composer } from './Composer';
 import { format, parseISO } from 'date-fns';
+import { SearchX } from 'lucide-react';
 
 export function MainView() {
   const { entries, visitors, filter, sortOrder, searchQuery, archiveMonthYear } = useGuestbookStore();
@@ -72,7 +73,10 @@ export function MainView() {
             
             <div className="space-y-6">
               {filteredEntries.length === 0 ? (
-                <div className="text-center py-12 text-[#a3948e] italic">
+                <div className="text-center py-12 flex flex-col items-center justify-center text-[#a3948e] italic">
+                  <div className="w-16 h-16 rounded-full bg-[#f0e6e2] flex items-center justify-center mb-4">
+                    <SearchX size={32} className="text-[#cf8c8c]" />
+                  </div>
                   No entries found matching your criteria.
                 </div>
               ) : (

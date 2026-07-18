@@ -6,7 +6,7 @@ import { MediaList } from './components/MediaList';
 import { UploadModal } from './components/UploadModal';
 import { useMediaStore } from './store/useMediaStore';
 import { useAuthStore } from '../../store/useAuthStore';
-import { Film } from 'lucide-react';
+import { Film, SearchX } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 export function MediaApp() {
@@ -63,7 +63,11 @@ export function MediaApp() {
             </div>
           ) : filteredItems.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-os-text-muted">
-              <p>No media found matching your criteria.</p>
+              <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                <SearchX size={32} className="opacity-50" />
+              </div>
+              <p className="text-base font-medium text-os-text mb-1">No media found</p>
+              <p className="text-sm">Try adjusting your filters or search query.</p>
             </div>
           ) : (
             viewMode === 'grid' ? <MediaGrid items={filteredItems} /> : <MediaList items={filteredItems} />

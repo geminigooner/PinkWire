@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useJournalStore } from '../../store/useJournalStore';
 import ReactMarkdown from 'react-markdown';
 import { format } from 'date-fns';
@@ -8,12 +8,14 @@ import { useAudioStore } from '../../../../store/useAudioStore';
 import { useAchievementStore } from '../../../../store/useAchievementStore';
 import { Music2, Play, Edit3, Trash2 } from 'lucide-react';
 import { useAuthStore } from '../../../../store/useAuthStore';
+import { ConfirmDialog } from '../../../../components/ConfirmDialog';
 
 export function Reader() {
-  const { articles, activeArticleId, textSize, readingMode, startEditing, deleteArticle } = useJournalStore();
+  const { articles, activeArticleId, textSize, readingMode, startEditing, deleteArticle, setActiveArticle } = useJournalStore();
   const openWindow = useWindowStore(state => state.openWindow);
   const { isAuthenticated } = useAuthStore();
   const { tracks, playTrack } = useAudioStore();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   
   const article = articles.find(a => a.id === activeArticleId);
 
@@ -53,7 +55,7 @@ export function Reader() {
               <button onClick={() => startEditing(article.id)} title="Edit Post" className="p-2 bg-os-window-bg/80 hover:bg-os-accent/20 text-os-text-muted hover:text-os-accent rounded-os transition-colors border border-os-window-border hover:border-os-accent/50 backdrop-blur-os-os-os shadow-os">
                 <Edit3 size={16} />
               </button>
-              <button onClick={() => deleteArticle(article.id)} title="Delete Post" className="p-2 bg-os-window-bg/80 hover:bg-red-500/20 text-os-text-muted hover:text-red-400 rounded-os transition-colors border border-os-window-border hover:border-red-500/50 backdrop-blur-os-os-os shadow-os">
+              <button onClick={() => setShowDeleteConfirm(true)} title="Delete Post" className="p-2 bg-os-window-bg/80 hover:bg-red-500/20 text-os-text-muted hover:text-red-400 rounded-os transition-colors border border-os-window-border hover:border-red-500/50 backdrop-blur-os-os-os shadow-os">
                 <Trash2 size={16} />
               </button>
             </div>
@@ -182,6 +184,18 @@ export function Reader() {
            <p className={cn("font-serif italic", readingMode ? "text-gray-500" : "text-os-text-muted")}>End of entry.</p>
         </footer>
       </div>
+
+      <ConfirmDialog
+        isOpen={showDeleteConfirm}
+        title="Delete Entry"
+        message="Are you sure you want to delete this entry? This action cannot be undone."
+        confirmText="Delete"
+        onConfirm={() => {
+          deleteArticle(article.id);
+          setActiveArticle(null);
+        }}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
     </div>
   );
 }

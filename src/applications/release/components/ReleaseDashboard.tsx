@@ -7,6 +7,7 @@ import { useMediaStore } from '../../media/store/useMediaStore';
 import { Rocket, Edit3, Plus, Package, Clock, LayoutDashboard, Database, Activity, CheckCircle2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { ReleaseTab } from './ReleaseSidebar';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export function ReleaseDashboard({ setActiveTab }: { setActiveTab: (tab: ReleaseTab) => void }) {
   const { currentVersion, draftRelease, createDraft, updateDraft, publishRelease, deleteDraft } = useReleaseStore();
@@ -20,6 +21,8 @@ export function ReleaseDashboard({ setActiveTab }: { setActiveTab: (tab: Release
   const [showNewDraft, setShowNewDraft] = useState(false);
   const [newVersion, setNewVersion] = useState('');
   const [newType, setNewType] = useState<'major' | 'minor' | 'patch' | 'pre-release'>('minor');
+  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false);
+  const [showPublishConfirm, setShowPublishConfirm] = useState(false);
 
   const handleCreateDraft = () => {
     if (newVersion) {
@@ -79,13 +82,13 @@ export function ReleaseDashboard({ setActiveTab }: { setActiveTab: (tab: Release
               </div>
               <div className="flex gap-2">
                 <button 
-                  onClick={() => deleteDraft()}
+                  onClick={() => setShowDiscardConfirm(true)}
                   className="px-3 py-1.5 rounded-os hover:bg-white/10 text-os-text-muted hover:text-red-400 transition-colors text-sm"
                 >
                   Discard
                 </button>
                 <button 
-                  onClick={() => publishRelease()}
+                  onClick={() => setShowPublishConfirm(true)}
                   className="px-4 py-1.5 rounded-os bg-os-accent text-white hover:bg-os-accent/90 transition-colors shadow-os text-sm font-medium flex items-center gap-2"
                 >
                   <Rocket size={16} /> Publish
@@ -205,6 +208,25 @@ export function ReleaseDashboard({ setActiveTab }: { setActiveTab: (tab: Release
           </div>
         </div>
       </div>
+      
+      <ConfirmDialog
+        isOpen={showDiscardConfirm}
+        title="Discard Draft"
+        message="Are you sure you want to discard this draft release? This action cannot be undone."
+        confirmText="Discard"
+        onConfirm={deleteDraft}
+        onCancel={() => setShowDiscardConfirm(false)}
+      />
+
+      <ConfirmDialog
+        isOpen={showPublishConfirm}
+        title="Publish Release"
+        message="Are you sure you want to publish this release? It will become the new current version."
+        confirmText="Publish"
+        variant="info"
+        onConfirm={publishRelease}
+        onCancel={() => setShowPublishConfirm(false)}
+      />
     </div>
   );
 }

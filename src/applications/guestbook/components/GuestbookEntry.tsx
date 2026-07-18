@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GuestbookEntryData, useGuestbookStore } from '../store/useGuestbookStore';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { MapPin, Globe, Star, Trash2 } from 'lucide-react';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { cn } from '../../../utils/cn';
+import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   const toggleFavorite = useGuestbookStore(state => state.toggleFavorite);
@@ -11,6 +12,7 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   const setSelectedVisitorId = useGuestbookStore(state => state.setSelectedVisitorId);
   const deleteEntry = useGuestbookStore(state => state.deleteEntry);
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   
   const visitor = visitors.find(v => v.id === entry.visitorId);
   if (!visitor) return null;
@@ -63,7 +65,7 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
             <div className="flex items-center gap-1">
               {isAuthenticated && (
               <button
-                onClick={() => deleteEntry(entry.id)}
+                onClick={() => setShowDeleteConfirm(true)}
                 className="p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-500 hover:bg-red-50"
                 title="Delete Entry"
               >
@@ -95,6 +97,15 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
           </div>
         </div>
       </div>
+      
+      <ConfirmDialog
+        isOpen={showDeleteConfirm}
+        title="Delete Entry"
+        message="Are you sure you want to delete this guestbook entry? This action cannot be undone."
+        confirmText="Delete"
+        onConfirm={() => deleteEntry(entry.id)}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
     </div>
   );
 }

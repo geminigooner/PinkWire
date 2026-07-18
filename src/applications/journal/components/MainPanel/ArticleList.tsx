@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useJournalStore } from '../../store/useJournalStore';
 import { useAuthStore } from '../../../../store/useAuthStore';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '../../../../utils/cn';
-import { Edit2, Copy, Archive, Trash2, Globe } from 'lucide-react';
+import { Edit2, Copy, Archive, Trash2, Globe, SearchX } from 'lucide-react';
+import { ConfirmDialog } from '../../../../components/ConfirmDialog';
 
 export function ArticleList() {
   const { 
@@ -11,6 +12,7 @@ export function ArticleList() {
     deleteArticle, duplicateArticle, archiveArticle, restoreArticle, startEditing, publishArticle, unpublishArticle
   } = useJournalStore();
   const { isAuthenticated } = useAuthStore();
+  const [articleToDelete, setArticleToDelete] = useState<string | null>(null);
 
   const filteredArticles = articles.filter(article => {
     // Auth filter - only show published to visitors
@@ -38,7 +40,11 @@ export function ArticleList() {
     <div className="flex-1 overflow-y-auto bg-black/20 p-6 space-y-4">
       {filteredArticles.length === 0 ? (
         <div className="h-full flex flex-col items-center justify-center text-os-text-muted">
-          <p className="text-sm">No entries found.</p>
+          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4">
+            <SearchX size={32} className="opacity-50" />
+          </div>
+          <p className="text-base font-medium text-os-text mb-1">No entries found</p>
+          <p className="text-sm">Try adjusting your filters or search query.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -68,7 +74,7 @@ export function ArticleList() {
                       <Globe size={14} />
                     </button>
                   )}
-                  <button onClick={(e) => { e.stopPropagation(); deleteArticle(article.id); }} className="p-1.5 hover:bg-red-500/80 rounded-os text-white transition-colors" title="Delete">
+                  <button onClick={(e) => { e.stopPropagation(); setArticleToDelete(article.id); }} className="p-1.5 hover:bg-red-500/80 rounded-os text-white transition-colors" title="Delete">
                     <Trash2 size={14} />
                   </button>
                 </div>
@@ -121,6 +127,17 @@ export function ArticleList() {
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        isOpen={!!articleToDelete}
+        title="Delete Entry"
+        message="Are you sure you want to delete this entry? This action cannot be undone."
+        confirmText="Delete"
+        onConfirm={() => {
+          if (articleToDelete) deleteArticle(articleToDelete);
+        }}
+        onCancel={() => setArticleToDelete(null)}
+      />
     </div>
   );
 }
