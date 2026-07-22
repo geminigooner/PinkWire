@@ -11,11 +11,37 @@ export function SyncProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isAuthenticated && token) {
       // Connect sync when user logs in
-      initialize(token).then(() => {
+      initialize(token).then(async () => {
+        try {
+          const res = await fetch('/api/sync', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            const data = await res.json();
+            let shouldReload = false;
+            for (const [storeName, payload] of Object.entries<any>(data)) {
+              const currentLocal = localStorage.getItem(storeName);
+              // The backend stores the SyncPayload which has { storeName, data, timestamp }
+              // We need to write the `payload.data` to localStorage
+              const newLocal = typeof payload.data === 'string' ? payload.data : JSON.stringify(payload.data);
+              if (currentLocal !== newLocal && newLocal) {
+                localStorage.setItem(storeName, newLocal);
+                shouldReload = true;
+              }
+            }
+            if (shouldReload) {
+              window.location.reload();
+              return;
+            }
+          }
+        } catch(e) {
+          console.error('Failed to pull sync data on login:', e);
+        }
+
         osEvents.publish({ 
           type: 'Toast', 
           payload: { 
-            message: 'Cloud Sync connected.'
+            message: 'Cloud Sync connected & synchronized.'
           } 
         });
       });

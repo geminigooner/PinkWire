@@ -84,7 +84,8 @@ export const useJournalStore = create<JournalState>()(
               status: 'draft',
               date: new Date().toISOString(),
               readingTime: 0,
-              favorite: false
+              favorite: false,
+              fontFamily: 'font-sans'
             }, 
             saveStatus: 'idle' 
           });

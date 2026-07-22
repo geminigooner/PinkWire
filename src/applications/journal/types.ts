@@ -19,6 +19,7 @@ export interface Article {
   seoDescription?: string;
   relatedPosts?: string[];
   references?: { type: 'track' | 'album' | 'playlist'; id: string; name: string }[];
+  fontFamily?: string;
 }
 
 export interface Category {

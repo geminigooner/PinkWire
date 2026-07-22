@@ -1,18 +1,18 @@
 import { SyncAdapter, SyncPayload } from './SyncAdapter';
+import { useAuthStore } from '../../store/useAuthStore';
 
 /**
- * A mock adapter preparing for future Cloudflare KV/D1/Durable Objects backend.
+ * ApiSyncAdapter communicating with our backend.
  */
 export class CloudflareSyncAdapter implements SyncAdapter {
-  name = 'cloudflare';
+  name = 'api-sync';
   private isAuthenticated = false;
   
   async initialize(token?: string): Promise<void> {
     if (token) {
       this.isAuthenticated = true;
-      console.log('[CloudflareSyncAdapter] Initialized with token.');
+      console.log('[ApiSyncAdapter] Initialized with token.');
     }
-    // In the future, establish WebSocket connection or check session here.
     return Promise.resolve();
   }
   
@@ -21,10 +21,22 @@ export class CloudflareSyncAdapter implements SyncAdapter {
       throw new Error('Not authenticated for cloud sync.');
     }
     
-    console.log(`[CloudflareSyncAdapter] Pushing data for ${payload.storeName}...`, payload);
+    console.log(`[ApiSyncAdapter] Pushing data for ${payload.storeName}...`);
     
-    // Simulate network delay
-    return new Promise((resolve) => setTimeout(resolve, 800));
+    const token = useAuthStore.getState().token;
+    
+    const res = await fetch(`/api/sync/${payload.storeName}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (!res.ok) {
+      throw new Error('Failed to push sync data');
+    }
   }
   
   async pull(storeName: string): Promise<SyncPayload | null> {
@@ -32,19 +44,31 @@ export class CloudflareSyncAdapter implements SyncAdapter {
       return null;
     }
     
-    console.log(`[CloudflareSyncAdapter] Pulling data for ${storeName}...`);
+    console.log(`[ApiSyncAdapter] Pulling data for ${storeName}...`);
     
-    // Simulate network delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(null); // Return null for now, meaning no remote data found
-      }, 500);
-    });
+    const token = useAuthStore.getState().token;
+    
+    try {
+      const res = await fetch(`/api/sync/${storeName}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (res.ok) {
+        return await res.json();
+      }
+      return null;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
   
   async disconnect(): Promise<void> {
     this.isAuthenticated = false;
-    console.log('[CloudflareSyncAdapter] Disconnected.');
+    console.log('[ApiSyncAdapter] Disconnected.');
     return Promise.resolve();
   }
 }

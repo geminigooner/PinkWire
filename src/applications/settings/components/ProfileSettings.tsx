@@ -1,30 +1,67 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { useProfileStore } from '../../../services/profile/useProfileStore';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { useSyncStore } from '../../../services/sync/useSyncStore';
-import { Cloud, LogOut, LogIn, User, RefreshCw, CheckCircle2, CloudOff } from 'lucide-react';
+import { useWindowStore } from '../../../store/useWindowStore';
+import { Cloud, LogOut, LogIn, User, RefreshCw, CheckCircle2, CloudOff, X, Check, UploadCloud, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 export function ProfileSettings() {
   const { profile, updateProfile } = useProfileStore();
   const { isAuthenticated, setAuth, logout } = useAuthStore();
   const { status, lastSyncTime, triggerManualSync } = useSyncStore();
+  const [isEditingPicture, setIsEditingPicture] = useState(false);
+  const [tempPictureUrl, setTempPictureUrl] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handlePictureEdit = () => {
-    const newUrl = prompt("Enter new profile picture URL:", profile.profilePicture);
-    if (newUrl) {
-      updateProfile({ profilePicture: newUrl });
+  const handlePictureEditClick = () => {
+    setTempPictureUrl(profile.profilePicture || '');
+    setIsEditingPicture(true);
+  };
+
+  const savePictureUrl = () => {
+    updateProfile({ profilePicture: tempPictureUrl });
+    setIsEditingPicture(false);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const token = useAuthStore.getState().token || '';
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        updateProfile({ profilePicture: data.url });
+        setIsEditingPicture(false);
+      } else {
+        console.error("Upload failed", await res.text());
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
   const handleLogin = () => {
-    // Basic mock auth for now
-    const password = prompt("Enter Administrator Password:");
-    if (password === 'amanda') {
-      setAuth(true, 'mock-jwt-token');
-    } else {
-      alert("Invalid password.");
-    }
+    useWindowStore.getState().openWindow('admin');
   };
 
   if (!isAuthenticated) {
@@ -53,14 +90,51 @@ export function ProfileSettings() {
       
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 bg-black/20 p-6 rounded-os border border-white/5">
         <div className="relative group">
-          <img 
-            src={profile.profilePicture} 
-            alt="Profile" 
-            className="w-24 h-24 rounded-full object-cover border-2 border-os-accent/50"
-          />
-          <div onClick={handlePictureEdit} className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
-            <span className="text-xs font-medium text-white">Edit</span>
-          </div>
+          {isEditingPicture ? (
+            <div className="flex flex-col gap-2 p-2 bg-black/40 rounded-os border border-os-accent/30 z-10 w-48 shadow-lg shrink-0">
+              <input 
+                type="text" 
+                value={tempPictureUrl} 
+                onChange={(e) => setTempPictureUrl(e.target.value)} 
+                placeholder="Image URL..." 
+                className="w-full bg-black/50 text-xs px-2 py-1.5 rounded border border-white/10 outline-none focus:border-os-accent"
+                autoFocus
+              />
+              <div className="flex items-center justify-between gap-1">
+                <button 
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isUploading}
+                  className="flex items-center gap-1.5 px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-xs text-os-text-muted transition-colors disabled:opacity-50"
+                  title="Upload from computer"
+                >
+                  {isUploading ? <Loader2 size={12} className="animate-spin" /> : <UploadCloud size={12} />}
+                  Upload
+                </button>
+                <div className="flex gap-1">
+                  <button onClick={() => setIsEditingPicture(false)} className="p-1 rounded bg-white/5 hover:bg-white/10 text-os-text-muted transition-colors"><X size={14} /></button>
+                  <button onClick={savePictureUrl} className="p-1 rounded bg-os-accent text-white hover:bg-os-accent/90 transition-colors"><Check size={14} /></button>
+                </div>
+              </div>
+              <input 
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
+          ) : (
+            <>
+              <img 
+                src={profile.profilePicture} 
+                alt="Profile" 
+                className="w-24 h-24 rounded-full object-cover border-2 border-os-accent/50 shrink-0"
+              />
+              <div onClick={handlePictureEditClick} className="absolute inset-0 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
+                <span className="text-xs font-medium text-white">Edit</span>
+              </div>
+            </>
+          )}
         </div>
         
         <div className="flex-1 text-center sm:text-left">

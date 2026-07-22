@@ -20,7 +20,7 @@ export const createSyncStorage = (storeName: string): StateStorage => {
       if (isAuthenticated) {
         try {
           const parsed = JSON.parse(value);
-          useSyncStore.getState().queueSync(storeName, parsed.state || parsed);
+          useSyncStore.getState().queueSync(storeName, parsed);
         } catch (e) {
           // Fallback to sending string if not JSON
           useSyncStore.getState().queueSync(storeName, value);

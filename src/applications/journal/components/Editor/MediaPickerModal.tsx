@@ -1,10 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useMediaStore } from '../../../media/store/useMediaStore';
-import { X, Search } from 'lucide-react';
+import { useAuthStore } from '../../../../store/useAuthStore';
+import { X, Search, UploadCloud, Loader2 } from 'lucide-react';
 
 export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, onSelect: (url: string) => void }) {
-  const { items } = useMediaStore();
+  const { items, addItem } = useMediaStore();
   const [search, setSearch] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const token = useAuthStore.getState().token || '';
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        
+        // Add to media store
+        const newItem = {
+          id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 9),
+          url: data.url,
+          displayName: file.name,
+          mimeType: file.type,
+          size: file.size,
+          category: 'Photos' as const,
+          dateAdded: new Date().toISOString(),
+          tags: ['uploaded', 'journal'],
+          favorite: false
+        };
+        addItem(newItem);
+        
+        onSelect(data.url);
+      } else {
+        console.error("Upload failed", await res.text());
+        alert("Upload failed");
+      }
+    } catch (error) {
+      console.error("Upload error", error);
+      alert("Upload failed");
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
 
   const filteredItems = items.filter(item => 
     item.displayName.toLowerCase().includes(search.toLowerCase()) ||
@@ -16,9 +70,26 @@ export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, o
       <div className="w-full max-w-4xl max-h-[80vh] bg-os-window-bg border border-os-window-border rounded-os shadow-os flex flex-col overflow-hidden">
         <div className="h-12 border-b border-os-window-border bg-os-titlebar-bg flex items-center justify-between px-4">
           <h2 className="font-semibold text-os-text">Select Media</h2>
-          <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-os text-os-text-muted hover:text-os-text transition-colors">
-            <X size={18} />
-          </button>
+          <div className="flex items-center gap-2">
+            <input 
+              type="file" 
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+              accept="image/*,video/*"
+              className="hidden"
+            />
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/5 hover:bg-white/10 rounded-os text-sm text-os-text transition-colors disabled:opacity-50"
+            >
+              {isUploading ? <Loader2 size={14} className="animate-spin" /> : <UploadCloud size={14} />}
+              Upload
+            </button>
+            <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-os text-os-text-muted hover:text-os-text transition-colors">
+              <X size={18} />
+            </button>
+          </div>
         </div>
         
         <div className="p-4 border-b border-os-window-border bg-os-window-bg/50">

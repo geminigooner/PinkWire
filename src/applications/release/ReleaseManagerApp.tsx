@@ -4,6 +4,7 @@ import { ReleaseDashboard } from './components/ReleaseDashboard';
 import { PreflightChecklist } from './components/PreflightChecklist';
 import { ReleaseHistory } from './components/ReleaseHistory';
 import { useAuthStore } from '../../store/useAuthStore';
+import { useWindowStore } from '../../store/useWindowStore';
 import { Rocket, LogIn } from 'lucide-react';
 
 export function ReleaseManagerApp() {
@@ -11,12 +12,7 @@ export function ReleaseManagerApp() {
   const { isAuthenticated, setAuth } = useAuthStore();
 
   const handleLogin = () => {
-    const password = prompt("Enter Administrator Password:");
-    if (password === 'amanda') {
-      setAuth(true, 'mock-jwt-token');
-    } else {
-      alert("Invalid password.");
-    }
+    useWindowStore.getState().openWindow('admin');
   };
 
   if (!isAuthenticated) {

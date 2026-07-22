@@ -132,7 +132,8 @@ export function Reader() {
 
         {/* We use standard tailwind typography equivalent styles manually, or custom elements */}
         <div className={cn(
-          "max-w-2xl mx-auto font-serif leading-relaxed",
+          "max-w-2xl mx-auto leading-relaxed",
+          article.fontFamily || "font-serif",
           sizeClasses[textSize],
           readingMode 
             ? "prose prose-gray prose-headings:font-sans prose-headings:font-semibold prose-a:text-rose-600 prose-blockquote:border-rose-600 prose-blockquote:text-gray-700" 
@@ -181,7 +182,7 @@ export function Reader() {
         </div>
         
         <footer className="mt-16 pt-8 border-t border-os-window-border/30 text-center">
-           <p className={cn("font-serif italic", readingMode ? "text-gray-500" : "text-os-text-muted")}>End of entry.</p>
+           <p className={cn("italic", article.fontFamily || "font-serif", readingMode ? "text-gray-500" : "text-os-text-muted")}>End of entry.</p>
         </footer>
       </div>
 

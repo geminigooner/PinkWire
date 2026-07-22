@@ -21,9 +21,12 @@ export function Toolbar() {
   return (
     <div className="h-14 shrink-0 border-b border-os-window-border bg-os-titlebar-bg/70 px-4 flex items-center justify-between">
       <div className="flex items-center gap-2">
-        {!activeArticleId && !isEditing && isAuthenticated && (
+        {!isEditing && isAuthenticated && (
           <button
-            onClick={() => startEditing()}
+            onClick={() => {
+              setActiveArticle(null);
+              startEditing();
+            }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-os text-sm font-medium bg-os-accent/20 text-os-accent hover:bg-os-accent hover:text-white transition-colors mr-2"
           >
             <FilePlus size={16} />

@@ -8,7 +8,7 @@ import { useProfileStore } from '../services/profile/useProfileStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { useSyncStore } from '../services/sync/useSyncStore';
 
-export function StartMenuProfile() {
+export function StartMenuProfile({ onClose }: { onClose?: () => void }) {
   const [time, setTime] = useState(new Date());
   const wallpaper = useDesktopStore(state => state.wallpaper);
   const theme = useSettingsStore(state => state.theme);
@@ -61,7 +61,10 @@ export function StartMenuProfile() {
       </div>
       
       <button 
-        onClick={() => openWindow('settings')}
+        onClick={() => {
+          openWindow('settings');
+          if (onClose) onClose();
+        }}
         className="p-2.5 rounded-os hover:bg-white/10 transition-colors z-10 text-os-text-muted hover:text-os-text shrink-0 border border-transparent hover:border-white/5"
       >
         <Settings size={20} />

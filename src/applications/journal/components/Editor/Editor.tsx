@@ -15,6 +15,7 @@ export function Editor() {
   const [coverImage, setCoverImage] = useState(draftArticle?.coverImage || '');
   const [tagsInput, setTagsInput] = useState(draftArticle?.tags?.join(', ') || '');
   const [category, setCategory] = useState(draftArticle?.category || 'research');
+  const [fontFamily, setFontFamily] = useState(draftArticle?.fontFamily || 'font-sans');
   const { categories } = useJournalStore();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
@@ -32,11 +33,12 @@ export function Editor() {
         (content !== draftArticle.content || 
          title !== draftArticle.title || 
          summary !== draftArticle.summary ||
-         coverImage !== draftArticle.coverImage)
+         coverImage !== draftArticle.coverImage ||
+         fontFamily !== draftArticle.fontFamily)
       ) {
         updateDraft({ 
           content, title, summary, coverImage, 
-          category, 
+          category, fontFamily,
           tags: tagsInput.split(',').map(t => t.trim()).filter(Boolean)
         });
         saveDraft();
@@ -221,6 +223,18 @@ export function Editor() {
                 ))}
               </select>
             </div>
+            <div className="flex-1 flex flex-col gap-1">
+              <label className="text-xs uppercase tracking-wider text-os-text-muted font-medium">Font Style</label>
+              <select 
+                value={fontFamily}
+                onChange={(e) => setFontFamily(e.target.value)}
+                className="bg-black/30 border border-os-window-border rounded-os px-3 py-2 text-sm text-os-text outline-none focus:border-os-accent/50"
+              >
+                <option value="font-sans">Modern (Sans)</option>
+                <option value="font-serif">Classic (Serif)</option>
+                <option value="font-mono">Technical (Mono)</option>
+              </select>
+            </div>
             <div className="flex-[2] flex flex-col gap-1">
               <label className="text-xs uppercase tracking-wider text-os-text-muted font-medium">Tags (comma separated)</label>
               <input 
@@ -239,7 +253,7 @@ export function Editor() {
             placeholder="Write your thoughts here..."
             value={content}
             onChange={handleContentChange}
-            className="w-full flex-1 min-h-[500px] bg-transparent border-none outline-none text-os-text text-lg leading-relaxed placeholder-os-text-muted/20 resize-none font-serif"
+            className={cn("w-full flex-1 min-h-[500px] bg-transparent border-none outline-none text-os-text text-lg leading-relaxed placeholder-os-text-muted/20 resize-none", fontFamily)}
           />
         </div>
       </div>

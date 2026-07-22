@@ -17,11 +17,13 @@ export function DesktopSettings() {
   } = useDesktopStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mediaItems = useMediaStore(state => state.items);
-  const uploadedWallpapers = mediaItems.filter(item => item.category === 'Wallpapers').map(item => ({
+  const uploadedWallpapers = mediaItems.filter(item => item.category === 'Wallpapers' || item.category === 'Photos').map(item => ({
     id: item.url,
     url: item.url,
-    title: item.displayName,
-    author: 'Uploaded'
+    name: item.displayName || 'Uploaded Image',
+    description: item.description || 'Uploaded from local device',
+    creator: 'You',
+    dateAdded: item.dateAdded
   }));
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +40,7 @@ export function DesktopSettings() {
 
   const isGradient = (url: string) => url.startsWith('bg-');
   
-  const currentWallpaperMeta = WALLPAPERS.find(w => w.url === wallpaper);
+  const currentWallpaperMeta = WALLPAPERS.concat(uploadedWallpapers).find(w => w.url === wallpaper);
 
   return (
     <div className="p-4 sm:p-8 max-w-5xl mx-auto space-y-8 sm:space-y-12">
@@ -68,7 +70,7 @@ export function DesktopSettings() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
-              {WALLPAPERS.map(w => {
+              {WALLPAPERS.concat(uploadedWallpapers).map(w => {
                 const isActive = wallpaper === w.url;
                 return (
                   <button

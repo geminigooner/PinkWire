@@ -52,7 +52,7 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
         <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mt-3 mb-1 sm:hidden shrink-0" />
         
         <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col p-4 sm:p-6 gap-6 relative">
-          <StartMenuProfile />
+          <StartMenuProfile onClose={onClose} />
           <StartMenuSearch onClose={onClose} />
           
           {query.trim().length > 0 ? (

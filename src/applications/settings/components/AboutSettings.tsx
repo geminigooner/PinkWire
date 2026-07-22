@@ -104,16 +104,6 @@ export function AboutSettings() {
           </div>
         </div>
         
-        <div className="md:col-span-2 bg-black/20 border border-os-window-border rounded-os p-6 backdrop-blur-os-os-os shadow-os text-center space-y-4">
-          <h3 className="text-sm font-medium text-os-text-muted uppercase tracking-wider flex items-center justify-center gap-2">
-            <Heart size={16} className="text-os-accent" /> Credits
-          </h3>
-          <p className="text-os-text text-sm leading-relaxed max-w-lg mx-auto">
-            <strong>PinkWire OS</strong><br/>
-            Designed and developed by Amanda Danielle. <br/><br/>
-            <span className="text-os-text-muted">Built with curiosity, humor, late nights, and entirely too much pink.</span>
-          </p>
-        </div>
       </div>
     </div>
   );
