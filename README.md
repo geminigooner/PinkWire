@@ -53,4 +53,4 @@ PinkWire OS respects reduced motion preferences, offers high-contrast modes, and
 ## Credits
 
 Designed and developed by Amanda Danielle.
-Built with curiosity, humor, late nights, and entirely too much pink.
+Built with Gemini and Claude with commentary from ChatGPT
