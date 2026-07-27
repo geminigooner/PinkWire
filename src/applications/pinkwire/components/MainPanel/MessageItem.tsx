@@ -1,6 +1,7 @@
 import React from 'react';
 import { Conversation, Message, Participant } from '../../types';
 import { format } from 'date-fns';
+import { Sparkles } from 'lucide-react';
 import { TextMessage } from './MessageTypes/TextMessage';
 import { ImageMessage } from './MessageTypes/ImageMessage';
 import { CodeMessage } from './MessageTypes/CodeMessage';
@@ -27,7 +28,7 @@ export function MessageItem({ message, prevMessage, participants }: { message: M
   }
 
   const isMe = message.senderId === 'me';
-  const sender = isMe ? { name: 'Amanda', avatar: '' } : participants.find(p => p.id === message.senderId);
+  const sender = isMe ? { id: 'me', name: 'Amanda', avatar: '' } : participants.find(p => p.id === message.senderId);
 
   const renderContent = () => {
     switch (message.type) {
@@ -46,6 +47,10 @@ export function MessageItem({ message, prevMessage, participants }: { message: M
         {!isGrouped && sender && (
           sender.avatar ? (
             <img src={sender.avatar} alt="" className="w-8 h-8 rounded-os object-cover" />
+          ) : sender.id === 'gemini' ? (
+            <div className="w-8 h-8 rounded-os bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white">
+              <Sparkles size={16} className="fill-white" />
+            </div>
           ) : (
             <div className="w-8 h-8 rounded-os bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white font-medium text-xs">
               {sender.name.charAt(0)}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { usePinkWireStore } from '../../store/usePinkWireStore';
 import { MessageList } from './MessageList';
-import { Hash, Phone, Video, Info, ChevronLeft } from 'lucide-react';
+import { ChatInput } from './ChatInput';
+import { Hash, Phone, Video, Info, ChevronLeft, Sparkles } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 
 const statusColors = {
@@ -45,6 +46,10 @@ export function MainPanel() {
           <div className="relative shrink-0">
             {participant?.avatar ? (
               <img src={participant.avatar} alt="" className="w-10 h-10 rounded-full object-cover" />
+            ) : participant?.id === 'gemini' ? (
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white">
+                <Sparkles size={20} className="fill-white" />
+              </div>
             ) : (
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white font-medium">
                 {conversation.title.charAt(0)}
@@ -75,12 +80,8 @@ export function MainPanel() {
       {/* Messages */}
       <MessageList conversation={conversation} />
 
-      {/* Input area (disabled for phase 4) */}
-      <div className="p-4 border-t border-os-window-border bg-os-titlebar-bg/30">
-        <div className="bg-black/40 border border-os-window-border rounded-os p-3 text-sm text-os-text-muted/50 cursor-not-allowed">
-          Viewing conversation history...
-        </div>
-      </div>
+      {/* Input area */}
+      <ChatInput conversation={conversation} />
     </div>
   );
 }

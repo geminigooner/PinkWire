@@ -3,7 +3,7 @@ import { Conversation, UserStatus } from '../../types';
 import { usePinkWireStore } from '../../store/usePinkWireStore';
 import { cn } from '../../../../utils/cn';
 import { formatDistanceToNow } from 'date-fns';
-import { Hash } from 'lucide-react';
+import { Hash, Sparkles } from 'lucide-react';
 
 const statusColors: Record<UserStatus, string> = {
   online: 'bg-green-500',
@@ -33,6 +33,10 @@ export function ConversationItem({ conversation }: { conversation: Conversation 
       <div className="relative shrink-0">
         {participant?.avatar ? (
           <img src={participant.avatar} alt="" className="w-10 h-10 rounded-full object-cover" />
+        ) : participant?.id === 'gemini' ? (
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center text-white">
+            <Sparkles size={20} className="fill-white" />
+          </div>
         ) : (
           <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center text-white font-medium">
             {conversation.title.charAt(0)}

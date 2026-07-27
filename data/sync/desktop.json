@@ -1,0 +1,78 @@
+{
+  "storeName": "desktop",
+  "data": {
+    "state": {
+      "hasBooted": true,
+      "wallpaper": "bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900",
+      "wallpaperFit": "cover",
+      "wallpaperBlur": false,
+      "favoriteWallpapers": [],
+      "desktopIcons": [
+        {
+          "id": "explorer-icon",
+          "appId": "explorer",
+          "x": 20,
+          "y": 20
+        },
+        {
+          "id": "pinkwire-icon",
+          "appId": "pinkwire",
+          "x": 20,
+          "y": 120
+        },
+        {
+          "id": "journal-icon",
+          "appId": "journal",
+          "x": 20,
+          "y": 220
+        },
+        {
+          "id": "disposable-icon",
+          "appId": "disposable",
+          "x": 20,
+          "y": 320
+        },
+        {
+          "id": "browser-icon",
+          "appId": "browser",
+          "x": 20,
+          "y": 420
+        },
+        {
+          "id": "guestbook-icon",
+          "appId": "guestbook",
+          "x": 20,
+          "y": 520
+        },
+        {
+          "id": "settings-icon",
+          "appId": "settings",
+          "x": 120,
+          "y": 20
+        }
+      ],
+      "stickers": [],
+      "stickyNotes": [
+        {
+          "id": "note-1",
+          "text": "buy iced coffee",
+          "x": -250,
+          "y": 100,
+          "color": "bg-yellow-200 text-yellow-900"
+        },
+        {
+          "id": "note-2",
+          "text": "remember to hydrate the embeddings",
+          "x": -220,
+          "y": 300,
+          "color": "bg-pink-200 text-pink-900"
+        }
+      ],
+      "autoArrangeIcons": false,
+      "snapToGrid": false,
+      "showLabels": true
+    },
+    "version": 1
+  },
+  "timestamp": 1784750965106
+}

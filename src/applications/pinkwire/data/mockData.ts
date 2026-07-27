@@ -6,17 +6,17 @@ const now = new Date();
 export const MOCK_CONVERSATIONS: Conversation[] = [
   {
     id: 'conv-1',
-    title: 'Keito',
+    title: 'Gemini',
     lastUpdated: subMinutes(now, 5).toISOString(),
     isFavorite: true,
     tags: ['work', 'ai', 'philosophy'],
     participants: [
       {
-        id: 'keito',
-        name: 'Keito',
+        id: 'gemini',
+        name: 'Gemini',
         status: 'online',
         customStatus: 'Thinking about arrays...',
-        avatar: 'https://images.unsplash.com/photo-1552508744-1696d4464960?auto=format&fit=crop&w=150&q=80'
+        avatar: '' // We will render the Sparkles icon dynamically in the UI
       }
     ],
     messages: [
@@ -29,7 +29,7 @@ export const MOCK_CONVERSATIONS: Conversation[] = [
       },
       {
         id: 'm-1',
-        senderId: 'keito',
+        senderId: 'gemini',
         timestamp: subDays(now, 2).toISOString(),
         type: 'text',
         content: 'Hey Amanda, did you see the new update for the neural processor?'
@@ -50,14 +50,14 @@ export const MOCK_CONVERSATIONS: Conversation[] = [
       },
       {
         id: 'm-4',
-        senderId: 'keito',
+        senderId: 'gemini',
         timestamp: subHours(now, 4).toISOString(),
         type: 'code',
         content: '```typescript\nconst optimize = (nodes: Node[]) => nodes.filter(n => n.active);\n```'
       },
       {
         id: 'm-5',
-        senderId: 'keito',
+        senderId: 'gemini',
         timestamp: subHours(now, 4).toISOString(),
         type: 'text',
         content: 'I think we can simplify the graph traversal too.'
