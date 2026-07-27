@@ -1,0 +1,23 @@
+{
+  "name": "pinkwireos",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "amandaos",
+      "database_id": "6498e167-857b-4345-a447-62c631b4a7a7"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "amandaos"
+    }
+  ]
+}
