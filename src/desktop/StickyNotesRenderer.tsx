@@ -40,7 +40,7 @@ function StickyNote({ note }: { note: StickyNoteState }) {
         boxShadow: "2px 4px 10px rgba(0,0,0,0.1), 0 0 40px rgba(0,0,0,0.05) inset"
       }}
       className={cn(
-        "absolute left-0 top-0 w-48 min-h-[160px] p-4 shadow-os cursor-default flex flex-col font-handwriting rotate-[-1deg]",
+        "absolute left-0 top-0 w-48 min-h-[160px] p-4 shadow-os cursor-default flex flex-col font-handwriting rotate-[-1deg] pointer-events-auto",
         note.color
       )}
     >
@@ -71,9 +71,7 @@ export function StickyNotesRenderer() {
   return (
     <div className="absolute inset-0 pointer-events-none z-[5]">
       {stickyNotes.map(note => (
-        <div key={note.id} className="pointer-events-auto absolute inset-0 w-0 h-0">
-          <StickyNote note={note} />
-        </div>
+        <StickyNote key={note.id} note={note} />
       ))}
     </div>
   );

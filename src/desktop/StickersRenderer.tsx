@@ -38,9 +38,7 @@ export function StickersRenderer() {
   return (
     <div className="absolute inset-0 z-[4] pointer-events-none">
       {stickers.map((sticker) => (
-        <div key={sticker.id} className="pointer-events-auto absolute inset-0 w-0 h-0">
-          <Sticker sticker={sticker} />
-        </div>
+        <Sticker key={sticker.id} sticker={sticker} />
       ))}
     </div>
   );
