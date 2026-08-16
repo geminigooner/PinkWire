@@ -14,7 +14,7 @@ export function GuestbookApp() {
   }, [seedMockData]);
 
   return (
-    <div className="flex flex-col w-full h-full bg-[#fdfbf7] text-[#2c2a29] overflow-hidden font-serif">
+    <div className="flex flex-col w-full h-full bg-black/20 text-os-text overflow-hidden font-serif">
       <Toolbar />
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar />

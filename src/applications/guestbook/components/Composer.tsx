@@ -102,16 +102,16 @@ export function Composer() {
 
   if (!isGuestbookEnabled) {
     return (
-      <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-os flex flex-col items-center justify-center text-center">
-        <h3 className="font-serif font-medium text-[#4a3f3a] text-xl mb-2">Submissions Paused</h3>
-        <p className="text-sm text-[#a3948e]">The guestbook is currently not accepting new entries. Check back later!</p>
+      <div className="bg-os-window-bg border border-os-window-border rounded-3xl p-6 md:p-8 shadow-os flex flex-col items-center justify-center text-center">
+        <h3 className="font-serif font-medium text-os-text text-xl mb-2">Submissions Paused</h3>
+        <p className="text-sm text-os-text-muted">The guestbook is currently not accepting new entries. Check back later!</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-os">
-      <h3 className="font-serif font-medium text-[#4a3f3a] text-xl mb-6">Sign the Guestbook</h3>
+    <div className="bg-os-window-bg border border-os-window-border rounded-3xl p-6 md:p-8 shadow-os">
+      <h3 className="font-serif font-medium text-os-text text-xl mb-6">Sign the Guestbook</h3>
       
       {error && (
         <div className="mb-6 p-4 rounded-os bg-red-50 text-red-600 text-sm flex items-start gap-3">
@@ -123,23 +123,23 @@ export function Composer() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6">
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-[#a3948e] uppercase tracking-wider">Display Name *</label>
+            <label className="text-xs font-semibold text-os-text-muted uppercase tracking-wider">Display Name *</label>
             <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="How should we call you?"
               maxLength={50}
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os px-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-black/30 border border-os-window-border rounded-os px-4 py-2.5 text-sm text-os-text focus:outline-none focus:border-os-accent focus:ring-1 focus:ring-os-accent transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>
         </div>
         
         <div className="space-y-2">
-          <label className="text-xs font-semibold text-[#a3948e] uppercase tracking-wider flex justify-between">
+          <label className="text-xs font-semibold text-os-text-muted uppercase tracking-wider flex justify-between">
             <span>Message *</span>
-            <span className={message.length > MAX_MESSAGE_LENGTH ? "text-red-500" : "text-[#d6c7c1]"}>
+            <span className={message.length > MAX_MESSAGE_LENGTH ? "text-red-500" : "text-os-text-muted/50"}>
               {message.length}/{MAX_MESSAGE_LENGTH}
             </span>
           </label>
@@ -148,33 +148,33 @@ export function Composer() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Leave a friendly note..."
             rows={4}
-            className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os px-4 py-3 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-serif resize-none"
+            className="w-full bg-black/30 border border-os-window-border rounded-os px-4 py-3 text-sm text-os-text focus:outline-none focus:border-os-accent focus:ring-1 focus:ring-os-accent transition-all font-serif resize-none"
             disabled={isSubmitting}
           />
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="relative">
-            <MapPin size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a3948e]" />
+            <MapPin size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-os-text-muted" />
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Where are you from?"
               maxLength={100}
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-black/30 border border-os-window-border rounded-os pl-9 pr-4 py-2.5 text-sm text-os-text focus:outline-none focus:border-os-accent focus:ring-1 focus:ring-os-accent transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>
           
           <div className="relative">
-            <Globe size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a3948e]" />
+            <Globe size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-os-text-muted" />
             <input
               type="url"
               value={website}
               onChange={(e) => setWebsite(e.target.value)}
               placeholder="Your website (https://...)"
-              className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os pl-9 pr-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
+              className="w-full bg-black/30 border border-os-window-border rounded-os pl-9 pr-4 py-2.5 text-sm text-os-text focus:outline-none focus:border-os-accent focus:ring-1 focus:ring-os-accent transition-all font-sans"
               disabled={isSubmitting}
             />
           </div>
@@ -182,7 +182,7 @@ export function Composer() {
         
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
           <div className="flex items-center gap-2">
-            <span className="text-xs text-[#a3948e] mr-2">Theme:</span>
+            <span className="text-xs text-os-text-muted mr-2">Theme:</span>
             {COLORS.map(color => (
               <button
                 key={color}
@@ -201,7 +201,7 @@ export function Composer() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center justify-center gap-2 bg-[#cf8c8c] hover:bg-[#b87a7a] text-white px-6 py-2.5 rounded-full font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center justify-center gap-2 bg-os-accent hover:bg-os-accent-hover text-white px-6 py-2.5 rounded-full font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>

@@ -17,7 +17,7 @@ export function StatusBar() {
   }, [visitors]);
 
   return (
-    <div className="h-8 bg-[#f8f4f0] border-t border-[#eaddd7] flex items-center justify-between px-4 text-[11px] text-[#7a6f6a] font-sans shrink-0 z-10 overflow-x-auto scrollbar-hide">
+    <div className="h-8 bg-black/30 border-t border-os-window-border flex items-center justify-between px-4 text-[11px] text-os-text-muted font-sans shrink-0 z-10 overflow-x-auto scrollbar-hide">
       <div className="flex items-center gap-4 sm:gap-6 whitespace-nowrap min-w-max">
         <span className="flex items-center gap-1.5">
           <Users size={12} className="opacity-70" />

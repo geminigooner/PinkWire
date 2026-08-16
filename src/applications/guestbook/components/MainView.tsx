@@ -57,29 +57,29 @@ export function MainView() {
   }, [entries, visitors, filter, sortOrder, searchQuery, archiveMonthYear]);
 
   return (
-    <div className="flex-1 flex flex-col min-w-0 bg-[#fdfbf7] relative">
+    <div className="flex-1 flex flex-col min-w-0 bg-black/20 relative">
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         <div className="max-w-3xl mx-auto px-4 py-8 md:px-8 md:py-12 space-y-12">
           
           {filter === 'all' && !searchQuery && (
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-serif italic text-[#4a3f3a] mb-3">Welcome to my Guestbook</h2>
-              <p className="text-[#7a6f6a] text-sm">Please leave a little note before you go. It's nice to know who stops by.</p>
+              <h2 className="text-3xl font-serif italic text-os-text mb-3">Welcome to my Guestbook</h2>
+              <p className="text-os-text-muted text-sm">Please leave a little note before you go. It's nice to know who stops by.</p>
             </div>
           )}
           
           <Composer />
 
           <div className="pt-8">
-            <h3 className="text-sm font-semibold text-[#a3948e] uppercase tracking-widest mb-6 border-b border-[#eaddd7] pb-2">
+            <h3 className="text-sm font-semibold text-os-text-muted uppercase tracking-widest mb-6 border-b border-os-window-border pb-2">
               {filter === 'favorites' ? 'Favorite Signatures' : filter === 'archive' ? `Archived from ${archiveMonthYear && format(parseISO(`${archiveMonthYear}-01`), 'MMMM yyyy')}` : 'Recent Signatures'}
             </h3>
             
             <div className="space-y-6">
               {filteredEntries.length === 0 ? (
-                <div className="text-center py-12 flex flex-col items-center justify-center text-[#a3948e] italic">
-                  <div className="w-16 h-16 rounded-full bg-[#f0e6e2] flex items-center justify-center mb-4">
-                    <SearchX size={32} className="text-[#cf8c8c]" />
+                <div className="text-center py-12 flex flex-col items-center justify-center text-os-text-muted italic">
+                  <div className="w-16 h-16 rounded-full bg-os-accent/20 flex items-center justify-center mb-4">
+                    <SearchX size={32} className="text-os-accent" />
                   </div>
                   No entries found matching your criteria.
                 </div>
