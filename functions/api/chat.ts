@@ -1,4 +1,4 @@
-import { Env, jsonResponse, requireAuth } from "../../_shared/auth";
+import { Env, jsonResponse, requireAuth } from "../_shared/auth";
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const authError = await requireAuth(request, env);

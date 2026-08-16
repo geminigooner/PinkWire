@@ -1,4 +1,4 @@
-import { Env, jsonResponse } from "../../../_shared/auth";
+import { Env, jsonResponse } from "../../_shared/auth";
 
 export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
   const row = await env.DB.prepare(
