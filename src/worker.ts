@@ -7,6 +7,8 @@ import { onRequestGet as syncGet, onRequestPost as syncPost } from "../functions
 import { onRequestPost as uploadPost } from "../functions/api/upload/index";
 import { onRequestDelete as uploadDelete } from "../functions/api/upload/[filename]";
 import { onRequestGet as serveUpload } from "../functions/uploads/[filename]";
+import { onRequestPost as chatPost } from "../functions/api/chat";
+import { onRequestGet as appearanceGet } from "../functions/api/public/appearance";
 
 export default {
   async fetch(request: Request, env: any, ctx: any): Promise<Response> {
@@ -19,6 +21,8 @@ export default {
     if (path === "/api/auth/logout" && method === "POST") return call(logoutPost);
     if (path === "/api/auth/verify" && method === "GET") return call(verifyGet);
     if (path === "/api/moderate" && method === "POST") return call(moderatePost);
+    if (path === "/api/chat" && method === "POST") return call(chatPost);
+    if (path === "/api/public/appearance" && method === "GET") return call(appearanceGet);
 
     if (path === "/api/sync" && method === "GET") return call(syncAllGet);
 

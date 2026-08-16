@@ -24,6 +24,7 @@ export interface GuestbookEntryData {
   timestamp: string;
   message: string;
   favorite: boolean;
+  pinned?: boolean;
   edited?: boolean;
   moderationStatus: 'Publish' | 'Review' | 'Reject';
   moderationReason?: string;
@@ -38,8 +39,10 @@ interface GuestbookStore {
   archiveMonthYear: string | null;
   lastSubmitTime: number;
   isSidebarOpen: boolean;
+  isGuestbookEnabled: boolean;
   selectedVisitorId: string | null;
   
+  setIsGuestbookEnabled: (enabled: boolean) => void;
   setSearchQuery: (query: string) => void;
   setFilter: (filter: 'all' | 'favorites' | 'archive') => void;
   setSortOrder: (order: 'newest' | 'oldest' | 'alphabetical') => void;
@@ -54,6 +57,7 @@ interface GuestbookStore {
     reason?: string
   ) => void;
   toggleFavorite: (id: string) => void;
+  togglePin: (id: string) => void;
   deleteEntry: (id: string) => void;
   
   seedMockData: () => void;
@@ -70,8 +74,10 @@ export const useGuestbookStore = create<GuestbookStore>()(
       archiveMonthYear: null,
       lastSubmitTime: 0,
       isSidebarOpen: false,
+      isGuestbookEnabled: true,
       selectedVisitorId: null,
       
+      setIsGuestbookEnabled: (enabled) => set({ isGuestbookEnabled: enabled }),
       setSearchQuery: (query) => set({ searchQuery: query }),
       setFilter: (filter) => set({ filter }),
       setSortOrder: (order) => set({ sortOrder: order }),
@@ -152,6 +158,12 @@ export const useGuestbookStore = create<GuestbookStore>()(
         };
       }),
       
+      togglePin: (id) => set((state) => {
+        return {
+          entries: state.entries.map(e => e.id === id ? { ...e, pinned: !e.pinned } : e)
+        };
+      }),
+
       deleteEntry: (id) => set((state) => ({
         entries: state.entries.filter(e => e.id !== id)
       })),
@@ -168,7 +180,7 @@ export const useGuestbookStore = create<GuestbookStore>()(
           {
             id: v1Id,
             displayName: 'H100Daddy',
-            avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop',
+            avatar: '',
             location: 'San Francisco, CA',
             favoriteColor: '#10b981',
             joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 7).toISOString(),
@@ -179,7 +191,7 @@ export const useGuestbookStore = create<GuestbookStore>()(
           {
             id: v2Id,
             displayName: 'ContextMaxxer',
-            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop',
+            avatar: '',
             location: 'Miami, FL',
             favoriteColor: '#8b5cf6',
             joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 3).toISOString(),
@@ -189,7 +201,7 @@ export const useGuestbookStore = create<GuestbookStore>()(
           {
             id: v3Id,
             displayName: 'PeptidePrince',
-            avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop',
+            avatar: '',
             location: 'Austin, TX',
             favoriteColor: '#3b82f6',
             joinedDate: new Date(now - 1000 * 60 * 60 * 24 * 1).toISOString(),
@@ -237,7 +249,8 @@ export const useGuestbookStore = create<GuestbookStore>()(
       partialize: (state) => ({
         visitors: state.visitors,
         entries: state.entries,
-        lastSubmitTime: state.lastSubmitTime
+        lastSubmitTime: state.lastSubmitTime,
+        isGuestbookEnabled: state.isGuestbookEnabled
       })
     }
   )

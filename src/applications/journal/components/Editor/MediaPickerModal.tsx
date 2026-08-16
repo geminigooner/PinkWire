@@ -75,7 +75,7 @@ export function MediaPickerModal({ onClose, onSelect }: { onClose: () => void, o
               type="file" 
               ref={fileInputRef}
               onChange={handleFileUpload}
-              accept="image/*,video/*"
+              accept="image/*,video/*,application/pdf"
               className="hidden"
             />
             <button 

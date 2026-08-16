@@ -40,7 +40,7 @@ export function DesktopIcon({ id, appId, x, y }: { id: string, appId: string, x:
       initial={{ x, y }}
       animate={{ x, y }}
       className={cn(
-        "absolute flex flex-col items-center gap-1.5 w-24 p-2 rounded-os cursor-pointer transition-colors group",
+        "absolute flex flex-col items-center gap-1.5 w-24 p-2 rounded-os cursor-pointer transition-colors group pointer-events-auto",
         isSelected ? "bg-white/20" : "hover:bg-white/10"
       )}
       onPointerDown={(e) => {

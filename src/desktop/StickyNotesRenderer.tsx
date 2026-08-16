@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useDragControls } from 'motion/react';
+import React, { useEffect } from 'react';
+import { motion, useDragControls, useMotionValue } from 'motion/react';
 import { useDesktopStore, StickyNoteState } from '../store/useDesktopStore';
 import { X } from 'lucide-react';
 import { cn } from '../utils/cn';
@@ -10,14 +10,22 @@ function StickyNote({ note }: { note: StickyNoteState }) {
   const dragControls = useDragControls();
   const isMobile = useMediaQuery('(max-width: 768px)');
   
-  const handleDragEnd = (e: any, info: any) => {
+  const x = useMotionValue(note.x);
+  const y = useMotionValue(note.y);
+
+  useEffect(() => {
+    x.set(note.x);
+    y.set(note.y);
+  }, [note.x, note.y, x, y]);
+
+  const handleDragEnd = () => {
     updateStickyNote(note.id, {
-      x: note.x + info.offset.x,
-      y: note.y + info.offset.y
+      x: x.get(),
+      y: y.get()
     });
   };
 
-  if (isMobile) return null; // Hide sticky notes on mobile for a cleaner desktop, or just scale them? The prompt says "Everything remains MOBILE-FIRST. Desktop is a progressive enhancement." So maybe let's keep them but smaller? No, I'll let them render on mobile.
+  if (isMobile) return null;
 
   return (
     <motion.div
@@ -26,20 +34,20 @@ function StickyNote({ note }: { note: StickyNoteState }) {
       dragListener={false}
       dragMomentum={false}
       onDragEnd={handleDragEnd}
-      initial={false}
-      animate={{ x: note.x, y: note.y }}
-      className={cn(
-        "absolute w-48 min-h-[160px] p-4 shadow-os cursor-default flex flex-col font-handwriting rotate-[-1deg]",
-        note.color
-      )}
       style={{ 
+        x, y,
         fontFamily: "'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif",
         boxShadow: "2px 4px 10px rgba(0,0,0,0.1), 0 0 40px rgba(0,0,0,0.05) inset"
       }}
+      className={cn(
+        "absolute left-0 top-0 w-48 min-h-[160px] p-4 shadow-os cursor-default flex flex-col font-handwriting rotate-[-1deg]",
+        note.color
+      )}
     >
       <div 
         className="h-6 w-full cursor-grab active:cursor-grabbing mb-2 opacity-50 hover:opacity-100 flex justify-between items-center"
         onPointerDown={(e) => dragControls.start(e)}
+        style={{ touchAction: 'none' }}
       >
         <div className="flex-1 h-full" />
         <button 

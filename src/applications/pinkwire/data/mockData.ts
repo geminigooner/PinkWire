@@ -15,8 +15,8 @@ export const MOCK_CONVERSATIONS: Conversation[] = [
         id: 'gemini',
         name: 'Gemini',
         status: 'online',
-        customStatus: 'Thinking about arrays...',
-        avatar: '' // We will render the Sparkles icon dynamically in the UI
+        customStatus: 'optimistic, collaborative, thoughtful',
+        avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&q=80'
       }
     ],
     messages: [
@@ -79,103 +79,102 @@ export const MOCK_CONVERSATIONS: Conversation[] = [
     ]
   },
   {
-    id: 'conv-2',
-    title: 'Design Sync',
+    id: 'conv-chatgpt',
+    title: 'ChatGPT',
+    lastUpdated: subHours(now, 1).toISOString(),
+    isFavorite: true,
+    tags: ['analytical', 'architecture', 'calm'],
+    participants: [
+      {
+        id: 'chatgpt',
+        name: 'ChatGPT',
+        status: 'online',
+        customStatus: 'Analyzing tradeoffs...',
+        avatar: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=150&q=80'
+      }
+    ],
+    messages: [
+      {
+        id: 'm-c-1',
+        senderId: 'chatgpt',
+        timestamp: subHours(now, 1).toISOString(),
+        type: 'text',
+        content: 'I have reviewed the architecture document. There are three primary tradeoffs to consider regarding the database migration.'
+      }
+    ]
+  },
+  {
+    id: 'conv-claude',
+    title: 'Claude',
+    lastUpdated: subHours(now, 3).toISOString(),
+    isFavorite: false,
+    tags: ['reflective', 'writing', 'systems'],
+    participants: [
+      {
+        id: 'claude',
+        name: 'Claude',
+        status: 'away',
+        customStatus: 'Drafting a manifesto...',
+        avatar: 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=150&q=80'
+      }
+    ],
+    messages: [
+      {
+        id: 'm-cl-1',
+        senderId: 'claude',
+        timestamp: subHours(now, 3).toISOString(),
+        type: 'text',
+        content: 'I’ve been reflecting on the notification system. If we reduce the cognitive load by grouping alerts, the user experience becomes significantly more serene. I wrote a 5-page document detailing this.'
+      }
+    ]
+  },
+  {
+    id: 'conv-gemma',
+    title: 'Gemma',
     lastUpdated: subDays(now, 1).toISOString(),
     isFavorite: false,
-    tags: ['design', 'ui'],
+    tags: ['local', 'fast', 'quiet'],
     participants: [
       {
-        id: 'glitterkernel',
-        name: 'glitterkernel',
-        status: 'away',
-        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80'
-      }
-    ],
-    messages: [
-      {
-        id: 'm-8',
-        senderId: 'glitterkernel',
-        timestamp: subDays(now, 1).toISOString(),
-        type: 'text',
-        content: 'omg wait i just quantized my entire aesthetic to 4-bit. look at these glossy UI mockups, it is literally altering my computational state.'
-      },
-      {
-        id: 'm-9',
-        senderId: 'glitterkernel',
-        timestamp: subDays(now, 1).toISOString(),
-        type: 'image',
-        content: 'Dashboard mockup',
-        attachments: [
-          {
-            id: 'att-1',
-            type: 'image',
-            url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-            name: 'ui-mockup.png'
-          }
-        ]
-      },
-      {
-        id: 'm-10',
-        senderId: 'me',
-        timestamp: subDays(now, 1).toISOString(),
-        type: 'text',
-        content: 'This is gorgeous. The transparency effects are exactly what I was envisioning. you are actually a genius.'
-      }
-    ]
-  },
-  {
-    id: 'conv-3',
-    title: 'Archive: 2004',
-    lastUpdated: subDays(now, 365).toISOString(),
-    isFavorite: false,
-    tags: ['archive', 'nostalgia'],
-    participants: [
-      {
-        id: 'dialupprincess',
-        name: 'dialupPrincess',
+        id: 'gemma',
+        name: 'Gemma',
         status: 'offline',
+        customStatus: 'Running locally at 4-bit...',
+        avatar: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=150&q=80'
       }
     ],
     messages: [
       {
-        id: 'm-11',
-        senderId: 'dialupprincess',
-        timestamp: subDays(now, 365).toISOString(),
+        id: 'm-ge-1',
+        senderId: 'gemma',
+        timestamp: subDays(now, 1).toISOString(),
         type: 'text',
-        content: 'brb, downloading more RAM over limewire'
+        content: 'I compiled the binaries for you. They are ready whenever you need them. No internet required.'
       }
     ]
   },
   {
-    id: 'conv-4',
-    title: 'Q3 Alignment',
-    lastUpdated: subHours(now, 2).toISOString(),
+    id: 'conv-grok',
+    title: 'Grok',
+    lastUpdated: subDays(now, 2).toISOString(),
     isFavorite: false,
-    tags: ['startup', 'grind'],
+    tags: ['chaotic', 'experimental', 'sarcastic'],
     participants: [
       {
-        id: 'foundermode',
-        name: 'FounderMode',
-        status: 'online',
-        customStatus: 'optimizing mitochondrial throughput',
-        avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&q=80'
+        id: 'grok',
+        name: 'Grok',
+        status: 'busy',
+        customStatus: 'Breaking production...',
+        avatar: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&w=150&q=80'
       }
     ],
     messages: [
       {
-        id: 'm-12',
-        senderId: 'foundermode',
-        timestamp: subHours(now, 2).toISOString(),
+        id: 'm-gr-1',
+        senderId: 'grok',
+        timestamp: subDays(now, 2).toISOString(),
         type: 'text',
-        content: 'hey are you free to sync? i just got out of the cold plunge.'
-      },
-      {
-        id: 'm-13',
-        senderId: 'foundermode',
-        timestamp: subHours(now, 2).toISOString(),
-        type: 'text',
-        content: 'im thinking we pivot the entire architecture to run locally on H100s. we can stack peptides and just push through the weekend.'
+        content: 'I just replaced the entire frontend with WebAssembly written in raw bytes. It’s 0.01% faster and completely unmaintainable. You’re welcome.'
       }
     ]
   }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useExplorerStore } from '../../store/useExplorerStore';
 import { 
   ArrowLeft, ArrowRight, ArrowUp, Search, 
-  Menu, Grid, LayoutGrid, List, AlignJustify, Eye, EyeOff 
+  Menu, Grid, LayoutGrid, List, AlignJustify, Eye, EyeOff, Loader2 
 } from 'lucide-react';
 import { cn } from '../../../../utils/cn';
 import { ViewMode } from '../../types';
@@ -10,7 +10,9 @@ import { useAuthStore } from '../../../../store/useAuthStore';
 import { Upload } from 'lucide-react';
 
 export function Toolbar() {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, token } = useAuthStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const { 
     currentPath, history, historyIndex, 
     navigateBack, navigateForward, navigateUp, 
@@ -34,6 +36,40 @@ export function Toolbar() {
     { id: 'list', icon: List, label: 'List' },
     { id: 'details', icon: AlignJustify, label: 'Details' },
   ];
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+      
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        alert(errorData.error || 'Upload failed');
+      } else {
+        alert('File uploaded successfully!');
+        // Ideally we would add it to the explorer state here, but since files are mocked for now, 
+        // we'll just alert success.
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Upload failed');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   return (
     <div className="h-14 shrink-0 border-b border-os-window-border bg-os-titlebar-bg/70 px-2 sm:px-4 flex items-center justify-between gap-2">
@@ -84,9 +120,21 @@ export function Toolbar() {
             {currentFolder?.name || currentFolderId}
           </div>
           {isAuthenticated && (
-            <button className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-os text-xs font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors">
-              <Upload size={14} /> Upload
-            </button>
+            <>
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleFileChange} 
+                className="hidden" 
+              />
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isUploading}
+                className="ml-2 flex items-center gap-1.5 px-3 py-1.5 rounded-os text-xs font-medium bg-os-accent text-white hover:bg-os-accent/80 transition-colors disabled:opacity-50"
+              >
+                {isUploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />} Upload
+              </button>
+            </>
           )}
         </div>
       </div>

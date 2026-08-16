@@ -31,7 +31,7 @@ async function startServer() {
   app.post("/api/auth/login", (req, res) => {
     const { password } = req.body;
     const expectedPassword = process.env.ADMIN_SECRET;
-    if (password === expectedPassword || password === 'amanda') {
+    if (password === expectedPassword) {
       res.json({ token: getAdminToken() });
     } else {
       res.status(401).json({ error: "Unauthorized" });

@@ -42,6 +42,7 @@ export const usePinkWireStore = create<PinkWireState>()(
     {
       name: 'pinkwire-store',
       storage: createJSONStorage(() => createSyncStorage('pinkwire')),
+      version: 2,
       partialize: (state) => ({
         conversations: state.conversations
       })

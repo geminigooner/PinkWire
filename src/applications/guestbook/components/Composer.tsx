@@ -4,23 +4,22 @@ import { cn } from '../../../utils/cn';
 import { Send, MapPin, Globe, Loader2, AlertCircle } from 'lucide-react';
 
 const COLORS = ['#cf8c8c', '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ec4899'];
-const AVATARS = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
-  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop',
-  'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&h=100&fit=crop',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
-  'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop',
-  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop'
-];
+
+// Basic bad words filter
+const BANNED_WORDS = ['fuck', 'shit', 'bitch', 'asshole', 'cunt', 'dick', 'pussy', 'slut', 'whore', 'bastard'];
+
+function containsBannedWords(text: string) {
+  const normalized = text.toLowerCase();
+  return BANNED_WORDS.some(word => normalized.includes(word));
+}
 
 export function Composer() {
-  const { addEntry, lastSubmitTime } = useGuestbookStore();
+  const { addEntry, lastSubmitTime, isGuestbookEnabled } = useGuestbookStore();
   
   const [displayName, setDisplayName] = useState('');
   const [message, setMessage] = useState('');
   const [location, setLocation] = useState('');
   const [website, setWebsite] = useState('');
-  const [avatar, setAvatar] = useState(AVATARS[0]);
   const [themeColor, setThemeColor] = useState(COLORS[0]);
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,6 +55,11 @@ export function Composer() {
       return;
     }
     
+    if (containsBannedWords(message) || containsBannedWords(displayName)) {
+      setError('Please keep the language friendly. Your message was blocked.');
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
@@ -75,7 +79,7 @@ export function Composer() {
           displayName: displayName.trim(),
           location: location.trim(),
           website: website.trim(),
-          avatar,
+          avatar: '',
           favoriteColor: themeColor
         }, message.trim(), result.decision, result.reason);
         
@@ -96,6 +100,15 @@ export function Composer() {
     }
   };
 
+  if (!isGuestbookEnabled) {
+    return (
+      <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-os flex flex-col items-center justify-center text-center">
+        <h3 className="font-serif font-medium text-[#4a3f3a] text-xl mb-2">Submissions Paused</h3>
+        <p className="text-sm text-[#a3948e]">The guestbook is currently not accepting new entries. Check back later!</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white border border-[#eaddd7] rounded-3xl p-6 md:p-8 shadow-os">
       <h3 className="font-serif font-medium text-[#4a3f3a] text-xl mb-6">Sign the Guestbook</h3>
@@ -108,7 +121,7 @@ export function Composer() {
       )}
       
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <div className="space-y-2">
             <label className="text-xs font-semibold text-[#a3948e] uppercase tracking-wider">Display Name *</label>
             <input
@@ -120,25 +133,6 @@ export function Composer() {
               className="w-full bg-[#f8f4f0] border border-[#eaddd7] rounded-os px-4 py-2.5 text-sm text-[#4a3f3a] focus:outline-none focus:border-[#cf8c8c] focus:ring-1 focus:ring-[#cf8c8c] transition-all font-sans"
               disabled={isSubmitting}
             />
-          </div>
-          
-          <div className="space-y-2">
-            <label className="text-xs font-semibold text-[#a3948e] uppercase tracking-wider">Avatar</label>
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
-              {AVATARS.map(img => (
-                <button
-                  key={img}
-                  type="button"
-                  onClick={() => setAvatar(img)}
-                  className={cn(
-                    "w-10 h-10 rounded-full overflow-hidden shrink-0 transition-transform",
-                    avatar === img ? "ring-2 ring-[#cf8c8c] scale-110" : "opacity-70 hover:opacity-100"
-                  )}
-                >
-                  <img src={img} alt="Avatar option" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
           </div>
         </div>
         

@@ -37,6 +37,10 @@ export function MainView() {
     
     // Apply sort
     result.sort((a, b) => {
+      // Pinned entries always come first
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+
       if (sortOrder === 'newest') {
         return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
       } else if (sortOrder === 'oldest') {

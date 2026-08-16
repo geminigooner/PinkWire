@@ -1,6 +1,6 @@
 import { Env, jsonResponse, requireAuth } from "../../_shared/auth";
 
-const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml"];
+const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml", "application/pdf"];
 const MAX_SIZE = 10 * 1024 * 1024;
 
 function randomHex(bytes: number): string {
@@ -18,7 +18,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   if (!file || !(file instanceof File)) return jsonResponse({ error: "No file uploaded." }, 400);
   if (!ALLOWED_MIME_TYPES.includes(file.type))
-    return jsonResponse({ error: "Unsupported file type. Please upload a valid image." }, 400);
+    return jsonResponse({ error: "Unsupported file type. Please upload a valid image or PDF." }, 400);
   if (file.size > MAX_SIZE) return jsonResponse({ error: "File too large (10MB max)." }, 400);
 
   const ext = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : "";

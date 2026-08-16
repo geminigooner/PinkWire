@@ -49,6 +49,7 @@ export function DesktopSettings() {
         
         <div className="space-y-12">
           {/* Wallpaper Manager */}
+          {isAuthenticated && (
           <section>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-medium text-os-text-muted uppercase tracking-wider">Wallpaper</h3>
@@ -161,6 +162,7 @@ export function DesktopSettings() {
               </div>
             </div>
           </section>
+          )}
 
           {/* Desktop Layout */}
           <section>

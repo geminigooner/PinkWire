@@ -274,7 +274,11 @@ export function Editor() {
             if (mediaPickerMode === 'cover') {
               setCoverImage(url);
             } else {
-              insertFormatting(`![alt](${url})`, '');
+              if (url.toLowerCase().endsWith('.pdf')) {
+                insertFormatting(`[View Document](${url})`, '');
+              } else {
+                insertFormatting(`![Image](${url})`, '');
+              }
             }
             setShowMediaPicker(false);
           }}

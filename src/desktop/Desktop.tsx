@@ -5,6 +5,7 @@ import { WindowManager } from '../windows/WindowManager';
 import { Taskbar } from '../taskbar/Taskbar';
 import { useDesktopStore } from '../store/useDesktopStore';
 import { useAchievementStore } from '../store/useAchievementStore';
+import { useAuthStore } from '../store/useAuthStore';
 import { StickersRenderer } from './StickersRenderer';
 import { StickersDrawer } from './StickersDrawer';
 import { StickyNotesRenderer } from './StickyNotesRenderer';
@@ -15,7 +16,8 @@ import { NotificationService } from '../services/notifications/NotificationServi
 import { NotificationToasts } from '../components/notifications/NotificationToasts';
 
 export function Desktop() {
-  const { desktopIcons, selectIcon, addSticker, autoArrangeIcons, updateIconPosition } = useDesktopStore();
+  const { desktopIcons, selectIcon, addSticker, autoArrangeIcons, updateIconPosition, setWallpaper, setWallpaperFit, setWallpaperBlur } = useDesktopStore();
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
   useEffect(() => {
     useAchievementStore.getState().trackDailyVisit();
@@ -25,6 +27,19 @@ export function Desktop() {
       useAchievementStore.getState().unlockAchievement('visited_at_night');
     }
   }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      fetch('/api/public/appearance')
+        .then(res => res.json())
+        .then(data => {
+          if (data.wallpaper) setWallpaper(data.wallpaper);
+          if (data.wallpaperFit) setWallpaperFit(data.wallpaperFit);
+          if (data.wallpaperBlur !== undefined) setWallpaperBlur(data.wallpaperBlur);
+        })
+        .catch(err => console.error("Failed to fetch public appearance", err));
+    }
+  }, [isAuthenticated, setWallpaper, setWallpaperFit, setWallpaperBlur]);
 
   useEffect(() => {
     if (autoArrangeIcons) {
@@ -75,7 +90,7 @@ export function Desktop() {
       <StickersRenderer />
       <StickyNotesRenderer />
       
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {desktopIcons.map((icon) => (
           <DesktopIcon key={icon.id} id={icon.id} appId={icon.appId} x={icon.x} y={icon.y} />
         ))}

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useGuestbookStore } from '../store/useGuestbookStore';
-import { Search, Filter, SortDesc, SortAsc, Menu } from 'lucide-react';
+import { Search, Filter, SortDesc, SortAsc, Menu, PauseCircle, PlayCircle } from 'lucide-react';
 import { cn } from '../../../utils/cn';
+import { useAuthStore } from '../../../store/useAuthStore';
 
 export function Toolbar() {
-  const { searchQuery, setSearchQuery, sortOrder, setSortOrder, toggleSidebar } = useGuestbookStore();
+  const { searchQuery, setSearchQuery, sortOrder, setSortOrder, toggleSidebar, isGuestbookEnabled, setIsGuestbookEnabled } = useGuestbookStore();
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated);
 
   return (
     <div className="h-14 px-4 border-b border-[#eaddd7] bg-[#f8f4f0]/80 backdrop-blur-os-os-os flex items-center justify-between shrink-0 z-10">
@@ -52,6 +54,16 @@ export function Toolbar() {
           >
             <Filter size={18} />
           </button>
+          
+          {isAuthenticated && (
+            <button
+              onClick={() => setIsGuestbookEnabled(!isGuestbookEnabled)}
+              className={cn("p-1.5 ml-2 rounded-os transition-colors", isGuestbookEnabled ? "text-[#a3948e] hover:text-[#4a3f3a] hover:bg-[#f0e6e2]/50" : "bg-red-100 text-red-500")}
+              title={isGuestbookEnabled ? "Pause New Submissions" : "Resume Submissions"}
+            >
+              {isGuestbookEnabled ? <PauseCircle size={18} /> : <PlayCircle size={18} />}
+            </button>
+          )}
         </div>
       </div>
     </div>

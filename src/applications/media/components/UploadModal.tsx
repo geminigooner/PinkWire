@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useMediaStore, MediaCategory } from '../store/useMediaStore';
+import { useAuthStore } from '../../../store/useAuthStore';
 import { X, UploadCloud, AlertCircle, CheckCircle2, Loader2, Image as ImageIcon } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 
@@ -13,6 +14,7 @@ interface Props {
 
 export function UploadModal({ onClose }: Props) {
   const { addMedia } = useMediaStore();
+  const { token } = useAuthStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [file, setFile] = useState<File | null>(null);
@@ -87,17 +89,13 @@ export function UploadModal({ onClose }: Props) {
     formData.append('file', file);
     
     try {
-      const token = sessionStorage.getItem('admin_token') || localStorage.getItem('admin_token') || 'amanda-admin-session'; // Need better token strategy if possible, but fallback works if we don't strict-check or we can pass proper token. We implemented a basic verify.
-      // Let's rely on standard XHR for progress
       const xhr = new XMLHttpRequest();
       xhr.open('POST', '/api/upload', true);
-      // Wait, let's get the token from standard places or just send the one we know dev server accepts
-      // Actually we have an admin login system, but it doesn't store token in localStorage in previous code?
-      // Wait, useAuthStore might have the token? For now let's just fetch without it and see, or we send a placeholder.
-      // Wait, our backend middleware checks req.headers.authorization
-      // In dev, the admin token might be fixed, or we can get it from somewhere.
       
-      // Let's just mock the XHR upload to return a local URL if it fails, or try real endpoint
+      if (token) {
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+      }
+
       xhr.upload.onprogress = (event) => {
         if (event.lengthComputable) {
           const percentComplete = Math.round((event.loaded / event.total) * 100);
@@ -218,7 +216,7 @@ export function UploadModal({ onClose }: Props) {
                 type="file" 
                 ref={fileInputRef} 
                 onChange={handleFileChange} 
-                accept="image/*" 
+                accept="image/*,application/pdf" 
                 className="hidden" 
               />
             </div>

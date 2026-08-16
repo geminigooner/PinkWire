@@ -11,17 +11,30 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 Name: ${displayName}
 Message: ${message}
 
-Rules:
-- Optimize for maintaining a psychologically safe, welcoming community.
-- Allow swearing, joking, criticism, disagreement, slang, and weirdness.
-- Reject or hold for review ONLY if it contains harassment, threats, hate speech, discriminatory insults, doxxing, sexual exploitation, spam, malicious links, or targeted abuse.
+Rules for rejecting (auto-decline):
+- ANY insults or offensive language directed at the user (Amanda) or anyone else (e.g. calling them fat, dumb, etc).
+- Any racism or hate speech.
+- Anything sexual or sexually explicit.
+- Any LARP (Live Action Role-Playing).
+- Any creepy or overly familiar comments like "HEY BEAUTIFUL" directed at the user.
+- Spam or malicious links.
+- If it violates ANY of these, output "Reject".
+
+Rules for holding for review:
+- If you are unsure if it's offensive but it seems borderline, or it might piss the user off but isn't explicitly banned above.
+- If it's safe but slightly weird.
+- Output "Review".
+
+Rules for publishing:
+- Friendly, normal guestbook notes.
+- Output "Publish".
 
 Output ONLY a JSON object with two fields:
 - "decision": one of "Publish", "Review", "Reject"
 - "reason": A short machine-readable explanation of the decision.`;
 
     const geminiResp = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "content-type": "application/json" },

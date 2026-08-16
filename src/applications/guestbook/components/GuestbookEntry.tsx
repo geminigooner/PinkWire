@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { GuestbookEntryData, useGuestbookStore } from '../store/useGuestbookStore';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { MapPin, Globe, Star, Trash2 } from 'lucide-react';
+import { MapPin, Globe, Star, Trash2, Pin } from 'lucide-react';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { cn } from '../../../utils/cn';
 import { ConfirmDialog } from '../../../components/ConfirmDialog';
 
 export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   const toggleFavorite = useGuestbookStore(state => state.toggleFavorite);
+  const togglePin = useGuestbookStore(state => state.togglePin);
   const visitors = useGuestbookStore(state => state.visitors);
   const setSelectedVisitorId = useGuestbookStore(state => state.setSelectedVisitorId);
   const deleteEntry = useGuestbookStore(state => state.deleteEntry);
@@ -18,7 +19,7 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
   if (!visitor) return null;
 
   return (
-    <div className="group relative bg-white border border-[#eaddd7] rounded-os p-5 md:p-6 shadow-os hover:shadow-os transition-shadow">
+    <div className={cn("group relative bg-white border border-[#eaddd7] rounded-os p-5 md:p-6 shadow-os hover:shadow-os transition-shadow", entry.pinned && "ring-2 ring-[#cf8c8c] bg-[#fdfbf7]")}>
       <div 
         className="absolute top-0 left-0 w-full h-1 rounded-t-2xl opacity-50"
         style={{ backgroundColor: visitor.favoriteColor || '#cf8c8c' }}
@@ -29,13 +30,9 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
           onClick={() => setSelectedVisitorId(visitor.id)}
           className="relative shrink-0 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#cf8c8c] focus:ring-offset-2 rounded-full"
         >
-          {visitor.avatar ? (
-            <img src={visitor.avatar} alt={visitor.displayName} className="w-12 h-12 rounded-full object-cover ring-2 ring-[#f0e6e2]" />
-          ) : (
-            <div className="w-12 h-12 rounded-full bg-[#f0e6e2] flex items-center justify-center text-[#cf8c8c] font-medium text-lg ring-2 ring-[#eaddd7]">
-              {visitor.displayName.charAt(0).toUpperCase()}
-            </div>
-          )}
+          <div className="w-12 h-12 rounded-full bg-[#f0e6e2] flex items-center justify-center text-[#cf8c8c] font-medium text-lg ring-2 ring-[#eaddd7]">
+            {visitor.displayName.charAt(0).toUpperCase()}
+          </div>
         </button>
         
         <div className="flex-1 min-w-0">
@@ -64,14 +61,26 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
             
             <div className="flex items-center gap-1">
               {isAuthenticated && (
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-500 hover:bg-red-50"
-                title="Delete Entry"
-              >
-                <Trash2 size={16} />
-              </button>
-            )}
+                <>
+                  <button
+                    onClick={() => togglePin(entry.id)}
+                    className={cn(
+                      "p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 sm:opacity-100",
+                      entry.pinned ? "text-[#cf8c8c] hover:bg-[#f0e6e2]" : "text-[#d6c7c1] hover:text-[#cf8c8c] hover:bg-[#f0e6e2]"
+                    )}
+                    title={entry.pinned ? "Unpin Entry" : "Pin Entry"}
+                  >
+                    <Pin size={18} className={entry.pinned ? "fill-current" : ""} />
+                  </button>
+                  <button
+                    onClick={() => setShowDeleteConfirm(true)}
+                    className="p-2 rounded-full transition-colors opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-500 hover:bg-red-50"
+                    title="Delete Entry"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </>
+              )}
             {isAuthenticated ? (
               <button
                 onClick={() => toggleFavorite(entry.id)}
@@ -83,11 +92,18 @@ export function GuestbookEntry({ entry }: { entry: GuestbookEntryData }) {
               <Star size={18} className={entry.favorite ? "fill-current" : ""} />
             </button>
             ) : (
-              entry.favorite && (
-                <div className="p-2 text-[#f59e0b]">
-                  <Star size={18} className="fill-current" />
-                </div>
-              )
+              <>
+                {entry.pinned && (
+                  <div className="p-2 text-[#cf8c8c]" title="Pinned">
+                    <Pin size={18} className="fill-current" />
+                  </div>
+                )}
+                {entry.favorite && (
+                  <div className="p-2 text-[#f59e0b]">
+                    <Star size={18} className="fill-current" />
+                  </div>
+                )}
+              </>
             )}
             </div>
           </div>
